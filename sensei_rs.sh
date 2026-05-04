@@ -55,16 +55,22 @@ EOF
     cat <<EOF >"${PROJECT_PATH}/src/main.rs"
 struct Solution;
 
+/**
+ * Implementa tu solución aquí
+ *
+ */
 impl Solution {
-    pub fn solve() {
+    pub fn ${PACKAGE_NAME}() {
         // Implementa tu solución aquí
         todo!()
     }
 }
 
-fn main() {
-    // Solution::solve();
-}
+/**
+ * Pruebas unitarias
+ *
+ */
+fn main() {}
 
 #[cfg(test)]
 mod tests {
@@ -72,7 +78,7 @@ mod tests {
 
     #[test]
     fn test_${PACKAGE_NAME}() {
-        // assert_eq!(Solution::solve(), expected);
+        // assert_eq!(Solution::${PACKAGE_NAME}(), expected);
         todo!()
     }
 }

@@ -1,15 +1,28 @@
+use std::collections::HashSet;
 struct Solution;
 
+/**
+ * Implementa tu solución aquí
+ *
+ */
 impl Solution {
-    pub fn solve() {
-        // Implementa tu solución aquí
-        todo!()
+    pub fn contains_duplicate(nums: Vec<i32>) -> bool {
+        let mut hash_table: HashSet<i32> = HashSet::new();
+        for n in nums.iter() {
+            if hash_table.contains(&n) {
+                return true;
+            }
+            hash_table.insert(*n);
+        }
+        false
     }
 }
 
-fn main() {
-    // Solution::solve();
-}
+/**
+ * Pruebas unitarias
+ *
+ */
+fn main() {}
 
 #[cfg(test)]
 mod tests {
@@ -17,7 +30,10 @@ mod tests {
 
     #[test]
     fn test_contains_duplicate() {
-        // assert_eq!(Solution::solve(), expected);
-        todo!()
+        assert!(Solution::contains_duplicate(vec![1, 2, 3, 1]));
+        assert!(!Solution::contains_duplicate(vec![1, 2, 3, 4]));
+        assert!(Solution::contains_duplicate(vec![
+            1, 1, 1, 3, 3, 4, 3, 2, 4, 2
+        ]));
     }
 }

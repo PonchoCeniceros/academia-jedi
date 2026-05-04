@@ -1,7 +1,10 @@
 use std::collections::HashMap;
-
 struct Solution;
 
+/**
+ * Implementa tu solución aquí
+ *
+ */
 impl Solution {
     pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
         let mut hash_table: HashMap<i32, i32> = HashMap::new();
@@ -31,9 +34,11 @@ impl Solution {
     }
 }
 
-fn main() {
-    // Solution::solve();
-}
+/**
+ * Pruebas unitarias
+ *
+ */
+fn main() {}
 
 #[cfg(test)]
 mod tests {
