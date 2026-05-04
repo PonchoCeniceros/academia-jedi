@@ -1,4 +1,4 @@
-# The Coding Dojo: Algorithmic Katas
+# Coding Dojo
 
 Este repositorio es mi espacio personal de entrenamiento. Aquí no solo resuelvo problemas, sino que practico la **maestría del código** a través de *Katas*: ejercicios diseñados para perfeccionar la lógica, la sintaxis y el pensamiento algorítmico mediante la repetición y el refinamiento.
 
