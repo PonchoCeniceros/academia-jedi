@@ -1,5 +1,5 @@
 struct Solution;
-// use std::collections::HashMap;
+use std::collections::HashMap;
 
 /**
  * Implementa tu solución aquí
@@ -7,7 +7,33 @@ struct Solution;
  */
 impl Solution {
     pub fn roman_to_int(s: String) -> i32 {
-        println!("{}", s);
+        let hash_map: HashMap<&str, i32> = HashMap::from([
+            ("I", 1),
+            ("V", 5),
+            ("X", 10),
+            ("L", 50),
+            ("C", 100),
+            ("D", 500),
+            ("M", 1000),
+            ("IX", 9),
+            ("XC", 90),
+            ("CM", 900),
+            ("IV", 4),
+            ("XL", 40),
+            ("CD", 400),
+        ]);
+
+        let arr = s.as_bytes();
+        let len = arr.len();
+        let mut idx = 0;
+
+        while idx < len {
+            let val = (arr[idx] as char).to_string();
+            let ans = hash_map.get(val.as_str()).unwrap();
+            println!("{}", ans);
+            idx += 1;
+        }
+
         0
     }
 }
@@ -17,7 +43,7 @@ impl Solution {
  *
  */
 fn main() {
-    let _ans = Solution::roman_to_int("X".to_string());
+    let _ans = Solution::roman_to_int("MCMXCIV".to_string());
 }
 
 #[cfg(test)]
@@ -26,8 +52,9 @@ mod tests {
 
     #[test]
     fn test_roman_to_integer() {
-        assert_eq!(Solution::roman_to_int("X".to_string()), 0);
-        todo!()
+        assert_eq!(Solution::roman_to_int("III".to_string()), 0);
+        assert_eq!(Solution::roman_to_int("LVIII".to_string()), 0);
+        assert_eq!(Solution::roman_to_int("MCMXCIV".to_string()), 0);
     }
 }
 
