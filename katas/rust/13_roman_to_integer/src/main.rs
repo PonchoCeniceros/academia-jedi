@@ -7,34 +7,103 @@ use std::collections::HashMap;
  */
 impl Solution {
     pub fn roman_to_int(s: String) -> i32 {
-        let hash_map: HashMap<&str, i32> = HashMap::from([
-            ("I", 1),
-            ("V", 5),
-            ("X", 10),
-            ("L", 50),
-            ("C", 100),
-            ("D", 500),
-            ("M", 1000),
-            ("IX", 9),
-            ("XC", 90),
-            ("CM", 900),
-            ("IV", 4),
-            ("XL", 40),
-            ("CD", 400),
+        let hash_map: HashMap<String, i32> = HashMap::from([
+            (String::from("I"), 1),
+            (String::from("V"), 5),
+            (String::from("X"), 10),
+            (String::from("L"), 50),
+            (String::from("C"), 100),
+            (String::from("D"), 500),
+            (String::from("M"), 1000),
+            (String::from("IX"), 9),
+            (String::from("XC"), 90),
+            (String::from("CM"), 900),
+            (String::from("IV"), 4),
+            (String::from("XL"), 40),
+            (String::from("CD"), 400),
         ]);
 
+        // transformando el string en una coleccion para poder recorrerla
         let arr = s.as_bytes();
         let len = arr.len();
         let mut idx = 0;
+        let mut ans = 0;
 
         while idx < len {
-            let val = (arr[idx] as char).to_string();
-            let ans = hash_map.get(val.as_str()).unwrap();
-            println!("{}", ans);
+            let key = (arr[idx] as char).to_string();
+
+            if idx + 1 < s.len() {
+                match key.as_str() {
+                    "I" => {
+                        let next_key = (arr[idx + 1] as char).to_string();
+
+                        match next_key.as_str() {
+                            "V" => {
+                                let val = hash_map.get("IV").unwrap();
+                                ans += *val;
+                                idx += 2;
+                                continue;
+                            }
+                            "X" => {
+                                let val = hash_map.get("IX").unwrap();
+                                ans += *val;
+                                idx += 2;
+                                continue;
+                            }
+                            _ => {}
+                        }
+                    }
+
+                    "X" => {
+                        let next_key = (arr[idx + 1] as char).to_string();
+
+                        match next_key.as_str() {
+                            "C" => {
+                                let val = hash_map.get("XC").unwrap();
+                                ans += *val;
+                                idx += 2;
+                                continue;
+                            }
+                            "L" => {
+                                let val = hash_map.get("XL").unwrap();
+                                ans += *val;
+                                idx += 2;
+                                continue;
+                            }
+                            _ => {}
+                        }
+                    }
+
+                    "C" => {
+                        let next_key = (arr[idx + 1] as char).to_string();
+
+                        match next_key.as_str() {
+                            "M" => {
+                                let val = hash_map.get("CM").unwrap();
+                                ans += *val;
+                                idx += 2;
+                                continue;
+                            }
+                            "D" => {
+                                let val = hash_map.get("CD").unwrap();
+                                ans += *val;
+                                idx += 2;
+                                continue;
+                            }
+                            _ => {}
+                        }
+                    }
+
+                    _ => {}
+                }
+            }
+            //
+            let val = hash_map.get(&key).unwrap();
+            ans += *val;
             idx += 1;
         }
 
-        0
+        ans
     }
 }
 
@@ -43,7 +112,8 @@ impl Solution {
  *
  */
 fn main() {
-    let _ans = Solution::roman_to_int("MCMXCIV".to_string());
+    let ans = Solution::roman_to_int(String::from("IV"));
+    println!("{}", ans);
 }
 
 #[cfg(test)]
@@ -52,80 +122,8 @@ mod tests {
 
     #[test]
     fn test_roman_to_integer() {
-        assert_eq!(Solution::roman_to_int("III".to_string()), 0);
-        assert_eq!(Solution::roman_to_int("LVIII".to_string()), 0);
-        assert_eq!(Solution::roman_to_int("MCMXCIV".to_string()), 0);
+        assert_eq!(Solution::roman_to_int(String::from("III")), 3);
+        assert_eq!(Solution::roman_to_int(String::from("LVIII")), 58);
+        assert_eq!(Solution::roman_to_int(String::from("MCMXCIV")), 1994);
     }
 }
-
-/*
-class Solution:
-    table = {
-        "I": 1,
-        "V": 5,
-        "X": 10,
-        "L": 50,
-        "C": 100,
-        "D": 500,
-        "M": 1000,
-        "IX": 9,
-        "XC": 90,
-        "CM": 900,
-        "IV": 4,
-        "XL": 40,
-        "CD": 400,
-    }
-
-    def romanToInt(self, s: str) -> int:
-        ans = 0
-        i = 0
-
-        while i < len(s):
-            if s[i] == "I":
-                if i + 1 < len(s) and s[i + 1] == "V":
-                    # Log.blue(f"{self.table['IV']}")
-                    ans = ans + self.table["IV"]
-                    i = i + 2
-                elif i + 1 < len(s) and s[i + 1] == "X":
-                    # Log.blue(f"{self.table['IX']}")
-                    ans = ans + self.table["IX"]
-                    i = i + 2
-                else:
-                    # Log.blue(f"{self.table[s[i]]}")
-                    ans = ans + self.table[s[i]]
-                    i = i + 1
-
-            elif s[i] == "X":
-                if i + 1 < len(s) and s[i + 1] == "L":
-                    # Log.blue(f"{self.table['XL']}")
-                    ans = ans + self.table["XL"]
-                    i = i + 2
-                elif i + 1 < len(s) and s[i + 1] == "C":
-                    # Log.blue(f"{self.table['XC']}")
-                    ans = ans + self.table["XC"]
-                    i = i + 2
-                else:
-                    # Log.blue(f"{self.table[s[i]]}")
-                    ans = ans + self.table[s[i]]
-                    i = i + 1
-
-            elif s[i] == "C":
-                if i + 1 < len(s) and s[i + 1] == "D":
-                    # Log.blue(f"{self.table['CD']}")
-                    ans = ans + self.table["CD"]
-                    i = i + 2
-                elif i + 1 < len(s) and s[i + 1] == "M":
-                    # Log.blue(f"{self.table['CM']}")
-                    ans = ans + self.table["CM"]
-                    i = i + 2
-                else:
-                    # Log.blue(f"{self.table[s[i]]}")
-                    ans = ans + self.table[s[i]]
-                    i = i + 1
-
-            else:
-                # Log.blue(f"{self.table[s[i]]}")
-                ans = ans + self.table[s[i]]
-                i = i + 1
-        return ans
-*/
