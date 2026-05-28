@@ -8,12 +8,14 @@ show_help() {
   echo "------------------------------------------------"
   echo "Uso:"
   echo "  ./sensei_rs.sh -m \"ID. Nombre\"  -> [M]editar: Crear nueva Kata"
-  echo "  ./sensei_rs.sh -e <ID>            -> [E]ntrenar: Ejecutar la Kata"
+  echo "  ./sensei_rs.sh -e <ID>            -> [E]ntrenar: Ejecutar tests de la Kata"
+  echo "  ./sensei_rs.sh -r <ID>            -> [R]un: Ejecutar main de la Kata"
   echo "  ./sensei_rs.sh -l                 -> [L]istar: Ver tus Katas completadas"
   echo ""
   echo "Ejemplos:"
   echo "  ./sensei_rs.sh -m \"1. Two Sum\""
-  echo "  ./sensei_rs.sh -e two_sum"
+  echo "  ./sensei_rs.sh -e 1"
+  echo "  ./sensei_rs.sh -r 1"
   exit 1
 }
 
@@ -36,7 +38,7 @@ case $OPTION in
     exit 1
   fi
 
-  PROJECT_PATH="${DIRECTORY}/${PACKAGE_NAME}"
+  PROJECT_PATH="${DIRECTORY}/${NUMBER}_${PACKAGE_NAME}"
 
   if [ -d "$PROJECT_PATH" ]; then
     echo "⚠️  Esa Kata ya existe en tu Dojo. ¡Sigue entrenando!"
@@ -50,9 +52,12 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+colored = "3"
 EOF
 
     cat <<EOF >"${PROJECT_PATH}/src/main.rs"
+use colored::*;
+
 struct Solution;
 
 /**
@@ -70,7 +75,9 @@ impl Solution {
  * Pruebas unitarias
  *
  */
-fn main() {}
+fn main() {
+  println!("{}", "Hello World!".black().bold().on_bright_green());
+}
 
 #[cfg(test)]
 mod tests {
@@ -93,10 +100,20 @@ EOF
   ;;
 
 -e | --entrenar)
-  PROJECT_PATH="${DIRECTORY}/${VALUE}"
-  if [ -d "$PROJECT_PATH" ]; then
+  PROJECT_PATH=$(find "$DIRECTORY" -maxdepth 1 -type d -name "${VALUE}_*" | head -1)
+  if [ -n "$PROJECT_PATH" ]; then
     echo "⚔️  Entrenando Kata ${VALUE}..."
     cargo test --manifest-path "${PROJECT_PATH}/Cargo.toml"
+  else
+    echo "❌ Error: La Kata '${VALUE}' no existe."
+  fi
+  ;;
+
+-r | --run)
+  PROJECT_PATH=$(find "$DIRECTORY" -maxdepth 1 -type d -name "${VALUE}_*" | head -1)
+  if [ -n "$PROJECT_PATH" ]; then
+    echo "🚀 Ejecutando Kata ${VALUE}..."
+    cargo run --manifest-path "${PROJECT_PATH}/Cargo.toml"
   else
     echo "❌ Error: La Kata '${VALUE}' no existe."
   fi
