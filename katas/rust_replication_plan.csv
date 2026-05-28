@@ -2,7 +2,7 @@ orden,numero,nombre,complejidad_tiempo,ya_en_rust,conceptos_clave_rust
 2,1464,Maximum Product of Two Elements,O(n),Si,"iteradores (iter/max/sort); desestructuración de tuplas; métodos de slice"
 3,191,Number of 1 Bits,O(log n),Si,"operaciones bitwise (&  >> ); método nativo count_ones() en u32; tipos enteros u32/i32"
 4,9,Palindrome Number,O(log n),Si,"to_string(); chars().rev(); String vs &str; collect(); comparación de iteradores"
-5,136,Single Number,O(n),No,"XOR bitwise (^); fold() para reducción; iteradores funcionales"
+5,136,Single Number,O(n),Si,"XOR bitwise (^); fold() para reducción; iteradores funcionales"
 6,2917,Find the K-or of an Array,O(32n),No,"bit shifting (<< >>); filter() y count() en iteradores; u32 y usize; range loops"
 7,338,Counting Bits,O(n log n),No,"Vec::new() y push(); count_ones() en u32; range 0..=n; collect::<Vec<i32>>()"
 8,26,Remove Duplicates from Sorted Array,O(n),No,"slices mutables (&mut Vec); two-pointer con índices; ownership de elementos; retain()"
