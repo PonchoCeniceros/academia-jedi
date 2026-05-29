@@ -1,24 +1,22 @@
 #!/bin/bash
 
-DIRECTORY="katas"
+DIRECTORY="trials/python"
 mkdir -p "$DIRECTORY"
 
-# Función para mostrar ayuda
 show_help() {
-  echo "🥋 SENSEI - Tu guía en el Coding Dojo"
-  echo "-------------------------------------"
-  echo "Uso:"
-  echo "  ./sensei.sh -m \"ID. Nombre\"  -> [M]editar: Crear nueva Kata"
-  echo "  ./sensei.sh -e <ID>            -> [E]ntrenar: Ejecutar tests de la Kata"
-  echo "  ./sensei.sh -l                 -> [L]istar: Ver tus Katas completadas"
+  echo "🌌 HOLOCRON PY - Your guide in the Jedi Academy (Python)"
+  echo "------------------------------------------------------------"
+  echo "Usage:"
+  echo "  ./holocron_py.sh -m \"ID. Name\"  -> [M]editate: Create new Trial"
+  echo "  ./holocron_py.sh -t <ID>          -> [T]rain: Run Trial tests"
+  echo "  ./holocron_py.sh -l               -> [L]og: List completed Trials"
   echo ""
-  echo "Ejemplos:"
-  echo "  ./sensei.sh -m \"14. Longest Common Prefix\""
-  echo "  ./sensei.sh -e 14"
+  echo "Examples:"
+  echo "  ./holocron_py.sh -m \"14. Longest Common Prefix\""
+  echo "  ./holocron_py.sh -t 14"
   exit 1
 }
 
-# Si no hay argumentos, mostrar ayuda
 if [ $# -eq 0 ]; then
   show_help
 fi
@@ -27,22 +25,21 @@ OPTION=$1
 VALUE=$2
 
 case $OPTION in
--m | --meditar)
-  # --- MODO CREACIÓN ---
+-m | --meditate)
   INPUT=$VALUE
   NUMBER=$(echo "$INPUT" | grep -oE '^[0-9]+')
   PROBLEM_NAME=$(echo "$INPUT" | sed -E 's/^[0-9]+\.? *//')
   FUNCTION_NAME=$(echo "$PROBLEM_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9 ]//g' | sed 's/  */_/g' | sed 's/ /_/g')
 
   if [ -z "$NUMBER" ] || [ -z "$PROBLEM_NAME" ]; then
-    echo "❌ Error: Formato inválido. Usa \"ID. Nombre\""
+    echo "❌ Error: Invalid format. Use \"ID. Name\""
     exit 1
   fi
 
   FILE_PATH="${DIRECTORY}/${NUMBER}.py"
 
   if [ -f "$FILE_PATH" ]; then
-    echo "⚠️  Esa Kata ya existe en tu Dojo. ¡Sigue entrenando!"
+    echo "⚠️  This Trial already exists in the Academy. Keep training, Padawan!"
   else
     cat <<EOF >"$FILE_PATH"
 import pytest
@@ -54,7 +51,7 @@ from typing import List, Dict, Optional
 #
 class Solution:
     def solve(self, *args, **kwargs):
-        # Implementa tu solución aquí
+        # Implement your solution here
         pass
 
 # Unit tests
@@ -69,29 +66,25 @@ def test_${FUNCTION_NAME}(params, expected):
     sol = Solution()
     # assert sol.solve(params) == expected
 EOF
-    echo "🥋 Kata $NUMBER preparada para meditación en: $FILE_PATH"
+    echo "⚔️  Trial $NUMBER is ready for training in: $FILE_PATH"
   fi
   ;;
 
--e | --entrenar)
-  # --- MODO EJECUCIÓN ---
+-t | --train)
   FILE_PATH="${DIRECTORY}/${VALUE}.py"
   if [ -f "$FILE_PATH" ]; then
-    echo "⚔️  Entrenando Kata $VALUE..."
+    echo "🌌 Initiating Trial $VALUE..."
     pytest "$FILE_PATH" -v
   else
-    echo "❌ Error: La Kata $VALUE no existe."
+    echo "❌ Error: Trial $VALUE does not exist."
   fi
   ;;
 
--l | --listar)
-  # --- MODO LISTAR ---
-  echo "📜 Registro de Katas en el Dojo:"
-  echo "--------------------------------"
-  # Lista archivos .py, extrae el número y el nombre que está en el comentario
+-l | --log)
+  echo "📜 Trial Log — Jedi Academy:"
+  echo "-----------------------------"
   ls $DIRECTORY/*.py 2>/dev/null | sort -V | while read -r file; do
     ID=$(basename "$file" .py)
-    # Extrae la primera línea después de 'class Solution' o el comentario inicial
     NAME=$(grep -m 1 "#" "$file" | sed 's/#//' | xargs)
     printf "  %-4s | %s\n" "$ID" "$NAME"
   done
