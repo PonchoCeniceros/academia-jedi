@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "find_first_occurrence_in_string"
+name = "katas"
 version = "0.1.0"
 dependencies = [
  "colored",

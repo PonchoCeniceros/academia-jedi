@@ -1,44 +1,50 @@
-# Coding Dojo
+<h1 align="left">
+  <img src="https://github.com/PonchoCeniceros/academia-jedi/blob/main/.assets/jedi.png" width="90" align="absmiddle">
+  &nbsp;
+  Academia Jedi
+</h1>
 
-Este repositorio es mi espacio personal de entrenamiento. Aquí no solo resuelvo problemas, sino que practico la **maestría del código** a través de *Katas*: ejercicios diseñados para perfeccionar la lógica, la sintaxis y el pensamiento algorítmico mediante la repetición y el refinamiento.
+> *"La fuerza de un Jedi fluye de la Fuerza. Pero cuidado. La ira, el miedo, la agresión — el lado oscuro son."*
+> — Maestro Yoda
+
+Este es mi campo de entrenamiento personal en los caminos de la Fuerza. Aquí, cada problema es una **Prueba** — un test de disciplina, claridad y dominio del código. Un Padawan no atraviesa las Pruebas con prisa. Medita, refina y regresa hasta que la solución fluye tan naturalmente como la Fuerza misma.
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Pytest](https://img.shields.io/badge/pytest-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)
 ![Rust](https://img.shields.io/badge/rust-000000?style=for-the-badge&logo=rust&logoColor=white)
 ![LeetCode](https://img.shields.io/badge/-LeetCode-FFA116?style=for-the-badge&logo=LeetCode&logoColor=black)
+
 ---
 
-## Estructura del Dojo
+## 🏛️ Estructura del Templo
 
-He organizado el entorno para que sea minimalista y eficiente. Cada ejercicio (Kata) reside en la carpeta `katas/`, identificada por su ID de LeetCode.
+Cada Prueba reside en `trials/`, identificada por su ID de LeetCode. El Templo está dividido en dos cámaras — una por cada camino de la Fuerza.
 
 ```text
 .
-├── katas/                   # Katas en Python (Pytest)
-│   ├── 1.py                 # Two Sum
-│   ├── 20.py                # Valid Parentheses
-│   ├── 26.py                # Remove Duplicates from Sorted Array
-│   ├── 28.py                # Find the Index of the First Occurrence in a String
-│   ├── 70.py                # Climbing Stairs
-│   ├── ...
-│   └── rust/                # Katas en Rust (cargo test)
-│       └── two_sum/         # Proyecto Cargo independiente por Kata
-│           ├── src/main.rs
-│           └── Cargo.toml
-├── utils/                   # Utilidades de apoyo (Loggers, etc.)
-├── sensei.sh                # Automatización de Katas Python
-├── sensei_rs.sh             # Automatización de Katas Rust
-└── README.md                # El manifiesto del Dojo
+├── trials/
+│   ├── python/              # La Cámara Python (Pytest)
+│   │   ├── 1.py             # Two Sum
+│   │   ├── 20.py            # Valid Parentheses
+│   │   └── ...
+│   └── rust/                # La Cámara Rust (cargo test)
+│       ├── Cargo.toml       # Un solo proyecto para gobernarlos a todos
+│       └── src/bin/         # Un pergamino por Prueba
+│           ├── 1_two_sum.rs
+│           └── ...
+├── utils/                   # Los Holocrones (conocimiento compartido)
+├── holocron_py.sh           # El Holocrón — camino Python
+├── holocron_rs.sh           # El Holocrón — camino Rust
+└── README.md                # El Códex Jedi
 ```
 
 ---
 
-## Laboratorio de Pruebas (Testing)
+## 🌌 Las Pruebas
 
-En este Dojo, una solución solo se considera "dominada" cuando supera todos los casos de prueba de forma elegante.
+Una Prueba solo se considera **dominada** cuando todos los tests pasan — y la solución es tan clara y simple como el lado luminoso exige.
 
-### Python con Pytest
-Utilizo tests parametrizados para una validación exhaustiva:
+### Camino Python
 ```python
 @pytest.mark.parametrize("input, expected", [
     (["flower","flow","flight"], "fl"),
@@ -48,8 +54,7 @@ def test_solution(input, expected):
     assert Solution().longestCommonPrefix(input) == expected
 ```
 
-### Rust con cargo test
-Cada Kata es un proyecto Cargo independiente con tests unitarios integrados:
+### Camino Rust
 ```rust
 #[cfg(test)]
 mod tests {
@@ -64,43 +69,52 @@ mod tests {
 
 ---
 
-## 🛠️ El "Sensei" (Automatización)
+## ⚔️ Los Holocrones (Automatización)
 
-Para mantener el enfoque en la lógica y no en la configuración, utilizo scripts en Bash para generar el *boilerplate* de mis Katas.
+Los scripts **Holocrón** guían a los Padawans a través de sus Pruebas — generando los pergaminos, iniciando los tests y llevando registro de las misiones completadas. Un verdadero Jedi no desperdicia energía en configuración. Se concentra en la Fuerza.
 
-### Python (`sensei.sh`)
+### Camino Python (`holocron_py.sh`)
 ```bash
-# Generar nueva Kata
-./sensei.sh -m "9. Palindrome Number"
+# Comenzar una nueva Prueba
+./holocron_py.sh -m "9. Palindrome Number"
 
-# Ejecutar tests
-./sensei.sh -e 9
+# Iniciar el entrenamiento
+./holocron_py.sh -t 9
 
-# Listar Katas
-./sensei.sh -l
+# Consultar el Registro de Pruebas
+./holocron_py.sh -l
 ```
 
-### Rust (`sensei_rs.sh`)
+### Camino Rust (`holocron_rs.sh`)
 ```bash
-# Generar nueva Kata
-./sensei_rs.sh -m "1. Two Sum"
+# Comenzar una nueva Prueba
+./holocron_rs.sh -m "1. Two Sum"
 
-# Ejecutar tests
-./sensei_rs.sh -e two_sum
+# Iniciar el entrenamiento
+./holocron_rs.sh -t 1
 
-# Listar Katas
-./sensei_rs.sh -l
+# Ejecutar la Prueba
+./holocron_rs.sh -r 1
+
+# Consultar el Registro de Pruebas
+./holocron_rs.sh -l
 ```
 
-Ambos scripts generan esqueletos automáticos con:
-- ✅ **Estructura de tests** lista para completar.
-- ✅ **Logging estandarizado** con `utils.log` (Python).
-- ✅ **Proyecto Cargo** configurado con `.gitignore` incluido (Rust).
+Ambos Holocrones conjuran pergaminos con:
+- ⚔️ **Estructura de tests** lista para ser empuñada.
+- 📡 **Logging estandarizado** con `utils.log` (Python).
+- 🦀 **Binario Cargo** forjado por Prueba (Rust).
 
 ---
 
-## Filosofía de Entrenamiento
+## 🔮 El Código Jedi
 
-1. **Claridad sobre Velocidad:** El código debe ser legible antes que ingenioso.
-2. **Refactorización Continua:** Una Kata no termina al pasar el test, sino cuando el código es lo más simple posible.
+> *No hay emoción, hay paz.*
+> *No hay ignorancia, hay conocimiento.*
+> *No hay pasión, hay serenidad.*
 
+1. **Claridad sobre Velocidad** — El código debe ser legible antes de ser ingenioso. El lado oscuro promete atajos; el Jedi construye cimientos.
+2. **Refinamiento Continuo** — Una Prueba no termina cuando el test pasa. Termina cuando ya no se puede eliminar nada más.
+3. **Abraza el Proceso** — Cada test fallido es una lección. Cada test aprobado es un paso más hacia la maestría.
+
+*Que la Fuerza te acompañe.* 🌌
