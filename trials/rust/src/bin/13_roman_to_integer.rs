@@ -1,5 +1,7 @@
-struct Solution;
+use katas::s;
 use std::collections::HashMap;
+
+struct Solution;
 
 /**
  * Implementa tu solución aquí
@@ -8,19 +10,19 @@ use std::collections::HashMap;
 impl Solution {
     pub fn roman_to_int(s: String) -> i32 {
         let hash_map: HashMap<String, i32> = HashMap::from([
-            (String::from("I"), 1),
-            (String::from("V"), 5),
-            (String::from("X"), 10),
-            (String::from("L"), 50),
-            (String::from("C"), 100),
-            (String::from("D"), 500),
-            (String::from("M"), 1000),
-            (String::from("IX"), 9),
-            (String::from("XC"), 90),
-            (String::from("CM"), 900),
-            (String::from("IV"), 4),
-            (String::from("XL"), 40),
-            (String::from("CD"), 400),
+            (s!("I"), 1),
+            (s!("V"), 5),
+            (s!("X"), 10),
+            (s!("L"), 50),
+            (s!("C"), 100),
+            (s!("D"), 500),
+            (s!("M"), 1000),
+            (s!("IX"), 9),
+            (s!("XC"), 90),
+            (s!("CM"), 900),
+            (s!("IV"), 4),
+            (s!("XL"), 40),
+            (s!("CD"), 400),
         ]);
 
         // transformando el string en una coleccion para poder recorrerla
@@ -112,7 +114,7 @@ impl Solution {
  *
  */
 fn main() {
-    let ans = Solution::roman_to_int(String::from("IV"));
+    let ans = Solution::roman_to_int(s!("IV"));
     println!("{}", ans);
 }
 
@@ -122,8 +124,8 @@ mod tests {
 
     #[test]
     fn test_roman_to_integer() {
-        assert_eq!(Solution::roman_to_int(String::from("III")), 3);
-        assert_eq!(Solution::roman_to_int(String::from("LVIII")), 58);
-        assert_eq!(Solution::roman_to_int(String::from("MCMXCIV")), 1994);
+        assert_eq!(Solution::roman_to_int(s!("III")), 3);
+        assert_eq!(Solution::roman_to_int(s!("LVIII")), 58);
+        assert_eq!(Solution::roman_to_int(s!("MCMXCIV")), 1994);
     }
 }

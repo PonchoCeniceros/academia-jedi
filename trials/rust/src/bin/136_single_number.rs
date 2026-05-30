@@ -1,4 +1,5 @@
 use colored::*;
+use katas::s;
 use std::collections::HashSet;
 
 struct Solution;

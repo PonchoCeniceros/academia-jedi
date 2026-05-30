@@ -47,6 +47,7 @@ case $OPTION in
   else
     cat <<EOF >"$BIN_FILE"
 use colored::*;
+use katas::s;
 
 struct Solution;
 
@@ -62,7 +63,14 @@ impl Solution {
 }
 
 fn main() {
-    println!("{}", "May the Force be with you!".black().bold().on_bright_green());
+    // let ans = Solution::${PACKAGE_NAME}();
+    println!(
+        "{}",
+        format!("{}", "May the Force be with you!")
+            .black()
+            .bold()
+            .on_bright_green()
+    );
 }
 
 #[cfg(test)]

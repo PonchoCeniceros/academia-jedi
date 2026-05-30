@@ -1,3 +1,4 @@
+use katas::s;
 use std::collections::HashSet;
 struct Solution;
 
