@@ -6,7 +6,7 @@ orden,numero,nombre,complejidad_tiempo,ya_en_rust,conceptos_clave_rust
 6,2917,Find the K-or of an Array,O(32n),Si,"bit shifting (<< >>); filter() y count() en iteradores; u32 y usize; range loops"
 7,338,Counting Bits,O(n log n),Si,"Vec::new() y push(); count_ones() en u32; range 0..=n; collect::<Vec<i32>>()"
 8,26,Remove Duplicates from Sorted Array,O(n),Si,"slices mutables (&mut Vec); two-pointer con índices; ownership de elementos; retain()"
-9,14,Longest Common Prefix,O(n*m),No,"String vs &str; chars() y zip(); iter().min_by_key(); string slicing con &s[..n]"
+9,14,Longest Common Prefix,O(n*m),Si,"String vs &str; chars() y zip(); iter().min_by_key(); string slicing con &s[..n]"
 10,217,Contains Duplicate,O(n),Si,"HashSet<i32>; insert() retorna bool; iter; from() para convertir Vec a HashSet"
 11,20,Valid Parentheses,O(n),No,"Vec como stack (push/pop); match con patrones; Option<T> con unwrap_or; chars()"
 12,888,Fair Candy Swap,O(n+m),No,"HashSet para búsqueda O(1); iter().sum::<i32>(); aritmética entera; contains()"
