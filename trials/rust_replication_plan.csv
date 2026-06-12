@@ -15,7 +15,7 @@ orden,numero,nombre,complejidad_tiempo,ya_en_rust,conceptos_clave_rust
 15,509,Fibonacci Number,O(n),Si,"HashMap<i32 i32> para memoización; recursión con estado; entry().or_insert(); o DP iterativo con array"
 16,1137,N-th Tribonacci Number,O(n),Si,"array fijo [i64; 3] para rolling window; DP iterativo; índices con módulo; evitar recursión sin memoización"
 17,70,Climbing Stairs,O(n),Si,"DP iterativo con dos variables; patrón fibonacci en Rust; u64 para valores grandes; sin recursión por stack overflow"
-18,746,Min Cost Climbing Stairs,O(n),No,"Vec para tabla DP; std::cmp::min(); iter().enumerate(); acceso con índices seguros"
+18,746,Min Cost Climbing Stairs,O(n),si,"Vec para tabla DP; std::cmp::min(); iter().enumerate(); acceso con índices seguros"
 19,241,Different Ways to Add Parentheses,O(Catalan(n)),No,"recursión dividir y conquistar; Vec<i32> como resultado; String parsing con chars() y enumerate(); closures para operaciones aritméticas; flatten()"
 20,13,Roman to Integer,O(n),Si,"HashMap<char i32> para valores; chars().peekable() para lookahead; windows(2) como alternativa; match para mapeo"
 21,28,Find First Occurrence in String,O(n*m) / O(n+m) KMP,Si,"str::find() nativo; implementación manual con windows(); Option<usize>; conversión Option a i32 con map_or"
