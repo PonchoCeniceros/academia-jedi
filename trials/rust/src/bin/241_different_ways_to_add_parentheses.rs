@@ -1,8 +1,8 @@
 use colored::*;
 use katas::s;
 
+use regex::Regex;
 use std::collections::HashSet;
-
 struct Solution;
 
 /**
@@ -83,6 +83,11 @@ impl Solution {
 }
 
 fn main() {
+    let expression = s!("2-11-1");
+    let re = Regex::new(r"(?:[1-9][0-9]|[0-9])|[+\-*]").unwrap();
+
+    let tokens = re.find_iter(&expression).map(|m| m.as_str()).collect();
+
     let ans = Solution::diff_ways_to_compute(s!("11"));
     println!("{}", format!("{:?}", ans).black().bold().on_bright_green());
 }
