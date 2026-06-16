@@ -20,7 +20,7 @@ orden,numero,nombre,complejidad_tiempo,ya_en_rust,conceptos_clave_rust
 20,13,Roman to Integer,O(n),Si,"HashMap<char i32> para valores; chars().peekable() para lookahead; windows(2) como alternativa; match para mapeo"
 21,28,Find First Occurrence in String,O(n*m) / O(n+m) KMP,Si,"str::find() nativo; implementación manual con windows(); Option<usize>; conversión Option a i32 con map_or"
 22,1,Two Sum,O(n),Si,"HashMap<i32 usize>; enumerate(); entry API; retorno temprano con return; Vec<i32> como resultado"
-23,11,Container With Most Water,O(n),No,"dos punteros concurrentes; std::cmp::min y max; mutabilidad limpia sin clonar datos"
+23,11,Container With Most Water,O(n),Si,"dos punteros concurrentes; std::cmp::min y max; mutabilidad limpia sin clonar datos"
 24,3,Longest Substring Without Repeating Characters,O(n),No,"Sliding Window; conversión String a Vec<char> para indexación segura; arreglo de frecuencias [usize; 128]"
 25,15,3Sum,O(n^2),No,"sort_unstable() para rendimiento; lógicas manuales para evitar duplicados en slices; evitar colecciones pesadas"
 26,49,Group Anagrams,O(n * m log m),No,"HashMap con llaves complejas; uso de arrays fijos [i32; 26] o Vec<char> ordenados como keys; traits Hash y Eq"
