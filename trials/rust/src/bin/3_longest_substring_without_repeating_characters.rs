@@ -11,12 +11,17 @@ struct Solution;
 impl Solution {
     pub fn length_of_longest_substring(s: String) -> i32 {
         // arreglo de chars en lugar de String
-        let mut i = 0;
         let arr: Vec<char> = s.chars().collect();
-        // calcular la longitud de los substrs y el maximo de ellos
-        let (mut l, mut max_l) = (0, 0);
+
         // set para ir guardando los chars de la substr consultada
         let mut set: HashSet<char> = HashSet::new();
+
+        // indices para recorrer el arreglo de chars
+        let mut i = 0_usize;
+        // calcular la longitud de los substrs y el maximo de ellos
+        let (mut l, mut max_l) = (0, 0);
+
+        let mut r = 0_usize;
 
         loop {
             if i >= arr.len() {
