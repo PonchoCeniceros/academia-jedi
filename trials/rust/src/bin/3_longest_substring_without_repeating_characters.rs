@@ -1,6 +1,9 @@
 use colored::*;
 use katas::s;
-use std::collections::{HashMap, HashSet};
+use std::{
+    cmp::max,
+    collections::{HashMap, HashSet},
+};
 
 struct Solution;
 
@@ -9,40 +12,51 @@ struct Solution;
  *
  */
 impl Solution {
-    //
-    // calcular los saltos que hay en el arreglo de
-    // "posiciones" de cada letra del substring
-    //
-    fn compute_len(arr: &[i32]) -> i32 {
-        let mut ans = 1;
-        for i in 0..arr.len() - 1 {
-            let diff = arr[i + 1] - arr[i];
-            ans = if diff == 1 { ans + 1 } else { ans };
-        }
-
-        ans
-    }
-
-    pub fn length_of_longest_substring(s: String) -> i32 {
-        if s.is_empty() {
-            return 0;
-        }
-
+    fn get_len(arr: &[char], idx: &mut usize) -> i32 {
+        let mut l = 0;
         let mut set: HashSet<char> = HashSet::new();
-        let mut map: HashMap<char, i32> = HashMap::new();
 
-        for (u, c) in s.chars().enumerate() {
+        loop {
+            if *idx >= arr.len() {
+                break;
+            }
+
+            let c = arr[*idx];
             if !set.contains(&c) {
                 set.insert(c);
-                map.insert(c, u as i32);
+                l += 1;
+                *idx += 1;
             } else {
-                map.insert(c, u as i32);
+                return l;
             }
         }
 
-        let mut idx: Vec<i32> = map.into_values().collect();
-        idx.sort();
-        Solution::compute_len(&idx)
+        l
+    }
+
+    pub fn length_of_longest_substring(s: String) -> i32 {
+        let mut l = 0;
+        let mut idx = 0;
+        let mut arr: Vec<char> = s.chars().collect();
+
+        loop {
+            if idx >= arr.len() {
+                break;
+            }
+            l = max(Solution::get_len(&arr, &mut idx), l);
+        }
+
+        idx = 0;
+        arr.reverse();
+
+        loop {
+            if idx >= arr.len() {
+                break;
+            }
+            l = max(Solution::get_len(&arr, &mut idx), l);
+        }
+
+        l
     }
 }
 
@@ -62,5 +76,6 @@ mod tests {
         assert_eq!(Solution::length_of_longest_substring(s!("bbbbb")), 1);
         assert_eq!(Solution::length_of_longest_substring(s!("pwwkew")), 3);
         assert_eq!(Solution::length_of_longest_substring(s!("aab")), 2);
+        assert_eq!(Solution::length_of_longest_substring(s!("dvdf")), 3);
     }
 }
