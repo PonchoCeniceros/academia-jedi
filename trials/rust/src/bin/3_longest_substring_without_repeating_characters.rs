@@ -1,6 +1,6 @@
 use colored::*;
 use katas::s;
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 struct Solution;
 
@@ -9,28 +9,40 @@ struct Solution;
  *
  */
 impl Solution {
-    pub fn length_of_longest_substring(s: String) -> i32 {
-        // @todo tal vez sea mejor usar un HashMap
-        // para guardar como clave o el char o la posicion
+    //
+    // calcular los saltos que hay en el arreglo de
+    // "posiciones" de cada letra del substring
+    //
+    fn compute_len(arr: &[i32]) -> i32 {
         let mut ans = 1;
-        let mut set: HashMap<char, i32> = HashMap::new();
-
-        // @todo es posible que considere evaluar las posiciones
-        // de los chars en el momento de su insercion?
-
-        for (u, c) in s.chars().enumerate() {
-            set.insert(c, u as i32);
-        }
-
-        let mut arr: Vec<i32> = set.into_values().collect();
-        arr.sort();
-
         for i in 0..arr.len() - 1 {
             let diff = arr[i + 1] - arr[i];
             ans = if diff == 1 { ans + 1 } else { ans };
         }
 
         ans
+    }
+
+    pub fn length_of_longest_substring(s: String) -> i32 {
+        if s.is_empty() {
+            return 0;
+        }
+
+        let mut set: HashSet<char> = HashSet::new();
+        let mut map: HashMap<char, i32> = HashMap::new();
+
+        for (u, c) in s.chars().enumerate() {
+            if !set.contains(&c) {
+                set.insert(c);
+                map.insert(c, u as i32);
+            } else {
+                map.insert(c, u as i32);
+            }
+        }
+
+        let mut idx: Vec<i32> = map.into_values().collect();
+        idx.sort();
+        Solution::compute_len(&idx)
     }
 }
 
@@ -49,5 +61,6 @@ mod tests {
         assert_eq!(Solution::length_of_longest_substring(s!("abcabcbb")), 3);
         assert_eq!(Solution::length_of_longest_substring(s!("bbbbb")), 1);
         assert_eq!(Solution::length_of_longest_substring(s!("pwwkew")), 3);
+        assert_eq!(Solution::length_of_longest_substring(s!("aab")), 2);
     }
 }
