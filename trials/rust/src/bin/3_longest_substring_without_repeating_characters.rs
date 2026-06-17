@@ -1,9 +1,6 @@
 use colored::*;
 use katas::s;
-use std::{
-    cmp::max,
-    collections::{HashMap, HashSet},
-};
+use std::{cmp::max, collections::HashSet};
 
 struct Solution;
 
@@ -61,7 +58,7 @@ impl Solution {
 }
 
 fn main() {
-    let s = s!("abcabcbb");
+    let s = s!("asjrgapa");
     let ans = Solution::length_of_longest_substring(s);
     println!("{}", format!("{}", ans).black().bold().on_bright_green());
 }
@@ -77,5 +74,6 @@ mod tests {
         assert_eq!(Solution::length_of_longest_substring(s!("pwwkew")), 3);
         assert_eq!(Solution::length_of_longest_substring(s!("aab")), 2);
         assert_eq!(Solution::length_of_longest_substring(s!("dvdf")), 3);
+        assert_eq!(Solution::length_of_longest_substring(s!("asjrgapa")), 6);
     }
 }
