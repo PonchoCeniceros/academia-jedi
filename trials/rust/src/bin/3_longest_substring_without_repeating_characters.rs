@@ -9,56 +9,37 @@ struct Solution;
  *
  */
 impl Solution {
-    fn get_len(arr: &[char], idx: &mut usize) -> i32 {
-        let mut l = 0;
+    pub fn length_of_longest_substring(s: String) -> i32 {
+        // arreglo de chars en lugar de String
+        let mut i = 0;
+        let arr: Vec<char> = s.chars().collect();
+        // calcular la longitud de los substrs y el maximo de ellos
+        let (mut l, mut max_l) = (0, 0);
+        // set para ir guardando los chars de la substr consultada
         let mut set: HashSet<char> = HashSet::new();
 
         loop {
-            if *idx >= arr.len() {
+            if i >= arr.len() {
+                max_l = max(max_l, l);
                 break;
             }
 
-            let c = arr[*idx];
-            if !set.contains(&c) {
-                set.insert(c);
+            if !set.contains(&arr[i]) {
+                set.insert(arr[i]);
                 l += 1;
-                *idx += 1;
+                i += 1;
             } else {
-                return l;
+                max_l = max(max_l, l);
+                set.clear();
             }
         }
 
-        l
-    }
-
-    pub fn length_of_longest_substring(s: String) -> i32 {
-        let mut l = 0;
-        let mut idx = 0;
-        let mut arr: Vec<char> = s.chars().collect();
-
-        loop {
-            if idx >= arr.len() {
-                break;
-            }
-            l = max(Solution::get_len(&arr, &mut idx), l);
-        }
-
-        idx = 0;
-        arr.reverse();
-
-        loop {
-            if idx >= arr.len() {
-                break;
-            }
-            l = max(Solution::get_len(&arr, &mut idx), l);
-        }
-
-        l
+        max_l
     }
 }
 
 fn main() {
-    let s = s!("asjrgapa");
+    let s = s!(" ");
     let ans = Solution::length_of_longest_substring(s);
     println!("{}", format!("{}", ans).black().bold().on_bright_green());
 }
