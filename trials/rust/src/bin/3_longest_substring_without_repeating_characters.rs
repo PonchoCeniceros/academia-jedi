@@ -9,21 +9,17 @@ struct Solution;
  *
  */
 impl Solution {
-    pub fn length_of_longest_substring(s: String) -> i32 {
-        // arreglo de chars en lugar de String
-        let arr: Vec<char> = s.chars().collect();
-
+    fn get_max_len(arr: &[char]) -> i32 {
         // set para ir guardando los chars de la substr consultada
         let mut set: HashSet<char> = HashSet::new();
 
         // indices para recorrer el arreglo de chars
-        let mut i = 0_usize;
+        let (mut r, mut i) = (0_usize, 0_usize);
         // calcular la longitud de los substrs y el maximo de ellos
         let (mut l, mut max_l) = (0, 0);
 
-        let mut r = 0_usize;
-
         loop {
+            // mi substr empieza aqui
             if i >= arr.len() {
                 max_l = max(max_l, l);
                 break;
@@ -36,15 +32,37 @@ impl Solution {
             } else {
                 max_l = max(max_l, l);
                 set.clear();
+                l = 0;
+                // y mi substr termina aqui
+                if arr[i] == arr[r] && (i as i32 - r as i32) > 1 {
+                    i -= 1;
+                }
+                // reacomodo r al nuevo substr
+                r = i;
             }
         }
 
         max_l
     }
+
+    pub fn length_of_longest_substring(s: String) -> i32 {
+        // arreglo de chars en lugar de String
+        let mut arr: Vec<char> = s.chars().collect();
+
+        if arr.len() <= 1 {
+            return arr.len() as i32;
+        }
+
+        let a = Solution::get_max_len(&arr);
+        arr.reverse();
+        let b = Solution::get_max_len(&arr);
+
+        max(a, b)
+    }
 }
 
 fn main() {
-    let s = s!(" ");
+    let s = s!("aab");
     let ans = Solution::length_of_longest_substring(s);
     println!("{}", format!("{}", ans).black().bold().on_bright_green());
 }
@@ -55,11 +73,24 @@ mod tests {
 
     #[test]
     fn test_length_of_longest_substring() {
-        assert_eq!(Solution::length_of_longest_substring(s!("abcabcbb")), 3);
-        assert_eq!(Solution::length_of_longest_substring(s!("bbbbb")), 1);
-        assert_eq!(Solution::length_of_longest_substring(s!("pwwkew")), 3);
-        assert_eq!(Solution::length_of_longest_substring(s!("aab")), 2);
-        assert_eq!(Solution::length_of_longest_substring(s!("dvdf")), 3);
-        assert_eq!(Solution::length_of_longest_substring(s!("asjrgapa")), 6);
+        let cases = [
+            ("abcabcbb", 3),
+            ("bbbbb", 1),
+            ("pwwkew", 3),
+            ("aab", 2),
+            ("dvdf", 3),
+            ("asjrgapa", 6),
+            (" ", 1),
+            ("busvutpwmu", 7),
+        ];
+
+        for (input, expected) in cases {
+            assert_eq!(
+                Solution::length_of_longest_substring(s!(input)),
+                expected,
+                "{}",
+                format!("{:?}", input).red().italic().underline()
+            );
+        }
     }
 }
