@@ -63,14 +63,8 @@ impl Solution {
 }
 
 fn main() {
-    // let ans = Solution::${PACKAGE_NAME}();
-    println!(
-        "{}",
-        format!("{}", "May the Force be with you!")
-            .black()
-            .bold()
-            .on_bright_green()
-    );
+    let ans = Solution::${PACKAGE_NAME}();
+    println!("{}", format!("{}", ans).green().italic().underline());
 }
 
 #[cfg(test)]
@@ -79,9 +73,26 @@ mod tests {
 
     #[test]
     fn test_${PACKAGE_NAME}() {
-        // assert_eq!(Solution::${PACKAGE_NAME}(), expected);
-        todo!()
+        let cases = [
+            // (, ),
+        ];
+
+        for (input, expected) in cases {
+            todo!();
+            // assert_eq!(
+            //     Solution::${PACKAGE_NAME}(),
+            //     expected,
+            //     "{}",
+            //     format!("{:?}", input).red().italic().underline()
+            // );
+        }
     }
+
+
+
+
+
+
 }
 EOF
 
