@@ -10,7 +10,22 @@ impl Solution {
     pub fn three_sum(nums: Vec<i32>) -> Vec<Vec<i32>> {
         let i = 1;
 
-        for j in 0..nums.len() - 1 {}
+        for j in 0..nums.len() - 1 {
+            /*
+            if sigma_0:
+               if sigma_3:
+                   delta_1(i,j,j+2)
+               else:
+                   delta_1(i,j,j+1)
+
+            if sigma_1:
+                continue
+
+            if sigma_2:
+
+
+            */
+        }
 
         // for j in 0..nums.len() - 1 {
         //     let x = if j == 0 { 0 } else { nums[j - 1] };
