@@ -8,12 +8,23 @@ struct Solution;
  */
 impl Solution {
     pub fn three_sum(nums: Vec<i32>) -> Vec<Vec<i32>> {
+        let i = 1;
+
+        for j in 0..nums.len() - 1 {}
+
+        // for j in 0..nums.len() - 1 {
+        //     let x = if j == 0 { 0 } else { nums[j - 1] };
+        //     let y = nums[j];
+        //     let z = nums[j + 1];
+        //     let _ans = y - x + z + w;
+        // }
+
         vec![vec![0]]
     }
 }
 
 fn main() {
-    let nums = vec![0, 1, 1];
+    let nums = vec![-1, 0, 1, 2, -1, -4];
     let ans = Solution::three_sum(nums);
     println!("{}", format!("{:?}", ans).green().italic().underline());
 }
