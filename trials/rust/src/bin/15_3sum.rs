@@ -53,9 +53,9 @@ impl Solution {
 }
 
 fn main() {
-    let nums = vec![-1, 0, 1, 2, -1, -4];
+    let nums = vec![2, -3, 0, -2, -5, -5, -4, 1, 2, -2, 2, 0, 2, -4, 5, 5, -10];
     let ans = Solution::three_sum(nums);
-    println!("{}", format!("{:?}", ans).green().italic().underline());
+    println!("{:?}", ans);
 }
 
 #[cfg(test)]
