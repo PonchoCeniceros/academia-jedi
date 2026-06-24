@@ -28,13 +28,19 @@ impl Solution {
                     let mut ans = vec![x, y, z];
                     ans.sort();
                     set.insert(ans);
-                    // println!("(x,y,z) = ({},{},{})", x, y, z);
-                    break;
+
+                    // mover los indices a valores inexplorados del arreglo
+                    i = if i + 1 == k { i + 2 } else { i + 1 };
+                    j = if j.saturating_sub(1) == k {
+                        j.saturating_sub(2) // evitando el casteo (j as i32 - 2) as usize
+                    } else {
+                        j.saturating_sub(1)
+                    };
                 }
 
                 if s < 0 {
                     j = if j.saturating_sub(1) == k {
-                        j.saturating_sub(2) // evitando el casteo (j as i32 - 2) as usize
+                        j.saturating_sub(2)
                     } else {
                         j.saturating_sub(1)
                     };
