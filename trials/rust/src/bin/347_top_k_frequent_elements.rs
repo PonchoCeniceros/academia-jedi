@@ -1,5 +1,6 @@
 use colored::*;
-use katas::s;
+use std::collections::HashMap;
+use std::collections::hash_map::Entry::{Occupied, Vacant};
 
 struct Solution;
 
@@ -12,7 +13,25 @@ impl Solution {
         // acumular la frecuencia en un map {num, freq},
         // ordenar respecto a las frecuencias,
         // extraer los nums y entregar un slice hasta el numero pedido
-        vec![0]
+
+        let mut set: HashMap<i32, i32> = HashMap::new();
+
+        for num in nums.into_iter() {
+            match set.entry(num) {
+                Vacant(e) => {
+                    e.insert(1);
+                }
+                Occupied(mut e) => {
+                    *e.get_mut() += 1; // Obtenemos la referencia mutable y le sumamos 1
+                }
+            }
+        }
+
+        let mut el: Vec<(i32, i32)> = set.into_iter().collect();
+        el.sort_by(|a, b| b.1.cmp(&a.1));
+        let ans: Vec<i32> = el.into_iter().take(k as usize).map(|(k, _v)| k).collect();
+
+        ans
     }
 }
 
