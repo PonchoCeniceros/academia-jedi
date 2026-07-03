@@ -5,12 +5,44 @@ struct Solution;
  *
  */
 impl Solution {
+    fn compute(s: usize, n: usize, matrix: &mut Vec<Vec<i32>>) {
+        if n < 2 {
+            return;
+        }
+
+        for p in s..(s + n - 2) {
+            let (mut i, mut j) = (p, p);
+            let (mut l, mut m) = (0_usize, 0_usize);
+            let (mut prev, mut aux) = (0, 0);
+
+            loop {
+                prev = if (i, j) == (p, p) { matrix[p][p] } else { aux };
+                (l, m) = (j, n - 1 - i);
+                aux = matrix[l][m];
+                matrix[l][m] = prev;
+                (i, j) = (l, m);
+
+                if (i, j) == (p, p) {
+                    break;
+                }
+            }
+        }
+    }
+
     pub fn rotate(matrix: &mut Vec<Vec<i32>>) {
         todo!();
     }
 }
 
 fn main() {
+    let mut matrix_0 = vec![
+        vec![1, 2, 3, 4],
+        vec![5, 6, 7, 8],
+        vec![9, 10, 11, 12],
+        vec![13, 14, 15, 16],
+    ];
+    Solution::rotate(&mut matrix_0);
+
     //
     let mut matrix_1 = vec![vec![1, 2, 3], vec![4, 5, 6], vec![7, 8, 9]];
     Solution::rotate(&mut matrix_1);
@@ -21,6 +53,7 @@ fn main() {
         vec![13, 3, 6, 7],
         vec![15, 14, 12, 16],
     ];
+
     Solution::rotate(&mut matrix_2);
 }
 
