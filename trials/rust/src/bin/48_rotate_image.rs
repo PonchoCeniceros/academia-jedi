@@ -6,12 +6,14 @@ struct Solution;
  */
 impl Solution {
     fn compute(s: usize, n: usize, matrix: &mut Vec<Vec<i32>>) {
+        println!("compute({},{})", s, n);
+
         if n < 2 {
             return;
         }
 
-        for p in s..(s + n - 2) {
-            let (mut i, mut j) = (p, p);
+        for p in s..(s + n - 1) {
+            let (mut i, mut j) = (s, p);
             let (mut l, mut m) = (0_usize, 0_usize);
             let (mut prev, mut aux) = (0, 0);
 
@@ -22,15 +24,19 @@ impl Solution {
                 matrix[l][m] = prev;
                 (i, j) = (l, m);
 
-                if (i, j) == (p, p) {
+                if (i, j) == (s, p) {
                     break;
                 }
             }
+
+            println!("{:?}", matrix);
         }
     }
 
     pub fn rotate(matrix: &mut Vec<Vec<i32>>) {
-        todo!();
+        Solution::compute(0, 4, matrix);
+        Solution::compute(1, 2, matrix);
+        Solution::compute(2, 1, matrix);
     }
 }
 
