@@ -18,7 +18,8 @@ impl Solution {
             let (mut prev, mut aux) = (0, 0);
 
             loop {
-                prev = if (i, j) == (p, p) { matrix[p][p] } else { aux };
+                let cond = (i, j) == (s, p);
+                prev = if cond { matrix[s][p] } else { aux };
                 (l, m) = (j, n - 1 - i);
                 aux = matrix[l][m];
                 matrix[l][m] = prev;
@@ -34,9 +35,9 @@ impl Solution {
     }
 
     pub fn rotate(matrix: &mut Vec<Vec<i32>>) {
-        Solution::compute(0, 4, matrix);
+        // Solution::compute(0, 4, matrix);
         Solution::compute(1, 2, matrix);
-        Solution::compute(2, 1, matrix);
+        // Solution::compute(2, 1, matrix);
     }
 }
 
