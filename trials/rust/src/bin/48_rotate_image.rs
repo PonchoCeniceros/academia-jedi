@@ -6,8 +6,6 @@ struct Solution;
  */
 impl Solution {
     fn compute(s: usize, n: usize, matrix: &mut Vec<Vec<i32>>) {
-        println!("compute({},{})", s, n);
-
         if n < 2 {
             return;
         }
@@ -29,8 +27,6 @@ impl Solution {
                     break;
                 }
             }
-
-            println!("{:?}", matrix);
         }
     }
 
@@ -52,9 +48,11 @@ impl Solution {
 }
 
 fn main() {
-    // let mut matrix_0 = vec![vec![1, 2, 3], vec![4, 5, 6], vec![7, 8, 9]];
-    // Solution::rotate(&mut matrix_0);
+    let mut matrix_0 = vec![vec![1, 2, 3], vec![4, 5, 6], vec![7, 8, 9]];
+    Solution::rotate(&mut matrix_0);
+    println!("{:?}", matrix_0);
 
+    //
     let mut matrix_1 = vec![
         vec![1, 2, 3, 4],
         vec![5, 6, 7, 8],
@@ -62,10 +60,13 @@ fn main() {
         vec![13, 14, 15, 16],
     ];
     Solution::rotate(&mut matrix_1);
+    println!("{:?}", matrix_1);
 
     //
     let mut matrix_2 = vec![vec![1, 2, 3], vec![4, 5, 6], vec![7, 8, 9]];
     Solution::rotate(&mut matrix_2);
+    println!("{:?}", matrix_2);
+
     //
     let mut matrix_3 = vec![
         vec![5, 1, 9, 11],
@@ -73,8 +74,8 @@ fn main() {
         vec![13, 3, 6, 7],
         vec![15, 14, 12, 16],
     ];
-
     Solution::rotate(&mut matrix_3);
+    println!("{:?}", matrix_3);
 }
 
 #[cfg(test)]
