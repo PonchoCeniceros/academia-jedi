@@ -2,13 +2,58 @@ use colored::*;
 
 struct Solution;
 
+type i32_matrix = Vec<Vec<i32>>;
+
 /**
  * Implement your solution here
  *
  */
 impl Solution {
-    pub fn spiral_order(matrix: Vec<Vec<i32>>) -> Vec<i32> {
-        vec![0]
+    fn next(i: usize, j: usize, direction: char) -> (usize, usize) {
+        match direction {
+            'u' => (i - 1, j),
+            'd' => (i + 1, j),
+            'l' => (i, j - 1),
+            'r' => (i, j + 1),
+            _ => (i, j), // Caso por defecto: si es un espacio u otro carácter, no se mueve
+        }
+    }
+
+    fn turn(matrix: i32_matrix, i: usize, j: usize, direction: char) -> char {
+        let directions = vec![
+            ('u', (i - 1, j)),
+            ('d', (i + 1, j)),
+            ('l', (i, j - 1)),
+            ('r', (i, j + 1)),
+        ];
+
+        for (dir, coords) in directions.iter() {
+            if let Some(&val) = matrix.get(coords.0)?.get(coords.1) {
+                println!("turn to {}", dir);
+            }
+        }
+    }
+
+    pub fn spiral_order(matrix: i32_matrix) -> Vec<i32> {
+        let mut dir: char = 'r';
+        let mut ans: Vec<i32> = vec![];
+        let (mut c, mut n) = (0, 0);
+        let (mut i, mut j) = (0_usize, 0_usize);
+
+        // primer valor capturado
+        ans.push(matrix[i][j]);
+
+        loop {
+            // incrementar contador general
+            // incrementar contador por linea
+            c += 1;
+
+            if c == 4 {
+                break;
+            }
+        }
+
+        ans
     }
 }
 
