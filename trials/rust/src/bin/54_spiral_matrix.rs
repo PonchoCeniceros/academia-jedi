@@ -69,18 +69,18 @@ impl Solution {
         ];
 
         for &(dir, coords_opt) in directions.iter() {
-            // 1. Evitamos volver por donde veníamos
+            // Evitamos volver por donde veníamos
             if curr_dir != dir {
-                // 2. Desempaquetamos la coordenada solo si es válida (no es None)
+                // Desempaquetamos la coordenada solo si es válida (no es None)
                 if let Some(coords) = coords_opt {
-                    // 3. Verificamos si la posición existe físicamente en la matriz
+                    // Verificamos si la posición existe físicamente en la matriz
                     if matrix
                         .get(coords.0)
                         .and_then(|row| row.get(coords.1))
                         .is_some()
                     {
-                        // println!("{:?}", coords);
-                        // println!("{:?}", map[coords.0][coords.1]);
+                        // y verificamos que nuestro mapa no este marcado
+                        // como visitado en dichas cordenadas
                         if map[coords.0][coords.1] == 'o' {
                             new_dir = dir;
                         }
@@ -106,13 +106,15 @@ impl Solution {
         map[i][j] = 'x';
 
         while ans.len() < n * m {
-            (i, j) = Solution::next(i, j, dir);
-            ans.push(matrix[i][j]);
-            map[i][j] = 'x';
-
+            // revisamos si primero hay que revirar
             if Solution::is_border_next(&map, i, j, dir) {
                 dir = Solution::turn(&matrix, &map, i, j, dir);
             }
+            // avanzamos en la direccion acordada
+            // y vamos marcando en nuestro mapa
+            (i, j) = Solution::next(i, j, dir);
+            ans.push(matrix[i][j]);
+            map[i][j] = 'x';
         }
 
         ans
@@ -151,6 +153,7 @@ mod tests {
                 ],
                 vec![1, 2, 3, 4, 8, 12, 16, 15, 14, 13, 9, 5, 6, 7, 11, 10],
             ),
+            (vec![vec![3], vec![2]], vec![3, 2]),
         ];
 
         for (input, expected) in cases {
