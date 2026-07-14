@@ -27,7 +27,7 @@ orden,numero,nombre,complejidad_tiempo,ya_en_rust,conceptos_clave_rust
 27,347,Top K Frequent Elements,O(n log k),Si,"BinaryHeap para colas de prioridad; HashMap de frecuencias; ordenamiento personalizado con closures e iteradores avanzados"
 28,48,Rotate Image,O(n^2),Si,"matrices Vec<Vec<i32>>; modificaciones in-place usando slice::swap; evitar múltiples referencias mutables"
 29,54,Spiral Matrix,O(n * m),Si,"control de flujo en matrices; desestructuración de tuplas para coordenadas; gestión de límites mutables seguros"
-30,206,Reverse Linked List,O(n),No,"Option<Box<ListNode>>; uso vital de Option::take() para extraer nodos sin romper la propiedad (ownership)"
+30,206,Reverse Linked List,O(n),Si,"Option<Box<ListNode>>; uso vital de Option::take() para extraer nodos sin romper la propiedad (ownership)"
 31,21,Merge Two Sorted Lists,O(n),No,"traspaso de propiedad de nodos en memoria dinámica; pattern matching recursivo o iterativo con match e if let"
 32,226,Invert Binary Tree,O(n),No,"Option<Rc<RefCell<TreeNode>>> o Option<Box>; mutabilidad interna; desempaquetado de punteros con match ref mut"
 33,198,House Robber,O(n),No,"programación dinámica lineal; optimización de espacio de Vec<i32> a dos variables mutables O(1)"
