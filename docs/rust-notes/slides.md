@@ -35,13 +35,13 @@ layout: center
 
 # Contenido
 
-<div class="grid grid-cols-2 gap-x-16 gap-y-10 mt-6 text-left">
+<div class="grid grid-cols-2 gap-x-16 gap-y-6 mt-3 text-left">
 
   <div>
     <h2 class="text-xl font-bold text-[#F26244] mb-4 border-b border-gray-700 pb-1">
       1. Sintaxis y Semántica
     </h2>
-    <ul class="space-y-3 list-none pl-0 text-sm">
+    <ul class="space-y-1.5 list-none pl-0 text-sm">
       <li><span class="text-gray-500 font-mono">1.1</span> Tokens</li>
       <li><span class="text-gray-500 font-mono">1.2</span> Tipos de Dato</li>
       <li><span class="text-gray-500 font-mono">1.3</span> Estructuras de Control</li>
@@ -54,7 +54,7 @@ layout: center
     <h2 class="text-xl font-bold text-[#F27343] mb-4 border-b border-gray-700 pb-1">
       2. Memory Safety
     </h2>
-    <ul class="space-y-3 list-none pl-0 text-sm">
+    <ul class="space-y-1.5 list-none pl-0 text-sm">
       <li><span class="text-gray-500 font-mono">2.1</span> Ownership</li>
       <li><span class="text-gray-500 font-mono">2.2</span> Borrowing y Lifetimes</li>
     </ul>
@@ -64,7 +64,7 @@ layout: center
     <h2 class="text-xl font-bold text-[#F28342] mb-4 border-b border-gray-700 pb-1">
       3. Enums y Option
     </h2>
-    <ul class="space-y-3 list-none pl-0 text-sm">
+    <ul class="space-y-1.5 list-none pl-0 text-sm">
       <li><span class="text-gray-500 font-mono">3.1</span> Enums</li>
       <li><span class="text-gray-500 font-mono">3.2</span> Option</li>
     </ul>
@@ -74,13 +74,21 @@ layout: center
     <h2 class="text-xl font-bold text-[#F29441] mb-4 border-b border-gray-700 pb-1">
       4. Estructuras de Datos
     </h2>
-    <ul class="space-y-3 list-none pl-0 text-sm">
-      <li><span class="text-gray-500 font-mono">4.1</span> Structs</li>
-      <li><span class="text-gray-500 font-mono">4.2</span> Listas Enlazadas</li>
-      <li><span class="text-gray-500 font-mono">4.3</span> Árboles</li>
+    <ul class="space-y-1.5 list-none pl-0 text-sm">
+      <li><span class="text-gray-500 font-mono">4.1</span> Vec</li>
+      <li><span class="text-gray-500 font-mono">4.2</span> Iteradores</li>
+      <li><span class="text-gray-500 font-mono">4.3</span> Structs</li>
+      <li><span class="text-gray-500 font-mono">4.4</span> Listas Enlazadas</li>
+      <li><span class="text-gray-500 font-mono">4.5</span> Árboles</li>
     </ul>
   </div>
 
+</div>
+
+<div class="mt-5 pt-3 border-t border-gray-800 text-sm text-gray-400 max-w-5xl mx-auto text-left">
+  <span class="font-bold text-gray-300">Apéndices</span>
+  &nbsp;&nbsp; <span class="font-mono text-gray-500">A</span> Cheatsheet
+  &nbsp;·&nbsp; <span class="font-mono text-gray-500">B</span> Aplicación
 </div>
 
 ---
@@ -153,12 +161,35 @@ layout: intro-image
 </div>
 
 ---
-src: ./pages/D01-structs.md
+src: ./pages/D01-vec.md
 ---
 ---
-src: ./pages/D02-listas-enlazadas.md
+src: ./pages/D02-iteradores.md
 ---
 ---
-src: ./pages/D03-arboles.md
+src: ./pages/D03-structs.md
+---
+---
+src: ./pages/D04-listas-enlazadas.md
+---
+---
+src: ./pages/D05-arboles.md
+---
+
+---
+layout: intro-image
+---
+
+<div class="absolute inset-0" style="background: linear-gradient(135deg, #F26244 0%, #F29441 100%);"></div>
+
+<div class="absolute bottom-10 z-2">
+  <h1 class="text-[#0D0500]">Apéndices</h1>
+</div>
+
+---
+src: ./pages/E01-cheatsheet.md
+---
+---
+src: ./pages/E02-aplicacion.md
 ---
 
