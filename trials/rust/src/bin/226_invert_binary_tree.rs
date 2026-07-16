@@ -20,11 +20,27 @@ pub struct TreeNode {
  * Implement your solution here
  */
 impl Solution {
-    pub fn pre_order(root: &Node) {
-        // recorrer el arbol en preorden
-        let iter: &mut Node = root;
-
-        println!("{}", format!("{:?}", root).green().italic().underline());
+    /*
+     * Recorrer un `Option<Rc<RefCell<TreeNode>>>` = atravesar 4 capas ("efecto cebolla"):
+     *
+     *   Option<..>   ¿hay nodo o es None?        -> abrir con `if let Some(...)`
+     *   Rc<..>       propiedad compartida         -> se atraviesa sola (deref)
+     *   RefCell<..>  mutabilidad interior         -> `.borrow()` (lectura) / `.borrow_mut()`
+     *   TreeNode     los datos (val, left, right) -> aquí sí `.left` / `.right`
+     *
+     * Por eso `n.left` directo NO compila: `n` es un `&Option<..>`, no un `TreeNode`.
+     * Tampoco se puede `if let Some(i) = n.left` porque intentaría MOVER un valor
+     * desde atrás de un `&` (préstamo). Hay que abrir el Option prestando, y luego
+     * `.borrow()` el RefCell para llegar a los campos.
+     */
+    fn pre_order(n: &Node) {
+        if let Some(rc) = n {
+            // rc: &Rc<RefCell<TreeNode>> (match ergonomics: liga por referencia)
+            let node = rc.borrow(); // nodo: Ref<TreeNode> -> ya puedo leer los campos
+            println!("{}", format!("{:?}", node.val).green().italic().underline()); // visitar(node.val);
+            Solution::pre_order(&node.left); // nodo.left es Node; &nodo.left es &Node
+            Solution::pre_order(&node.right);
+        }
     }
 
     // pub fn invert_tree(root: Node) -> Node {
@@ -71,7 +87,7 @@ fn main() {
     })));
 
     let tree_0: Node = Some(Rc::new(RefCell::new(TreeNode {
-        val: 1,
+        val: 4,
         left: leaf_10,
         right: leaf_11,
     })));

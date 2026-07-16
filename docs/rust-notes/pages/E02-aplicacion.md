@@ -186,3 +186,48 @@ Solo puede existir ese único `&mut` sobre la cadena a la vez — el borrow chec
 </div>
 
 </div>
+
+---
+layout: center
+---
+
+## Aplicación · Efecto cebolla `Rc<RefCell<TreeNode>>` — Invert Binary Tree (226)
+
+<div class="grid grid-cols-2 gap-x-6 mt-4 w-full text-left items-center">
+  <div>
+
+```rust
+type Node = Option<Rc<RefCell<TreeNode>>>;
+
+fn pre_order(n: &Node) {
+    // n.left NO compila: n es un
+    // Option, no un TreeNode
+    if let Some(rc) = n {       // &Rc<..>
+        let nodo = rc.borrow(); // Ref<TreeNode>
+        // visitar(nodo.val);
+        pre_order(&nodo.left);
+        pre_order(&nodo.right);
+    }
+}
+```
+
+  </div>
+
+<div class="rounded px-4 py-3 border border-gray-700 text-sm space-y-2">
+
+<div class="font-bold text-[#F26244]">Corrida mental — 4 capas</div>
+
+<div class="grid gap-x-3 gap-y-1" style="grid-template-columns:auto 1fr;font-size:0.72rem">
+  <div class="font-mono opacity-80">Option</div><div>¿hay nodo? → <code>if let Some</code></div>
+  <div class="font-mono opacity-80">Rc</div><div>propiedad compartida → deref</div>
+  <div class="font-mono opacity-80">RefCell</div><div>mutabilidad interior → <code>.borrow()</code></div>
+  <div class="font-mono opacity-80">TreeNode</div><div>datos → ya <code>.left</code> / <code>.right</code></div>
+</div>
+
+No se puede mover desde atrás de un `&`: por eso `if let Some(rc) = n` **presta** (match ergonomics), no consume.
+
+<div class="opacity-70">Cheatsheet: <b>no sacar un valor de un préstamo</b> · <code>.borrow()</code> = lectura compartida</div>
+
+</div>
+
+</div>
