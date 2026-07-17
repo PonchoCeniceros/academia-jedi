@@ -68,6 +68,52 @@ layout: center
 layout: center
 ---
 
+## Pelar la cebolla — leer un tipo envuelto
+
+<div class="flex flex-col gap-3 mt-3 max-w-5xl mx-auto text-left text-xs">
+
+<div class="rounded px-4 py-3 border border-gray-700">
+  <div class="grid gap-x-4 gap-y-2" style="grid-template-columns:1.2fr 1.3fr 1.6fr 1.3fr;font-size:0.66rem">
+    <div class="opacity-50">Envoltura</div><div class="opacity-50">Qué representa</div><div class="opacity-50">Cómo la abres</div><div class="opacity-50">Qué obtienes</div>
+    <div class="font-mono">&amp;T / &amp;mut T</div><div>préstamo</div><div>deref <code>*</code> (casi siempre auto)</div><div>acceso sin mover</div>
+    <div class="font-mono">Box&lt;T&gt;</div><div>dueño único (heap)</div><div>auto-deref <code>*</code></div><div>el <code>T</code> interior</div>
+    <div class="font-mono">Option&lt;T&gt;</div><div>¿hay valor?</div><div><code>if let Some</code> / <code>match</code> / <code>?</code></div><div>el <code>T</code> (o nada)</div>
+    <div class="font-mono">Result&lt;T,E&gt;</div><div>¿éxito o error?</div><div><code>match</code> / <code>?</code></div><div>el <code>T</code> (o <code>E</code>)</div>
+    <div class="font-mono">Rc&lt;T&gt; / Arc&lt;T&gt;</div><div>propiedad compartida</div><div>auto-deref → <code>&amp;T</code>; <code>.clone()</code></div><div>solo lectura; comparte dueño</div>
+    <div class="font-mono">RefCell&lt;T&gt;</div><div>mutabilidad interior</div><div><code>.borrow()</code> / <code>.borrow_mut()</code></div><div><code>Ref</code> / <code>RefMut</code> (runtime)</div>
+    <div class="font-mono">Vec&lt;T&gt;</div><div>secuencia</div><div><code>.iter()</code> / <code>.into_iter()</code> / <code>[i]</code></div><div><code>&amp;T</code> / <code>T</code> / elemento</div>
+  </div>
+</div>
+
+<div class="grid grid-cols-2 gap-3">
+
+  <div class="rounded px-4 py-3 border border-gray-700 space-y-1.5">
+    <div class="font-bold text-[#F26244] mb-1">El método · 3 pasos</div>
+    <div><b>①</b> Lee el tipo de <b>afuera → adentro</b>.</div>
+    <div><b>②</b> Abre cada capa con su operación y pregúntate: ¿me da <b>dueño</b> (move), <b>préstamo</b> (<code>&amp;</code>) o <b>valor Copy</b>?</div>
+    <div><b>③</b> Repite hasta el dato que necesitas.</div>
+    <div class="mt-1 opacity-70">Iteradores = el mismo patrón: <code>.iter()</code> presta, <code>.into_iter()</code> consume.</div>
+  </div>
+
+  <div class="rounded px-4 py-3" style="background:#F27F3D;color:#000">
+    <div class="font-bold mb-1">Ejemplo · el nodo del árbol</div>
+    <div class="font-mono" style="font-size:0.66rem;line-height:1.9">
+      Option&lt;Rc&lt;RefCell&lt;TreeNode&gt;&gt;&gt;<br>
+      → <code style="background:#F29441;color:#000">if let Some(rc)</code> → &amp;Rc&lt;..&gt;<br>
+      → (Rc se desreferencia solo)<br>
+      → <code style="background:#F29441;color:#000">.borrow()</code> → Ref&lt;TreeNode&gt;<br>
+      → <code style="background:#F29441;color:#000">.val</code> ✅
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+---
+layout: center
+---
+
 ## Diagnóstico — el compilador se queja
 
 <div class="flex flex-col gap-3 mt-3 max-w-5xl mx-auto text-left text-xs">

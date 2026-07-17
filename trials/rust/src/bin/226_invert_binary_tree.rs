@@ -37,16 +37,41 @@ impl Solution {
         if let Some(rc) = n {
             // rc: &Rc<RefCell<TreeNode>> (match ergonomics: liga por referencia)
             let node = rc.borrow(); // nodo: Ref<TreeNode> -> ya puedo leer los campos
-            println!("{}", format!("{:?}", node.val).green().italic().underline()); // visitar(node.val);
             Solution::pre_order(&node.left); // nodo.left es Node; &nodo.left es &Node
             Solution::pre_order(&node.right);
+            println!("{}", format!("{:?}", node.val).green().italic().underline()); // visitar(node.val);
         }
     }
 
-    // pub fn invert_tree(root: Node) -> Node {
-    //     println!("{:?}", root);
-    //     None
-    // }
+    fn post_order(n: &Node) {
+        if let Some(rc) = n {
+            // rc: &Rc<RefCell<TreeNode>> (match ergonomics: liga por referencia)
+            let node = rc.borrow(); // nodo: Ref<TreeNode> -> ya puedo leer los campos
+            Solution::post_order(&node.left); // nodo.left es Node; &nodo.left es &Node
+            Solution::post_order(&node.right);
+            println!(
+                "{}",
+                format!("{:?}", node.val).purple().italic().underline()
+            ); // visitar(node.val);
+        }
+    }
+
+    fn invert_tree(n: &Node) {
+        if let Some(rc) = n {
+            let mut node = rc.borrow_mut();
+            Solution::invert_tree(&node.left);
+            Solution::invert_tree(&node.right);
+
+            let tmp_left: Node = node.left.take();
+            let tmp_right: Node = node.right.take();
+            node.left = tmp_right;
+            node.right = tmp_left;
+        }
+    }
+
+    pub fn invert_tree_(root: Node) -> Node {
+        None
+    }
 }
 
 fn main() {
@@ -93,6 +118,8 @@ fn main() {
     })));
 
     Solution::pre_order(&tree_0);
+    Solution::invert_tree(&tree_0);
+    Solution::post_order(&tree_0);
 }
 
 /*
