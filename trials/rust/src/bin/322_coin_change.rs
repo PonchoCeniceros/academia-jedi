@@ -1,5 +1,5 @@
 use colored::*;
-use katas::s;
+use std::{char::MAX, cmp::min};
 
 struct Solution;
 
@@ -8,8 +8,40 @@ struct Solution;
  *
  */
 impl Solution {
+    fn solve(remainder: i32, coins: &[i32]) -> i32 {
+        if remainder <= 0 {
+            return 0;
+        }
+
+        let mut ans = i32::MAX;
+
+        for &coin_val in coins.iter() {
+            let coin_qty = 1 + Solution::solve(remainder - coin_val, coins);
+            ans = min(ans, coin_qty);
+        }
+        ans
+    }
+
     pub fn coin_change(coins: Vec<i32>, amount: i32) -> i32 {
-        0
+        // PA: ¿cual es mi estado actual?
+        // PB: ¿que decisiones puedo tomar desde el estado actual?
+        // PC: ¿que estoy optimizando?
+
+        // RA: mi amount actual m (inicialmente m = amount)
+        // RB: puedo:
+        //      1. restarle el coins[0]
+        //      ...
+        //      n. restarle el coins[n]
+        // RC: la menor cantidad de coins usadas
+
+        // tengo que encontrar ma menor cantidad de coins entre
+        // restar a m la cantidad de coins[0] hasta coins[n]
+
+        if coins.len() == 1 && coins[0] < amount {
+            return -1;
+        }
+
+        Solution::solve(amount, &coins)
     }
 }
 
