@@ -1,5 +1,5 @@
 use colored::*;
-use std::{char::MAX, cmp::min};
+use std::cmp::min;
 
 struct Solution;
 
@@ -36,8 +36,11 @@ impl Solution {
 
         // tengo que encontrar ma menor cantidad de coins entre
         // restar a m la cantidad de coins[0] hasta coins[n]
+        if amount == 0 {
+            return 0;
+        }
 
-        if coins.len() == 1 && coins[0] < amount {
+        if coins.len() == 1 && amount % coins[0] != 0 {
             return -1;
         }
 
@@ -46,7 +49,7 @@ impl Solution {
 }
 
 fn main() {
-    let ans = Solution::coin_change(vec![1, 2, 5], 11);
+    let ans = Solution::coin_change(vec![1, 2147483647], 2);
     println!("{}", format!("{}", ans).green().italic().underline());
 }
 
@@ -57,6 +60,7 @@ mod tests {
     #[test]
     fn test_coin_change() {
         let cases = [
+            ((vec![1, 2147483647], 2), 2),
             ((vec![1, 2, 5], 11), 3),
             ((vec![2], 3), -1),
             ((vec![1], 0), 0),
