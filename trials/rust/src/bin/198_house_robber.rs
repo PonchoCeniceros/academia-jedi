@@ -1,5 +1,6 @@
 use colored::*;
 use std::cmp::max;
+use std::collections::HashMap;
 
 struct Solution;
 
@@ -8,31 +9,29 @@ struct Solution;
  */
 impl Solution {
     // me encuentro en la casa curr (y tengo la adjacencia prev)
-    fn solve(curr: usize, prev: usize, houses: &[i32]) -> i32 {
+    fn solve(curr: usize, houses: &[i32], memo: &mut HashMap<usize, i32>) -> i32 {
         // condicion base: si se termina el arreglo de casa que robar, terminamos
         if curr >= houses.len() {
             return 0;
         }
 
-        // puedo (1) robar la casa adjacente o (2) brincarme esta casa
-        // y pasarme a la siguiente de la adjacente
-        //
-        // dependiendo de la adjacencia puedo o no tomar el botin de la casa curr
-        let loot = if curr == prev + 1 { 0 } else { houses[curr] };
+        if let Some(&ans) = memo.get(&curr) {
+            return ans;
+        }
 
-        // ¿cual de las 2 decisiones me deja con mas dinero?
-        loot + max(
-            Solution::solve(curr + 1, curr, houses),
-            Solution::solve(curr + 2, curr, houses),
-        )
+        //
+        // () robar la casa actual (y tener que brincarme la sig casa porque no podre robarle)
+        // () brincerme la casa actual (y no tomar el botin)
+        let steal = houses[curr] + Solution::solve(curr + 2, houses, memo);
+        let skip = Solution::solve(curr + 1, houses, memo);
+        let ans = max(steal, skip);
+        memo.insert(curr, ans);
+        ans
     }
 
     pub fn rob(nums: Vec<i32>) -> i32 {
-        // ¿cual de las 2 decisiones me deja con mas dinero?
-        max(
-            Solution::solve(0, 0, &nums), // empezar por robar la primer casa
-            Solution::solve(1, 1, &nums), // empezar por robar desde la siguiente casa
-        )
+        let mut memo: HashMap<usize, i32> = HashMap::new();
+        Solution::solve(0, &nums, &mut memo)
     }
 }
 
