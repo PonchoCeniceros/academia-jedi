@@ -5,19 +5,25 @@ struct Solution;
 
 /**
  * Implement your solution here
- *
  */
 impl Solution {
-    fn solve(remainder: i32, coins: &[i32]) -> i32 {
-        if remainder <= 0 {
+    fn solve(mnt: i32, coins: &[i32]) -> i32 {
+        // caso base: ya no hay un amount al que restarle monedas
+        if mnt <= 0 {
             return 0;
         }
 
+        // sentinela para calcular el minimo en el array de monedas
         let mut ans = i32::MAX;
 
-        for &coin_val in coins.iter() {
-            let coin_qty = 1 + Solution::solve(remainder - coin_val, coins);
-            ans = min(ans, coin_qty);
+        for &val in coins.iter() {
+            // si la moneda puede ocupar la cantidad actual
+            let rem = mnt - val;
+            if rem >= 0 {
+                // obtenemos la cantidad minima de monedas implementadas de esta denominacion
+                let qty = 1 + Solution::solve(rem, coins);
+                ans = min(ans, qty);
+            }
         }
         ans
     }
