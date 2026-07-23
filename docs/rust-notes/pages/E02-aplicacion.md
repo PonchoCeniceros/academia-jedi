@@ -231,3 +231,77 @@ No se puede mover desde atrás de un `&`: por eso `if let Some(rc) = n` **presta
 </div>
 
 </div>
+
+---
+layout: center
+---
+
+## Aplicación · HashMap + `get` → Option — Two Sum (1)
+
+<div class="grid grid-cols-2 gap-x-6 mt-4 w-full text-left items-center">
+  <div>
+
+```rust
+let mut visto: HashMap<i32, i32> = HashMap::new();
+
+for (idx, val) in nums.iter().enumerate() {
+    let falta = target - val;
+    if let Some(&i) = visto.get(&falta) {
+        return vec![i, idx as i32];
+    }
+    visto.insert(*val, idx as i32);
+}
+```
+
+  </div>
+
+<div class="rounded px-4 py-3 border border-gray-700 text-sm space-y-2">
+
+<div class="font-bold text-[#F26244]">Corrida mental</div>
+
+`visto.get(&falta)` devuelve `Option<&i32>` — el compilador te obliga a manejar el caso "no está" con `if let Some`.
+
+`Some(&i)` desestructura el `&` para copiar el `i32` (Copy), sin quedarte con un préstamo del HashMap.
+
+<div class="opacity-70">Cheatsheet: <b>get → Option</b> · abrir con <code>if let Some</code></div>
+
+</div>
+
+</div>
+
+---
+layout: center
+---
+
+## Aplicación · HashSet + `insert`/`contains` — Contains Duplicate (217)
+
+<div class="grid grid-cols-2 gap-x-6 mt-4 w-full text-left items-center">
+  <div>
+
+```rust
+let mut visto: HashSet<i32> = HashSet::new();
+
+for n in nums.iter() {
+    if visto.contains(&n) {
+        return true;
+    }
+    visto.insert(*n);
+}
+false
+```
+
+  </div>
+
+<div class="rounded px-4 py-3 border border-gray-700 text-sm space-y-2">
+
+<div class="font-bold text-[#F26244]">Corrida mental</div>
+
+`contains(&n)` **presta** el elemento (`&i32`) para consultar sin moverlo — el `Vec` original queda intacto.
+
+`insert(*n)` copia el `i32` (Copy) al set; se podría acortar usando que `insert` devuelve `false` si ya existía.
+
+<div class="opacity-70">Cheatsheet: <b>&T</b> para consultar · <code>i32</code> se copia al insertar</div>
+
+</div>
+
+</div>

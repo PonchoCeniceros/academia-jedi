@@ -1,30 +1,40 @@
 use colored::*;
 use std::cmp::min;
+use std::collections::HashMap;
 
 struct Solution;
+
+type Memo = HashMap<i32, i32>;
 
 /**
  * Implement your solution here
  */
 impl Solution {
-    fn solve(mnt: i32, coins: &[i32]) -> i32 {
+    fn solve(mnt: i32, coins: &[i32], memo: &mut Memo) -> i32 {
         // caso base: ya no hay un amount al que restarle monedas
         if mnt <= 0 {
             return 0;
         }
 
+        /* MEMOIZACION */
+        if let Some(&ans) = memo.get(&mnt) {
+            return ans;
+        }
+
         // sentinela para calcular el minimo en el array de monedas
-        let mut ans = i32::MAX;
+        let mut ans = i32::MAX - 1;
 
         for &val in coins.iter() {
             // si la moneda puede ocupar la cantidad actual
             let rem = mnt - val;
             if rem >= 0 {
                 // obtenemos la cantidad minima de monedas implementadas de esta denominacion
-                let qty = 1 + Solution::solve(rem, coins);
+                let qty = 1 + Solution::solve(rem, coins, memo);
                 ans = min(ans, qty);
             }
         }
+        /* MEMOIZACION */
+        memo.insert(mnt, ans);
         ans
     }
 
@@ -50,12 +60,15 @@ impl Solution {
             return -1;
         }
 
-        Solution::solve(amount, &coins)
+        let mut memo: Memo = HashMap::new();
+
+        Solution::solve(amount, &coins, &mut memo)
     }
 }
 
 fn main() {
-    let ans = Solution::coin_change(vec![1, 2147483647], 2);
+    // let ans = Solution::coin_change(vec![186, 419, 83, 408], 6249);
+    let ans = Solution::coin_change(vec![384, 324, 196, 481], 285);
     println!("{}", format!("{}", ans).green().italic().underline());
 }
 
@@ -66,6 +79,8 @@ mod tests {
     #[test]
     fn test_coin_change() {
         let cases = [
+            // ((vec![], ), ),
+            ((vec![186, 419, 83, 408], 6249), 20),
             ((vec![1, 2147483647], 2), 2),
             ((vec![1, 2, 5], 11), 3),
             ((vec![2], 3), -1),
