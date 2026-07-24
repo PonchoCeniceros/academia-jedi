@@ -4,16 +4,20 @@ use std::collections::HashMap;
 
 struct Solution;
 
-type Memo = HashMap<i32, i32>;
+type Memo = HashMap<i32, Option<i32>>;
 
 /**
  * Implement your solution here
  */
 impl Solution {
-    fn solve(mnt: i32, coins: &[i32], memo: &mut Memo) -> i32 {
+    fn solve(mnt: i32, coins: &[i32], memo: &mut Memo) -> Option<i32> {
         // caso base: ya no hay un amount al que restarle monedas
-        if mnt <= 0 {
-            return 0;
+        if mnt < 0 {
+            return None;
+        }
+
+        if mnt == 0 {
+            return Some(0);
         }
 
         /* MEMOIZACION */
@@ -22,15 +26,21 @@ impl Solution {
         }
 
         // sentinela para calcular el minimo en el array de monedas
-        let mut ans = i32::MAX - 1;
+        // antes usaba i32::MAX (∞) como sentinela pero es mejor usar None,
+        // no hay broncas de desbordamiento
+        let mut ans = None;
 
         for &val in coins.iter() {
             // si la moneda puede ocupar la cantidad actual
             let rem = mnt - val;
-            if rem >= 0 {
+            if rem >= 0
+                && let Some(qty) = Solution::solve(rem, coins, memo)
+            {
                 // obtenemos la cantidad minima de monedas implementadas de esta denominacion
-                let qty = 1 + Solution::solve(rem, coins, memo);
-                ans = min(ans, qty);
+                ans = match ans {
+                    Some(curr) => Some(min(curr, 1 + qty)),
+                    None => Some(1 + qty),
+                };
             }
         }
         /* MEMOIZACION */
@@ -56,19 +66,25 @@ impl Solution {
             return 0;
         }
 
-        if coins.len() == 1 && amount % coins[0] != 0 {
-            return -1;
-        }
+        // if coins.len() == 1 && amount % coins[0] != 0 {
+        //     return -1;
+        // }
 
         let mut memo: Memo = HashMap::new();
 
-        Solution::solve(amount, &coins, &mut memo)
+        // el unwrap_or es quivalente al
+        // match Solution::solve(amount, &coins, &mut memo) {
+        //     Some(ans) => ans,
+        //     None => -1,
+        // }
+        Solution::solve(amount, &coins, &mut memo).unwrap_or(-1)
     }
 }
 
 fn main() {
     // let ans = Solution::coin_change(vec![186, 419, 83, 408], 6249);
-    let ans = Solution::coin_change(vec![384, 324, 196, 481], 285);
+    // let ans = Solution::coin_change(vec![384, 324, 196, 481], 285);
+    let ans = Solution::coin_change(vec![2], 3);
     println!("{}", format!("{}", ans).green().italic().underline());
 }
 
@@ -80,6 +96,7 @@ mod tests {
     fn test_coin_change() {
         let cases = [
             // ((vec![], ), ),
+            ((vec![384, 324, 196, 481], 285), -1),
             ((vec![186, 419, 83, 408], 6249), 20),
             ((vec![1, 2147483647], 2), 2),
             ((vec![1, 2, 5], 11), 3),
