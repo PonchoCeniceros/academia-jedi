@@ -35,7 +35,7 @@ layout: center
 
 # Contenido
 
-<div class="grid grid-cols-2 gap-x-16 gap-y-8 mt-6 text-left">
+<div class="grid grid-cols-3 gap-x-10 mt-6 text-left">
 
   <div>
     <h2 class="text-xl font-bold text-[#F26244] mb-4 border-b border-gray-700 pb-1">
@@ -60,6 +60,17 @@ layout: center
     </ul>
   </div>
 
+  <div>
+    <h2 class="text-xl font-bold text-[#F28342] mb-4 border-b border-gray-700 pb-1">
+      3. Enums, Option y Result
+    </h2>
+    <ul class="space-y-3 list-none pl-0 text-sm">
+      <li><span class="text-gray-500 font-mono">3.1</span> Enums</li>
+      <li><span class="text-gray-500 font-mono">3.2</span> Option</li>
+      <li><span class="text-gray-500 font-mono">3.3</span> Result</li>
+    </ul>
+  </div>
+
 </div>
 
 ---
@@ -68,17 +79,7 @@ layout: center
 
 # Contenido (cont.)
 
-<div class="grid grid-cols-2 gap-x-16 gap-y-8 mt-6 text-left">
-
-  <div>
-    <h2 class="text-xl font-bold text-[#F28342] mb-4 border-b border-gray-700 pb-1">
-      3. Enums y Option
-    </h2>
-    <ul class="space-y-3 list-none pl-0 text-sm">
-      <li><span class="text-gray-500 font-mono">3.1</span> Enums</li>
-      <li><span class="text-gray-500 font-mono">3.2</span> Option</li>
-    </ul>
-  </div>
+<div class="grid grid-cols-3 gap-x-10 mt-6 text-left">
 
   <div>
     <h2 class="text-xl font-bold text-[#F29441] mb-4 border-b border-gray-700 pb-1">
@@ -92,6 +93,16 @@ layout: center
       <li><span class="text-gray-500 font-mono">4.5</span> Listas Enlazadas</li>
       <li><span class="text-gray-500 font-mono">4.6</span> Árboles</li>
       <li><span class="text-gray-500 font-mono">4.7</span> Big-O (resumen)</li>
+    </ul>
+  </div>
+
+  <div>
+    <h2 class="text-xl font-bold text-[#F2A44A] mb-4 border-b border-gray-700 pb-1">
+      5. Traits y Generics
+    </h2>
+    <ul class="space-y-3 list-none pl-0 text-sm">
+      <li><span class="text-gray-500 font-mono">5.1</span> Traits</li>
+      <li><span class="text-gray-500 font-mono">5.2</span> Generics</li>
     </ul>
   </div>
 
@@ -152,7 +163,7 @@ layout: intro-image
 <div class="absolute inset-0" style="background: linear-gradient(135deg, #F26244 0%, #F29441 100%);"></div>
 
 <div class="absolute bottom-10 z-2">
-  <h1 class="text-[#0D0500]">Enums y Option</h1>
+  <h1 class="text-[#0D0500]">Enums, Option y Result</h1>
 </div>
 
 ---
@@ -160,6 +171,9 @@ src: ./pages/C01-enums.md
 ---
 ---
 src: ./pages/C02-option.md
+---
+---
+src: ./pages/C03-result.md
 ---
 
 ---
@@ -201,13 +215,30 @@ layout: intro-image
 <div class="absolute inset-0" style="background: linear-gradient(135deg, #F26244 0%, #F29441 100%);"></div>
 
 <div class="absolute bottom-10 z-2">
+  <h1 class="text-[#0D0500]">Traits y Generics</h1>
+</div>
+
+---
+src: ./pages/E01-traits.md
+---
+---
+src: ./pages/E02-generics.md
+---
+
+---
+layout: intro-image
+---
+
+<div class="absolute inset-0" style="background: linear-gradient(135deg, #F26244 0%, #F29441 100%);"></div>
+
+<div class="absolute bottom-10 z-2">
   <h1 class="text-[#0D0500]">Apéndices</h1>
 </div>
 
 ---
-src: ./pages/E01-cheatsheet.md
+src: ./pages/Z01-cheatsheet.md
 ---
 ---
-src: ./pages/E02-aplicacion.md
+src: ./pages/Z02-aplicacion.md
 ---
 
