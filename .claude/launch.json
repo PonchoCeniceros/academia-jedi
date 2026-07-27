@@ -4,8 +4,14 @@
     {
       "name": "rust-notes",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["--dir", "rust/fundamentals/notes", "run", "dev", "--", "--port", "3031"],
+      "runtimeArgs": ["--dir", "rust/fundamentals/notes", "run", "dev"],
       "port": 3031
+    },
+    {
+      "name": "building-notes",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--dir", "rust/building/notes", "run", "dev"],
+      "port": 3032
     }
   ]
 }

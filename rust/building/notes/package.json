@@ -1,17 +1,15 @@
 {
-  "name": "rosto",
+  "name": "building-notes",
   "type": "module",
   "private": true,
   "scripts": {
     "build": "slidev build",
-    "dev": "slidev --open --port 3031",
+    "dev": "slidev --open --port 3032",
     "export": "slidev export"
   },
   "dependencies": {
     "@slidev/cli": "^52.16.0",
     "@slidev/theme-apple-basic": "^0.25.1",
-    "@slidev/theme-default": "latest",
-    "@slidev/theme-seriph": "latest",
     "vue": "^3.5.33"
   }
 }

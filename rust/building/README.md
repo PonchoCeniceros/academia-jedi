@@ -4,17 +4,33 @@ Pista de **desarrollo aplicado** en Rust: construir cosas que alguien usaría, e
 contraste con `../fundamentals/`, que se enfoca en dominar el lenguaje a través
 de algoritmos.
 
-## Estructura prevista
+## Estructura
 
 ```
 building/
-├── notes/       # deck de conceptos (módulos y crates, arquitectura de
-│                # errores, async/await) + apéndices de entrada a las
-│                # tecnologías (tokio, axum, polars)
+├── notes/       # deck Slidev de conceptos  ← ya existe
 └── projects/    # un proyecto Cargo independiente por cada cosa construida,
                  # con su propio Cargo.toml y su README con los detalles
-                 # específicos de las crates que usa
+                 # específicos de las crates que usa  ← por crear
 ```
+
+## El deck
+
+```bash
+pnpm --dir rust/building/notes run dev     # http://localhost:3032
+```
+
+Contenido (en progreso):
+
+| Sección | Estado |
+| --- | --- |
+| 1. Módulos y Crates | ✅ |
+| 2. Arquitectura de Errores (`thiserror` / `anyhow`) | pendiente |
+| 3. Async / Await | pendiente |
+| Apéndices: Tokio · Axum · Polars | pendiente |
+
+El deck de fundamentals corre en el puerto 3031, este en el 3032, así que
+ambos pueden estar arriba a la vez.
 
 ## Por qué separado de `fundamentals/`
 
