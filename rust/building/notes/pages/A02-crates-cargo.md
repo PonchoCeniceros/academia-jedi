@@ -109,7 +109,7 @@ layout: center
 layout: center
 ---
 
-## Comandos de Cargo
+## Comandos: Crear y Compilar
 
 <div class="text-sm">
 
@@ -120,15 +120,35 @@ layout: center
 | `cargo check` | valida que compile **sin generar binario** — el más rápido |
 | `cargo build` | compila (`--release` para optimizado) |
 | `cargo run` | compila y ejecuta (`--bin nombre` si hay varios) |
-| `cargo test` | corre los tests |
-| `cargo clippy` | linter: sugiere mejoras idiomáticas |
-| `cargo fmt` | formatea según el estilo estándar |
 
 </div>
 
 <div class="important-note">
 
 `cargo check` es el compañero del ciclo de escritura: verifica tipos, ownership y borrows en una fracción del tiempo de `build`, porque se salta la generación de código.
+
+</div>
+
+---
+layout: center
+---
+
+## Comandos: Verificar y Pulir
+
+<div class="text-sm">
+
+| Comando | Qué hace |
+| :--- | :--- |
+| `cargo test` | corre los tests |
+| `cargo clippy` | linter: sugiere mejoras idiomáticas |
+| `cargo fmt` | formatea según el estilo estándar |
+| `cargo doc --open` | genera la documentación del proyecto y la abre |
+
+</div>
+
+<div class="important-note">
+
+`cargo clippy` va más allá de los warnings del compilador: detecta patrones que funcionan pero no son idiomáticos (un `match` que debería ser `if let`, un `.clone()` innecesario, un índice donde cabía un iterador).
 
 </div>
 

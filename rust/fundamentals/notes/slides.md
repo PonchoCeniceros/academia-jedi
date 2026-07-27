@@ -3,8 +3,8 @@ theme: apple-basic
 layout: intro
 ---
 
-# Rust
-Notas del estudio
+# Rust Fundamentos
+Notas de estudio
 
 <div class="absolute bottom-10">
   <span class="font-700">
@@ -25,7 +25,7 @@ layout: intro-image
 </div>
 
 <div class="absolute bottom-10 z-2">
-  <h1 class="text-[#0D0500]">Rust</h1>
+  <h1 class="text-[#0D0500]">Rust Fundamentos</h1>
   <p class="text-[#0D0500]">Notas de estudio</p>
 </div>
 
