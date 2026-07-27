@@ -24,7 +24,7 @@ enum Result<T, E> {
 
 <div class="important-note">
 
-`Result<T, E>` es otro enum de la librería estándar: `Ok(valor)` si salió bien, `Err(error)` si falló. Al ser parte del tipo, **el compilador no te deja ignorar la posibilidad de error**.
+`Result<T, E>` es otro enum de la librería estándar: `Ok(valor)` si salió bien, `Err(error)` si falló. Al ser parte del tipo, **el compilador no permite ignorar la posibilidad de error**.
 
 </div>
 
@@ -63,7 +63,7 @@ fn leer(t: &str) -> Result<i32, ParseIntError>
 
 <div class="important-note">
 
-Regla práctica: si la ausencia es **normal y esperada** (no encontré el elemento), usa `Option`. Si es un **fallo que amerita explicación**, usa `Result` — el `E` carga el motivo.
+Regla práctica: cuando la ausencia es **normal y esperada** (el elemento no está), corresponde `Option`. Cuando es un **fallo que amerita explicación**, corresponde `Result` — el `E` carga el motivo.
 
 </div>
 
@@ -135,7 +135,7 @@ fn sumar(a: &str, b: &str)
 
 <div class="important-note">
 
-`?` solo se puede usar dentro de una función que **devuelva `Result`** (o `Option`): necesita a dónde propagar el error. Por eso el retorno sigue siendo `Result` y el éxito se envuelve en `Ok(...)`.
+`?` solo puede aparecer dentro de una función que **devuelva `Result`** (o `Option`): requiere un destino al que propagar el error. Por eso el retorno sigue siendo `Result` y el éxito se envuelve en `Ok(...)`.
 
 </div>
 
@@ -143,9 +143,9 @@ fn sumar(a: &str, b: &str)
 layout: center
 ---
 
-## Lo que Ya Estabas Usando
+## Result Estaba a la Vista
 
-Cada vez que escribiste `.unwrap()` sobre algo que no era un `Option`, era un `Result`:
+Cada `.unwrap()` aplicado sobre algo que no era un `Option` operaba en realidad sobre un `Result`:
 
 ```rust
 let re = Regex::new(r"[0-9]+").unwrap();   // Result<Regex, Error>
@@ -154,7 +154,7 @@ let n: i32 = "42".parse().unwrap();        // Result<i32, ParseIntError>
 
 <div class="important-note">
 
-`.unwrap()` está bien en un trial o un prototipo, donde un *panic* es aceptable. En código real se prefiere `?` para propagar el error, o `match` para decidir qué hacer con él.
+`.unwrap()` es admisible en un trial o un prototipo, donde un *panic* no tiene consecuencias. En código real se prefiere `?` para propagar el error, o `match` para decidir qué hacer con él.
 
 </div>
 

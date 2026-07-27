@@ -58,7 +58,7 @@ let n = w.len();    // cantidad de elementos
 
 <div class="important-note">
 
-`.pop()` no devuelve un `i32` directo, sino un **`Option<T>`**: `Some(valor)` si había elementos, `None` si el `Vec` estaba vacío. Es el mismo `Option` de la sección anterior — el compilador te obliga a considerar el caso vacío.
+`.pop()` no devuelve un `i32` directo, sino un **`Option<T>`**: `Some(valor)` si había elementos, `None` si el `Vec` estaba vacío. Es el mismo `Option` de la sección anterior — el compilador obliga a considerar el caso vacío.
 
 </div>
 

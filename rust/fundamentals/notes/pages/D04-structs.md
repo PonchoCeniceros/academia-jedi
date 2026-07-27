@@ -207,11 +207,11 @@ fn main() {
 }
 ```
 
-2. Sirven para representar un concepto o agrupar funciones relacionadas bajo un `impl`, sin necesitar una instancia con datos — piensa en él como un espacio de nombres con identidad de tipo propia.
+2. Sirven para representar un concepto o agrupar funciones relacionadas bajo un `impl`, sin necesitar una instancia con datos — equivalen a un espacio de nombres con identidad de tipo propia.
 3. Un struct con campos, en cambio, existe para *cargar información*: cada instancia es distinta porque sus valores lo son.
 
 <div class="important-note">
 
-Regla práctica: si el tipo solo necesita comportamiento (métodos) sin estado propio, un unit struct basta; si necesita representar datos distintos por instancia, usa campos.
+Regla práctica: si el tipo solo necesita comportamiento (métodos) sin estado propio, un unit struct basta; si necesita representar datos distintos por instancia, corresponde declarar campos.
 
 </div>

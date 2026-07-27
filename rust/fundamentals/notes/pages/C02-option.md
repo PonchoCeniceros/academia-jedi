@@ -96,7 +96,7 @@ layout: center
 
 <div class="important-note">
 
-* **`.unwrap()`**: extrae el valor de `Some`, o hace *panic* si es `None` — úsalo solo cuando estás seguro de que hay valor.
+* **`.unwrap()`**: extrae el valor de `Some`, o hace *panic* si es `None` — solo conviene cuando la presencia del valor está garantizada.
 * **`.is_some()` / `.is_none()`**: preguntan por el caso sin extraer el valor.
 * **`.map(f)`**: transforma el valor interno si existe, sin tener que escribir un `match` manualmente.
 * **`.take()`**: extrae el valor y deja `None` en su lugar.
@@ -114,6 +114,6 @@ let c = a.unwrap_or(0);   // 3 (o 0 si a fuera None)
 layout: center
 ---
 
-## Lo que Ya Estabas Usando
+## Un Patrón que Reaparece
 
-El patrón `Option<Box<Nodo>>` de la siguiente sección (Listas Enlazadas, Árboles) es exactamente esto: un enum con dos variantes, `Some` y `None`, sobre el que se hace *pattern matching* para decidir si seguir recorriendo la estructura o detenerse — y `Option::take()` es el mismo combinator que ya se mencionó aquí.
+El patrón `Option<Box<Nodo>>` de la siguiente sección (Listas Enlazadas, Árboles) es exactamente esto: un enum con dos variantes, `Some` y `None`, sobre el que se hace *pattern matching* para decidir si seguir recorriendo la estructura o detenerse — y `Option::take()` es el mismo combinator mencionado aquí.

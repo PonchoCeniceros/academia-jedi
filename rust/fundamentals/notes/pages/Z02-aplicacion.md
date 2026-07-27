@@ -3,7 +3,7 @@ layout: section
 ---
 
 # Aplicación
-El cheatsheet en tus propios trials
+El cheatsheet aplicado a los trials del repo
 
 ---
 layout: center
@@ -103,7 +103,7 @@ for word in strs.iter() {   // word: &String
 
 <div class="font-bold text-[#F26244]">Corrida mental</div>
 
-`.iter()` entrega `&String`: préstamos **compartidos**, puedes tener muchos a la vez.
+`.iter()` entrega `&String`: préstamos **compartidos**, de los que pueden existir muchos a la vez.
 
 `strs` no se mueve — sigue usable tras el bucle (de hecho se vuelve a iterar después).
 
@@ -141,7 +141,7 @@ while i < j {
 
 `i`, `j` (`usize`) y los `height[i]` (`i32`) viven en el **stack** → se **copian**.
 
-Por eso puedes reasignar `i += 1` y comparar valores libremente, sin mover ni prestar nada.
+De ahí que `i += 1` y las comparaciones funcionen libremente, sin mover ni prestar nada.
 
 <div class="opacity-70">Cheatsheet: <b>Stack → Copia</b> · ambos siguen vivos</div>
 
@@ -259,9 +259,9 @@ for (idx, val) in nums.iter().enumerate() {
 
 <div class="font-bold text-[#F26244]">Corrida mental</div>
 
-`visto.get(&falta)` devuelve `Option<&i32>` — el compilador te obliga a manejar el caso "no está" con `if let Some`.
+`visto.get(&falta)` devuelve `Option<&i32>` — el compilador obliga a manejar el caso "no está" con `if let Some`.
 
-`Some(&i)` desestructura el `&` para copiar el `i32` (Copy), sin quedarte con un préstamo del HashMap.
+`Some(&i)` desestructura el `&` para copiar el `i32` (Copy), sin retener un préstamo del HashMap.
 
 <div class="opacity-70">Cheatsheet: <b>get → Option</b> · abrir con <code>if let Some</code></div>
 

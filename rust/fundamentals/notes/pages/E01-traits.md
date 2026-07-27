@@ -63,7 +63,7 @@ layout: center
 
 ## `derive` es Auto-Implementar Traits
 
-Ya venías usando traits sin nombrarlos: `#[derive(...)]` le pide al compilador que **escriba la implementación por ti**.
+Los traits ya aparecían sin nombrarse: `#[derive(...)]` le pide al compilador que **genere la implementación automáticamente**.
 
 <div class="text-sm">
 
@@ -79,7 +79,7 @@ Ya venías usando traits sin nombrarlos: `#[derive(...)]` le pide al compilador 
 
 <div class="important-note">
 
-Por eso un tipo necesita `Hash + Eq` para ser llave de un `HashMap`, y `Ord` para usarse en `sort()` o en un `BinaryHeap`: esas estructuras **exigen** esos traits.
+De ahí que un tipo requiera `Hash + Eq` para ser llave de un `HashMap`, y `Ord` para usarse en `sort()` o en un `BinaryHeap`: esas estructuras **exigen** esos traits.
 
 </div>
 
@@ -87,11 +87,11 @@ Por eso un tipo necesita `Hash + Eq` para ser llave de un `HashMap`, y `Ord` par
 layout: center
 ---
 
-## Los Traits que Ya Usabas
+## Traits Presentes en las Secciones Anteriores
 
 <div class="text-sm">
 
-| Lo que escribías | El trait detrás |
+| Construcción usada | El trait detrás |
 | :--- | :--- |
 | `for x in v.iter()` · `.map()` · `.filter()` | **`Iterator`** — cada adaptador vive en este trait |
 | `println!("{:?}", v)` | **`Debug`** |
@@ -103,6 +103,6 @@ layout: center
 
 <div class="important-note">
 
-Los closures también son traits: `Fn` (solo lee lo que captura), `FnMut` (lo muta) y `FnOnce` (lo consume). Por eso `.map()` acepta cualquier closure: su firma pide un tipo que cumpla uno de esos traits, no un tipo concreto.
+Los closures también son traits: `Fn` (solo lee lo que captura), `FnMut` (lo muta) y `FnOnce` (lo consume). De ahí que `.map()` acepte cualquier closure: su firma pide un tipo que cumpla uno de esos traits, no un tipo concreto.
 
 </div>

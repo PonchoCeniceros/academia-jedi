@@ -37,7 +37,7 @@ layout: center
 
 <div class="important-note">
 
-Se lee: *"`T` puede ser cualquier tipo, **siempre que** se pueda comparar con `>`"*. Sin el bound el compilador rechaza `a > b`, porque no todo tipo sabe compararse.
+Se lee: *"`T` es cualquier tipo, **siempre que** se pueda comparar con `>`"*. Sin el bound el compilador rechaza `a > b`, porque no todo tipo sabe compararse.
 
 </div>
 
@@ -92,15 +92,15 @@ impl<T: PartialOrd> Par<T> {
 ```
 
 * `struct Par<T>` declara el parámetro; `impl<T: ...> Par<T>` lo vuelve a declarar para el bloque de métodos.
-* El bound puede vivir solo en el `impl`: así el struct se construye con cualquier `T`, pero `mayor()` existe únicamente si `T` es comparable.
+* El bound puede vivir solo en el `impl`: así el struct admite cualquier `T`, pero `mayor()` existe únicamente si `T` es comparable.
 
 ---
 layout: center
 ---
 
-## Lo que Ya Estabas Usando
+## Genéricos en las Secciones Anteriores
 
-Todas las estructuras de las secciones anteriores eran genéricas:
+Todas estas estructuras, ya vistas, son genéricas:
 
 <div class="text-sm">
 

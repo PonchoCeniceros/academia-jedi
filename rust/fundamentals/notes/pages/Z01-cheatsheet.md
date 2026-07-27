@@ -51,7 +51,7 @@ layout: center
 </div>
 
 <div class="rounded px-4 py-3" style="background:#F27F3D;color:#000">
-  <b>Regla del borrow checker:</b> en un mismo instante puedes tener <b>una sola</b> <code style="background:#F29441;color:#000">&amp;mut T</code> <b>o bien cualquier cantidad de</b> <code style="background:#F29441;color:#000">&amp;T</code> — pero <b>nunca las dos a la vez</b>. Además, toda referencia debe ser siempre válida (sin <i>dangling</i>).
+  <b>Regla del borrow checker:</b> en un mismo instante puede existir <b>una sola</b> <code style="background:#F29441;color:#000">&amp;mut T</code> <b>o bien cualquier cantidad de</b> <code style="background:#F29441;color:#000">&amp;T</code> — pero <b>nunca las dos a la vez</b>. Además, toda referencia debe ser siempre válida (sin <i>dangling</i>).
 </div>
 
 <div class="rounded px-4 py-3 border border-gray-700 space-y-2">
@@ -89,9 +89,9 @@ layout: center
 
   <div class="rounded px-4 py-3 border border-gray-700 space-y-1.5">
     <div class="font-bold text-[#F26244] mb-1">El método · 3 pasos</div>
-    <div><b>①</b> Lee el tipo de <b>afuera → adentro</b>.</div>
-    <div><b>②</b> Abre cada capa con su operación y pregúntate: ¿me da <b>dueño</b> (move), <b>préstamo</b> (<code>&amp;</code>) o <b>valor Copy</b>?</div>
-    <div><b>③</b> Repite hasta el dato que necesitas.</div>
+    <div><b>①</b> Leer el tipo de <b>afuera → adentro</b>.</div>
+    <div><b>②</b> Abrir cada capa con su operación y determinar qué entrega: <b>dueño</b> (move), <b>préstamo</b> (<code>&amp;</code>) o <b>valor Copy</b>.</div>
+    <div><b>③</b> Repetir hasta llegar al dato buscado.</div>
     <div class="mt-1 opacity-70">Iteradores = el mismo patrón: <code>.iter()</code> presta, <code>.into_iter()</code> consume.</div>
   </div>
 
@@ -130,14 +130,14 @@ layout: center
 </div>
 
 <div class="rounded px-4 py-3 border border-gray-700 space-y-1.5">
-  <div class="font-bold text-[#F26244] mb-1">Corrida mental — pregúntate en orden</div>
+  <div class="font-bold text-[#F26244] mb-1">Corrida mental — tres preguntas en orden</div>
   <div><b>①</b> ¿El dato vive en Heap? → asignarlo o pasarlo lo <b>mueve</b> (el original queda inutilizable). ¿En Stack? → se <b>copia</b>, ambos siguen vivos.</div>
-  <div><b>②</b> ¿Hay una <code>&amp;mut</code> y una <code>&amp;</code> vivas a la vez sobre el mismo dato? → prohibido: ¿alguien escribe mientras otro lee?</div>
-  <div><b>③</b> ¿La referencia que devuelvo o guardo vive más que su dueño? → <i>dangling</i>, prohibido.</div>
+  <div><b>②</b> ¿Hay una <code>&amp;mut</code> y una <code>&amp;</code> vivas a la vez sobre el mismo dato? → prohibido: equivale a escribir mientras alguien lee.</div>
+  <div><b>③</b> ¿La referencia devuelta o guardada vive más que su dueño? → <i>dangling</i>, prohibido.</div>
 </div>
 
 <div class="rounded px-4 py-3" style="background:#F27F3D;color:#000">
-  En corto, casi todo error de memoria es una de tres: <b>¿lo moví y lo volví a usar?</b> · <b>¿mezclé lectura y escritura?</b> · <b>¿la referencia vive más que su dueño?</b>
+  En corto, casi todo error de memoria es uno de tres: <b>un valor movido y vuelto a usar</b> · <b>lectura y escritura mezcladas</b> · <b>una referencia que vive más que su dueño</b>
 </div>
 
 </div>
