@@ -4,89 +4,107 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-**Academia Jedi** is a personal competitive programming training ground for LeetCode problems. Solutions exist in two languages: Python and Rust. Each problem is called a "Trial" and is identified by its LeetCode problem ID. The repository uses automation scripts called "Holocrons" to scaffold, test, and organize work.
+**Academia Jedi** is a personal competitive programming and language-learning training ground. Solutions exist in two languages: Python and Rust. Each problem is called a "Trial" and is identified by its LeetCode problem ID. The repository uses automation scripts called "Holocrons" to scaffold, test, and organize work.
+
+The repo is organized **language-first**. Within Rust there are two tracks: `fundamentals/` (mastering the language via algorithms) and `building/` (applied projects — APIs, data analysis).
 
 ## Repository Structure
 
 ```
-trials/
-├── python/              # Python solutions (pytest-based)
-│   ├── {ID}.py         # Solution file with tests
-│   ├── {ID}/           # (Optional) Multi-file trials
-│   │   ├── solution.py
-│   │   └── test.py
-│   └── ... (20+ problems)
-└── rust/               # Rust solutions (cargo-based)
-    ├── Cargo.toml      # Single workspace for all binaries
-    └── src/bin/
-        ├── {ID}_{name}.rs  # One binary per trial
-        └── ... (30+ problems)
-utils/                  # Shared utilities
-├── __init__.py
-└── log.py             # Logging utility used in Python tests
-docs/                  # Notes and documentation (rust-notes, whiteboards)
+rust/
+├── fundamentals/           # Mastering the language
+│   ├── notes/              # Slidev study deck (pnpm project)
+│   │   ├── slides.md       # Entry point; includes pages/ via `src:`
+│   │   └── pages/          # A0X syntax, B0X memory safety, C0X enums,
+│   │                       # D0X data structures, E0X appendices
+│   └── trials/             # Cargo package "katas" (LeetCode in Rust)
+│       ├── Cargo.toml
+│       ├── holocron.sh     # Scaffolds/tests/runs trials
+│       └── src/
+│           ├── lib.rs      # `mod macros;`
+│           ├── macros.rs   # exports the `s!` macro
+│           └── bin/{ID}_{name}.rs   # one binary per trial (34)
+└── building/               # Applied projects (notes/ + projects/) — planned
+python/
+├── trials/                 # Python solutions (pytest-based, 21)
+│   ├── {ID}.py             # Solution file with tests
+│   └── {ID}/main.py        # (Optional) Multi-file trials
+├── utils/                  # log.py — logging helper used in tests
+└── holocron.sh             # Scaffolds/tests Python trials
+docs/whiteboards/           # Cross-language sketches
+roadmap.csv                 # Problem metadata + progress (spans both languages)
+pytest.ini                  # Stays at root — see "Python Setup"
 ```
 
 ## Development Workflow
+
+Both holocrons resolve their own location, so they work from the repo root **or** from their own directory.
 
 ### Python Path (pytest)
 
 **Create a new trial:**
 ```bash
-./holocron_py.sh -m "9. Palindrome Number"
+python/holocron.sh -m "9. Palindrome Number"
 ```
-Creates `trials/python/9.py` with test scaffold.
+Creates `python/trials/9.py` with test scaffold.
 
 **Run tests for a trial:**
 ```bash
-./holocron_py.sh -t 9
+python/holocron.sh -t 9
 ```
 Or directly:
 ```bash
-pytest trials/python/9.py -v
+pytest python/trials/9.py -v
 ```
 
 **List all completed trials:**
 ```bash
-./holocron_py.sh -l
+python/holocron.sh -l
 ```
 
 **Run all Python tests:**
 ```bash
-pytest trials/python/ -v
+pytest
 ```
 
 ### Rust Path (cargo)
 
 **Create a new trial:**
 ```bash
-./holocron_rs.sh -m "1. Two Sum"
+rust/fundamentals/trials/holocron.sh -m "1. Two Sum"
 ```
-Creates `trials/rust/src/bin/1_two_sum.rs` with test scaffold.
+Creates `rust/fundamentals/trials/src/bin/1_two_sum.rs` with test scaffold.
 
 **Run tests for a trial:**
 ```bash
-./holocron_rs.sh -t 1
+rust/fundamentals/trials/holocron.sh -t 1
 ```
 Or directly:
 ```bash
-cargo test --manifest-path trials/rust/Cargo.toml --bin 1_two_sum
+cargo test --manifest-path rust/fundamentals/trials/Cargo.toml --bin 1_two_sum
 ```
 
 **Execute trial main function:**
 ```bash
-./holocron_rs.sh -r 1
+rust/fundamentals/trials/holocron.sh -r 1
 ```
 
 **Run all Rust tests:**
 ```bash
-cargo test --manifest-path trials/rust/Cargo.toml
+cargo test --manifest-path rust/fundamentals/trials/Cargo.toml
 ```
 
 **List all completed trials:**
 ```bash
-./holocron_rs.sh -l
+rust/fundamentals/trials/holocron.sh -l
 ```
+
+### Study deck (Slidev)
+
+```bash
+pnpm --dir rust/fundamentals/notes run dev
+```
+Also available as the `rust-notes` config in `.claude/launch.json` (port 3031).
 
 ## Key Technical Details
 
@@ -94,11 +112,12 @@ cargo test --manifest-path trials/rust/Cargo.toml
 - Uses **pytest** for testing with parametrize decorators
 - Tests in same file as solution (at bottom of `{ID}.py`)
 - Imports `utils.log.Log` for standardized logging (optional but available)
-- Project root is on `PYTHONPATH` (configured in `pytest.ini`)
+- `python/` is on `PYTHONPATH` (via `pythonpath = python` in `pytest.ini`), which is what makes `from utils.log import Log` resolve
+- **`pytest.ini` deliberately stays at the repo root.** If moved into `python/`, running `pytest` from the root would let the root `pyproject.toml` win as rootdir and silently discard all config. At the root it behaves identically from either directory.
 - venv at `.venv/` (pyright configured to use it)
 
 ### Rust Setup
-- Single Cargo workspace in `trials/rust/` with edition `2024`
+- Single Cargo **package** (`katas`, not a workspace) in `rust/fundamentals/trials/` with edition `2024`
 - Each solution is a separate binary: `cargo run --bin {ID}_{name}`
 - Dependencies available: `regex`, `colored`
 - Tests embedded in binary via `#[cfg(test)]` modules
@@ -112,13 +131,14 @@ cargo test --manifest-path trials/rust/Cargo.toml
 
 | Task | Command |
 |------|---------|
-| Create Python trial | `./holocron_py.sh -m "{ID}. Problem Name"` |
-| Create Rust trial | `./holocron_rs.sh -m "{ID}. Problem Name"` |
-| Test Python solution | `./holocron_py.sh -t {ID}` or `pytest trials/python/{ID}.py -v` |
-| Test Rust solution | `./holocron_rs.sh -t {ID}` |
-| Run Rust binary | `./holocron_rs.sh -r {ID}` |
-| Test all Python | `pytest trials/python/ -v` |
-| Test all Rust | `cargo test --manifest-path trials/rust/Cargo.toml` |
+| Create Python trial | `python/holocron.sh -m "{ID}. Problem Name"` |
+| Create Rust trial | `rust/fundamentals/trials/holocron.sh -m "{ID}. Problem Name"` |
+| Test Python solution | `python/holocron.sh -t {ID}` or `pytest python/trials/{ID}.py -v` |
+| Test Rust solution | `rust/fundamentals/trials/holocron.sh -t {ID}` |
+| Run Rust binary | `rust/fundamentals/trials/holocron.sh -r {ID}` |
+| Test all Python | `pytest` |
+| Test all Rust | `cargo test --manifest-path rust/fundamentals/trials/Cargo.toml` |
+| Serve study deck | `pnpm --dir rust/fundamentals/notes run dev` |
 
 ## Code Philosophy
 
@@ -128,14 +148,23 @@ Per the README philosophy:
 3. **Process-driven** — each failed test is a lesson; solutions should flow naturally when mastered
 
 ## Important Files
-- `holocron_py.sh` — scaffolds and runs Python trials
-- `holocron_rs.sh` — scaffolds and runs Rust trials
-- `trials/roadmap.csv` — tracks problem metadata and progress
+- `python/holocron.sh` — scaffolds and runs Python trials
+- `rust/fundamentals/trials/holocron.sh` — scaffolds and runs Rust trials
+- `roadmap.csv` — tracks problem metadata and progress (spans both languages, hence at root)
 - `pytest.ini` — pytest configuration (testpaths, pythonpath, logging)
-- `trials/rust/Cargo.toml` — Rust workspace config
+- `rust/fundamentals/trials/Cargo.toml` — Rust package config
+- `rust/fundamentals/notes/slides.md` — study deck entry point
 
 ## Notes for Future Sessions
 - Both language paths run independently; no requirement to do both
 - LeetCode problem IDs are used consistently across both paths
 - Rust edition 2024 is explicitly set in Cargo.toml (non-standard; verify compatibility when upgrading)
 - Test scaffold filenames follow the pattern: Python uses `test_{function_name}`, Rust uses `test_{package_name}`
+- The Slidev deck's images use root-absolute paths (`/images/...`) served from `notes/public`; its page includes use `./pages/...`. Both are internal, so the deck can be moved as a unit.
+- In Slidev pages, sibling `<div>`s containing markdown need blank lines around them, or the build fails with `Element is missing end tag`.
+
+## Known pre-existing issues (not caused by the language-first refactor)
+- `rust/.../bin/241_different_ways_to_add_parentheses.rs:89` — `collect()` without a type annotation fails to compile (`E0283`), which aborts a full `cargo test` run. Needs `let tokens: Vec<_> = ...`.
+- `python/trials/{241,338,746}/main.py` — three files share the basename `main` with no `__init__.py`, so collecting more than one in a session fails with pytest's `import file mismatch`. Workaround: `pytest --continue-on-collection-errors`, or give them unique names.
+- `python/trials/888.py` — one parametrized case fails (`test_fairCandySwap[...expected1]`).
+- `.venv/bin/*` console scripts have a dead shebang pointing at `/Users/giovannychavez/developments/...` (plural) while the repo lives at `.../development/...`. So bare `pytest` fails; use `.venv/bin/python -m pytest`, or recreate the venv.

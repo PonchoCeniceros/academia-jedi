@@ -1,19 +1,22 @@
 #!/bin/bash
 
-DIRECTORY="trials/python"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DIRECTORY="${SCRIPT_DIR}/trials"
 mkdir -p "$DIRECTORY"
 
 show_help() {
   echo "🌌 HOLOCRON PY - Your guide in the Jedi Academy (Python)"
   echo "------------------------------------------------------------"
   echo "Usage:"
-  echo "  ./holocron_py.sh -m \"ID. Name\"  -> [M]editate: Create new Trial"
-  echo "  ./holocron_py.sh -t <ID>          -> [T]rain: Run Trial tests"
-  echo "  ./holocron_py.sh -l               -> [L]og: List completed Trials"
+  echo "  ./holocron.sh -m \"ID. Name\"  -> [M]editate: Create new Trial"
+  echo "  ./holocron.sh -t <ID>          -> [T]rain: Run Trial tests"
+  echo "  ./holocron.sh -l               -> [L]og: List completed Trials"
   echo ""
   echo "Examples:"
-  echo "  ./holocron_py.sh -m \"14. Longest Common Prefix\""
-  echo "  ./holocron_py.sh -t 14"
+  echo "  ./holocron.sh -m \"14. Longest Common Prefix\""
+  echo "  ./holocron.sh -t 14"
+  echo ""
+  echo "Runs from anywhere: python/holocron.sh -t 14"
   exit 1
 }
 

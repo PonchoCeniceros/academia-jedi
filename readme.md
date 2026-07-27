@@ -18,23 +18,29 @@ Este es mi campo de entrenamiento personal en los caminos de la Fuerza. Aquí, c
 
 ## 🏛️ Estructura del Templo
 
-Cada Prueba reside en `trials/`, identificada por su ID de LeetCode. El Templo está dividido en dos cámaras — una por cada camino de la Fuerza.
+El Templo se organiza por **lenguaje**. Cada Prueba se identifica por su ID de LeetCode. Dentro del camino Rust hay dos senderos: *fundamentals* (dominar el lenguaje) y *building* (construir cosas útiles con él).
 
 ```text
 .
-├── trials/
-│   ├── python/              # La Cámara Python (Pytest)
+├── rust/
+│   ├── fundamentals/        # El camino del dominio del lenguaje
+│   │   ├── notes/           # Los Pergaminos (presentación de estudio)
+│   │   └── trials/          # La Cámara Rust (cargo test)
+│   │       ├── Cargo.toml   # Un solo proyecto para gobernarlos a todos
+│   │       ├── holocron.sh  # El Holocrón — camino Rust
+│   │       └── src/bin/     # Un pergamino por Prueba
+│   │           ├── 1_two_sum.rs
+│   │           └── ...
+│   └── building/            # El camino de la construcción (APIs, datos)
+├── python/
+│   ├── trials/              # La Cámara Python (Pytest)
 │   │   ├── 1.py             # Two Sum
 │   │   ├── 20.py            # Valid Parentheses
 │   │   └── ...
-│   └── rust/                # La Cámara Rust (cargo test)
-│       ├── Cargo.toml       # Un solo proyecto para gobernarlos a todos
-│       └── src/bin/         # Un pergamino por Prueba
-│           ├── 1_two_sum.rs
-│           └── ...
-├── utils/                   # Los Holocrones (conocimiento compartido)
-├── holocron_py.sh           # El Holocrón — camino Python
-├── holocron_rs.sh           # El Holocrón — camino Rust
+│   ├── utils/               # Conocimiento compartido (logging)
+│   └── holocron.sh          # El Holocrón — camino Python
+├── docs/whiteboards/        # Meditaciones visuales
+├── roadmap.csv              # El Registro de Pruebas
 └── README.md                # El Códex Jedi
 ```
 
@@ -73,31 +79,33 @@ mod tests {
 
 Los scripts **Holocrón** guían a los Padawans a través de sus Pruebas — generando los pergaminos, iniciando los tests y llevando registro de las misiones completadas. Un verdadero Jedi no desperdicia energía en configuración. Se concentra en la Fuerza.
 
-### Camino Python (`holocron_py.sh`)
+Ambos Holocrones resuelven su propia ubicación: funcionan desde la raíz del Templo o desde su propia cámara.
+
+### Camino Python (`python/holocron.sh`)
 ```bash
 # Comenzar una nueva Prueba
-./holocron_py.sh -m "9. Palindrome Number"
+python/holocron.sh -m "9. Palindrome Number"
 
 # Iniciar el entrenamiento
-./holocron_py.sh -t 9
+python/holocron.sh -t 9
 
 # Consultar el Registro de Pruebas
-./holocron_py.sh -l
+python/holocron.sh -l
 ```
 
-### Camino Rust (`holocron_rs.sh`)
+### Camino Rust (`rust/fundamentals/trials/holocron.sh`)
 ```bash
 # Comenzar una nueva Prueba
-./holocron_rs.sh -m "1. Two Sum"
+rust/fundamentals/trials/holocron.sh -m "1. Two Sum"
 
 # Iniciar el entrenamiento
-./holocron_rs.sh -t 1
+rust/fundamentals/trials/holocron.sh -t 1
 
 # Ejecutar la Prueba
-./holocron_rs.sh -r 1
+rust/fundamentals/trials/holocron.sh -r 1
 
 # Consultar el Registro de Pruebas
-./holocron_rs.sh -l
+rust/fundamentals/trials/holocron.sh -l
 ```
 
 Ambos Holocrones conjuran pergaminos con:

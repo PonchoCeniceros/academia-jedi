@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIRECTORY="trials/rust"
+DIRECTORY="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BIN_DIR="${DIRECTORY}/src/bin"
 mkdir -p "$BIN_DIR"
 
@@ -8,15 +8,17 @@ show_help() {
   echo "🦀 HOLOCRON RS - Your guide in the Jedi Academy (Rust)"
   echo "----------------------------------------------------------"
   echo "Usage:"
-  echo "  ./holocron_rs.sh -m \"ID. Name\"  -> [M]editate: Create new Trial"
-  echo "  ./holocron_rs.sh -t <ID>          -> [T]rain: Run Trial tests"
-  echo "  ./holocron_rs.sh -r <ID>          -> [R]un: Execute Trial main"
-  echo "  ./holocron_rs.sh -l               -> [L]og: List completed Trials"
+  echo "  ./holocron.sh -m \"ID. Name\"  -> [M]editate: Create new Trial"
+  echo "  ./holocron.sh -t <ID>          -> [T]rain: Run Trial tests"
+  echo "  ./holocron.sh -r <ID>          -> [R]un: Execute Trial main"
+  echo "  ./holocron.sh -l               -> [L]og: List completed Trials"
   echo ""
   echo "Examples:"
-  echo "  ./holocron_rs.sh -m \"1. Two Sum\""
-  echo "  ./holocron_rs.sh -t 1"
-  echo "  ./holocron_rs.sh -r 1"
+  echo "  ./holocron.sh -m \"1. Two Sum\""
+  echo "  ./holocron.sh -t 1"
+  echo "  ./holocron.sh -r 1"
+  echo ""
+  echo "Runs from anywhere: rust/fundamentals/trials/holocron.sh -t 1"
   exit 1
 }
 
