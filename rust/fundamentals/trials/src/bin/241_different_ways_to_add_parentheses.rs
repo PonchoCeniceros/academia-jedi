@@ -86,7 +86,7 @@ fn main() {
     let expression = s!("2-11-1");
     let re = Regex::new(r"(?:[1-9][0-9]|[0-9])|[+\-*]").unwrap();
 
-    let tokens = re.find_iter(&expression).map(|m| m.as_str()).collect();
+    let tokens: Vec<&str> = re.find_iter(&expression).map(|m| m.as_str()).collect();
 
     let ans = Solution::diff_ways_to_compute(s!("11"));
     println!("{}", format!("{:?}", ans).black().bold().on_bright_green());

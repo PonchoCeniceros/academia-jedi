@@ -163,8 +163,29 @@ Per the README philosophy:
 - The Slidev deck's images use root-absolute paths (`/images/...`) served from `notes/public`; its page includes use `./pages/...`. Both are internal, so the deck can be moved as a unit.
 - In Slidev pages, sibling `<div>`s containing markdown need blank lines around them, or the build fails with `Element is missing end tag`.
 
-## Known pre-existing issues (not caused by the language-first refactor)
-- `rust/.../bin/241_different_ways_to_add_parentheses.rs:89` — `collect()` without a type annotation fails to compile (`E0283`), which aborts a full `cargo test` run. Needs `let tokens: Vec<_> = ...`.
-- `python/trials/{241,338,746}/main.py` — three files share the basename `main` with no `__init__.py`, so collecting more than one in a session fails with pytest's `import file mismatch`. Workaround: `pytest --continue-on-collection-errors`, or give them unique names.
-- `python/trials/888.py` — one parametrized case fails (`test_fairCandySwap[...expected1]`).
-- `.venv/bin/*` console scripts have a dead shebang pointing at `/Users/giovannychavez/developments/...` (plural) while the repo lives at `.../development/...`. So bare `pytest` fails; use `.venv/bin/python -m pytest`, or recreate the venv.
+## Failing tests (pre-existing; unrelated to the language-first refactor)
+
+`cargo test` is **fail-fast**: a single failing target stops the run, so use
+`--no-fail-fast` to see the whole picture. Four targets fail today:
+
+| Trial | Symptom | Likely cause |
+|---|---|---|
+| 241 Different Ways to Add Parentheses | `[]` vs `[11]` | real bug: single-number input returns nothing |
+| 347 Top K Frequent Elements | `[2, 1]` vs `[1, 2]` | **order only** — the answer is right; the test asserts an exact order that LeetCode doesn't require |
+| 49 Group Anagrams | groups right, order differs | **order only** — same as above, at both the group and element level |
+| 48 Rotate Image | panics at `48_rotate_image.rs:86` | needs a look (no left/right in the assert output) |
+
+All four are marked `ya_en_rust=Si` in `roadmap.csv`. They stayed invisible for a
+while because a compile error in 241 aborted the suite before reaching them.
+
+`python/trials/888.py` also has one failing parametrized case
+(`test_fairCandySwap[...expected1]`).
+
+## Environment gotcha
+
+The `.venv/bin/*` console scripts have a dead shebang pointing at
+`/Users/giovannychavez/developments/...` (plural) while the repo lives at
+`.../development/...` — the venv was built before the repo moved. So invoking
+bare `pytest` fails even with the venv activated. Use `.venv/bin/python -m
+pytest` (which is what `python/holocron.sh` does), or recreate the venv from
+`requeriments.txt`.

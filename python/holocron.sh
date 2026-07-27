@@ -77,7 +77,15 @@ EOF
   FILE_PATH="${DIRECTORY}/${VALUE}.py"
   if [ -f "$FILE_PATH" ]; then
     echo "🌌 Initiating Trial $VALUE..."
-    pytest "$FILE_PATH" -v
+    # Preferimos el python del venv via `-m pytest`: invocar `pytest` directo
+    # depende del shebang de .venv/bin/pytest, que se rompe si el repo cambia
+    # de ruta en disco.
+    VENV_PY="${SCRIPT_DIR}/../.venv/bin/python"
+    if [ -x "$VENV_PY" ]; then
+      "$VENV_PY" -m pytest "$FILE_PATH" -v
+    else
+      pytest "$FILE_PATH" -v
+    fi
   else
     echo "❌ Error: Trial $VALUE does not exist."
   fi
