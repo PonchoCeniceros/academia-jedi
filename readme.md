@@ -32,6 +32,7 @@ El Templo se organiza por **lenguaje**. Cada Prueba se identifica por su ID de L
 │   │           ├── 1_two_sum.rs
 │   │           └── ...
 │   └── building/            # El camino de la construcción (APIs, datos)
+│       └── notes/           # Los Pergaminos aplicados
 ├── python/
 │   ├── trials/              # La Cámara Python (Pytest)
 │   │   ├── 1.py             # Two Sum
@@ -39,9 +40,25 @@ El Templo se organiza por **lenguaje**. Cada Prueba se identifica por su ID de L
 │   │   └── ...
 │   ├── utils/               # Conocimiento compartido (logging)
 │   └── holocron.sh          # El Holocrón — camino Python
-├── docs/whiteboards/        # Meditaciones visuales
+├── docs/
+│   ├── algorithms/          # Patrones de razonamiento (sin lenguaje)
+│   └── whiteboards/         # Meditaciones visuales
 ├── roadmap.csv              # El Registro de Pruebas
 └── README.md                # El Códex Jedi
+```
+
+### Los tres Pergaminos
+
+| Deck | Tema | Puerto |
+| --- | --- | --- |
+| `rust/fundamentals/notes` | **Rust Fundamentos** — el lenguaje | 3031 |
+| `rust/building/notes` | **Rust Aplicado** — construir con el lenguaje | 3032 |
+| `docs/algorithms` | **Algoritmos** — patrones, independiente del lenguaje | 3033 |
+
+```bash
+pnpm --dir rust/fundamentals/notes run dev
+pnpm --dir rust/building/notes run dev
+pnpm --dir docs/algorithms run dev
 ```
 
 ---

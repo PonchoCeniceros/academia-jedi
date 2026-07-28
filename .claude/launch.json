@@ -12,6 +12,12 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["--dir", "rust/building/notes", "run", "dev"],
       "port": 3032
+    },
+    {
+      "name": "algorithms-notes",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--dir", "docs/algorithms", "run", "dev"],
+      "port": 3033
     }
   ]
 }
