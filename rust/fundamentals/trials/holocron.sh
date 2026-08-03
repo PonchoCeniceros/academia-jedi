@@ -54,8 +54,7 @@ use katas::s;
 struct Solution;
 
 /**
- * Implement your solution here
- *
+ * Solución a implementar
  */
 impl Solution {
     pub fn ${PACKAGE_NAME}() {
@@ -64,30 +63,41 @@ impl Solution {
     }
 }
 
+/**
+ * Casos de prueba
+ */
+fn get_test_cases() {
+    // (, ),
+}
+
+/**
+ * Ejecución a discresión
+ */
 fn main() {
+    let suite = get_test_cases();
     let ans = Solution::${PACKAGE_NAME}();
     println!("{}", format!("{}", ans).green().italic().underline());
 }
 
+/**
+ * Ejecucion de la suite completa de pruebas
+ */
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn test_${PACKAGE_NAME}() {
-        let cases = [
-            // (, ),
-        ];
+      let suite = get_test_cases();
 
-        for (input, expected) in cases {
-            todo!();
-            // assert_eq!(
-            //     Solution::${PACKAGE_NAME}(),
-            //     expected,
-            //     "{}",
-            //     format!("{:?}", input).red().italic().underline()
-            // );
-        }
+      for (input, expected) in cases {
+        // assert_eq!(
+        //   Solution::${PACKAGE_NAME}(),
+        //   expected,
+        //   "{}",
+        //   format!("{:?}", input).red().italic().underline()
+        // );
+      }
     }
 
 
