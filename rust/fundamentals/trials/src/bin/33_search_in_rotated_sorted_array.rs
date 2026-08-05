@@ -28,23 +28,28 @@ impl Solution {
     }
 
     fn make_bs(nums: &[i32], target: i32, delta: i32) -> i32 {
-        let mut left = 0;
-        let mut right = nums.len() as i32 - 1;
+        println!("{:?} {}", nums, target);
 
-        while left <= right {
-            let mid = left + (right - left) / 2;
-            let idx = mid as usize;
+        if nums.len() == 1 && target == nums[0] {
+            return 0;
+        }
 
-            if target == nums[idx] {
-                return mid + delta;
+        let mut l = 0;
+        let mut r = nums.len() as i32 - 1;
+
+        while l <= r {
+            let m = l + (r - l) / 2;
+
+            if target == nums[m as usize] {
+                return m + delta;
             }
 
-            if target < nums[idx] {
-                right = mid - 1;
+            if target < nums[m as usize] {
+                r = m - 1;
             }
 
-            if target > nums[idx] {
-                left = mid + 1;
+            if target > nums[m as usize] {
+                l = m + 1;
             }
         }
 
@@ -55,24 +60,75 @@ impl Solution {
         // #1 primero encontrar el cero (el desplazamiento)
         let delta = Solution::get_delta(&nums);
 
+        println!("δ = {}", format!("{}", delta).purple().italic().underline());
+
+        // #1.5 si no hay dislocamiento, hacer BS en todo el arr
+        // if delta == 0 {
+        //     return Solution::make_bs(&nums, target, 0_i32);
+        // }
+
         // #2 luego hacer la BS considerando el desplazamiento
         let l = 0_i32;
         let s = delta.saturating_sub(1);
         let t = delta;
         let r = nums.len() as i32;
 
-        if target <= nums[0] {
-            // slice derecho
-            Solution::make_bs(&nums[t..r as usize], target, delta as i32)
-        } else {
+        let nums_izq = &nums[(l as usize)..s.saturating_add(1)];
+        let nums_der = &nums[t..r as usize];
+
+        println!(
+            "{}{}",
+            "(l, s, t, r) = ".purple().italic().underline(),
+            format!("({}, {}, {}, {})", l, s, t, r)
+        );
+
+        println!(
+            "nₗₛ = {}",
+            format!("{:?}", nums_izq).cyan().italic().underline()
+        );
+        println!(
+            "nₜᵣ = {}",
+            format!("{:?}", nums_der).blue().italic().underline()
+        );
+
+        println!(
+            "τ ∈ [{},{}] | τ ∈ [{},{}]",
+            nums[l as usize],
+            nums[s],
+            nums[t],
+            nums[(r - 1) as usize]
+        );
+
+        // nums[l as usize] <= target && target <= nums[s],
+        // nums[t] <= target && target <= nums[(r - 1) as usize]
+
+        if nums[l as usize] <= target && target <= nums[s] {
+            println!("slice izquierdo");
             // slice izquierdo
-            Solution::make_bs(&nums[(l as usize)..s], target, 0_i32)
+            Solution::make_bs(nums_izq, target, 0_i32)
+        } else {
+            println!("slice derecho");
+            // slice derecho
+            Solution::make_bs(nums_der, target, delta as i32)
         }
+
+        // if nums[t] <= target && target <= nums[(r - 1) as usize] {
+        //     println!("slice derecho");
+        //     // slice derecho
+        //     Solution::make_bs(&nums[t..r as usize], target, delta as i32)
+        // } else {
+        //     println!("slice izquierdo");
+        //     // slice izquierdo
+        //     Solution::make_bs(&nums[(l as usize)..s], target, 0_i32)
+        // }
     }
 }
 
 fn get_test_cases() -> Vec<((Vec<i32>, i32), i32)> {
     vec![
+        ((vec![5, 1, 3], 5), 0),
+        ((vec![3, 5, 1], 3), 0),
+        ((vec![3, 1], 3), 0),
         ((vec![1, 3], 3), 1),
         ((vec![6, 7, 0, 1, 2, 4, 5], 0), 2),
         ((vec![4, 5, 6, 7, 0, 1, 2], 0), 4),
