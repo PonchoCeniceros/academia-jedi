@@ -16,12 +16,13 @@ rust/
 │   ├── notes/              # "Rust · Cuaderno de campo" — Slidev, ONE deck.
 │   │   ├── slides.md       # Entry point; includes pages/ via `src:`
 │   │   ├── export-sections.py  # One PDF per section (splits the deck) + standalone decks
+│   │   ├── export-navegable.py # One navigable PDF: bookmarks, per-section topic page, working TOC links, back buttons
 │   │   ├── sync-indice.py  # Re-syncs the TOC's slide numbers. RUN AFTER EDITING pages/
-│   │   ├── ejercicios.md   # Standalone deck: 56 exercises (its own PDF, not in slides.md)
+│   │   ├── ejercicios.md   # Standalone deck: 80 exercises (its own PDF, not in slides.md)
 │   │   ├── GUIA-DE-TONO.md # Writing/tone rules for the deck — READ BEFORE EDITING
 │   │   ├── _multideck/     # Abandoned per-section entry files. Safe to delete.
 │   │   └── pages/          # Numbered by section (topological order, see below):
-│   │                       # 1.1-tokens.md … 7.4-errores-idiomaticos.md,
+│   │                       # 1.1-tokens.md … 9.6-un-servidor-minimo.md,
 │   │                       # ap0-cheatsheet.md, ap2-aplicacion.md, ejercicios.md
 │   └── trials/             # Cargo package "katas" (LeetCode in Rust)
 │       ├── Cargo.toml
@@ -113,9 +114,10 @@ rust/fundamentals/trials/holocron.sh -l
 ```bash
 pnpm --dir rust/fundamentals/notes run dev
 ```
-One deck, ~296 slides (called *láminas* in the deck's own language), served whole on port 3031, plus a standalone `ejercicios.md`
-(114 slides) that is exported separately. The split into sections happens only at
-PDF export time: `pnpm export:sections` produces one PDF per section in `exports/`.
+One deck, ~330 slides (called *láminas* in the deck's own language), served whole on port 3031, plus a standalone `ejercicios.md`
+(161 slides: cover + 80 exercise/answer pairs) that is served with `pnpm dev:ej` (port 3032) and exported separately. The split into sections happens only at
+PDF export time: `pnpm export:sections` produces one PDF per section in `exports/`,
+and `pnpm export:nav` produces the whole deck as one navigable PDF.
 The deck's TOC links to slide numbers, so **run `python3 sync-indice.py` after
 adding, removing or reordering any page** or the links go stale. Also available as the `rust-notes` config in `.claude/launch.json`.
 
@@ -180,6 +182,8 @@ are in `_multideck/`.
 | Test all Rust | `cargo test --manifest-path rust/fundamentals/trials/Cargo.toml` |
 | Serve study deck | `pnpm --dir rust/fundamentals/notes run dev` |
 | One PDF per section | `pnpm --dir rust/fundamentals/notes run export:sections` |
+| One navigable PDF | `pnpm --dir rust/fundamentals/notes run export:nav` |
+| Serve exercises deck | `pnpm --dir rust/fundamentals/notes run dev:ej` |
 
 ## Code Philosophy
 
@@ -205,8 +209,8 @@ Per the README philosophy:
 - The Slidev deck's images use root-absolute paths (`/images/...`) served from `notes/public`; its page includes use `./pages/...`. Both are internal, so the deck can be moved as a unit.
 - In Slidev pages, sibling `<div>`s containing markdown need blank lines around them, or the build fails with `Element is missing end tag`.
 - `rust/building/notes` (a separate "Rust Aplicado" deck) was merged into `rust/fundamentals/notes` as the `F0X` pages (Módulos, Crates y Cargo) — there is now a single Slidev deck for all of Rust. `rust/building/` keeps only future Cargo projects.
-- `slidev export --range "X-Y"` silently produces blank-page PDFs/PNGs in this Slidev version (Playwright rendering bug). `export-sections.py` works around it by exporting the full deck once and splitting the result with `pypdf`, verifying each PDF's content streams aren't suspiciously small before trusting the output. It was updated for the new numbering: sections are keyed `0`–`7`, `cheat`, `ap`, `ej` (see `section_key()`).
-- The deck was split and reordered on 2026-08-31: `A01`…`Z02` became `1.1`…`7.4` plus appendices, `B02` was split into `2.3-borrowing.md` and `2.4-lifetimes.md`, and nine placeholder pages were created for content that does not exist yet (`1.1`, `1.3`, `1.6`, `2.5`, `4.4`, `5.3`, `7.3`, `7.4`, `0-por-que-rust`). Originals kept as `pages/_B02-original.md.bak` and `pages/_Z01-original.md.bak`.
+- `slidev export --range "X-Y"` silently produces blank-page PDFs/PNGs in this Slidev version (Playwright rendering bug). `export-sections.py` works around it by exporting the full deck once and splitting the result with `pypdf`, verifying each PDF's content streams aren't suspiciously small before trusting the output. It was updated for the new numbering: sections are keyed `0`–`9`, `cheat`, `ap`, `ej` (see `section_key()`).
+- The deck was split and reordered on 2026-08-31 (`A01`…`Z02` became `1.1`…`9.6` plus appendices; `B02` became `2.3-borrowing`/`2.4-lifetimes`, later renumbered). The placeholder pages from that split have since been written. Pages prefixed `_` (`_*.md`, `_*.md.bak`) are drafts or backups that `slides.md` does not include.
 
 ## Failing tests (pre-existing; unrelated to the language-first refactor)
 

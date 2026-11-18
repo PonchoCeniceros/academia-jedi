@@ -65,6 +65,7 @@ pnpm dev          # http://localhost:3031
 | `pnpm build` | sitio estático en `dist/` |
 | `pnpm export` | el deck completo en un PDF |
 | `pnpm export:sections` | **un PDF por sección** en `exports/` |
+| `pnpm export:nav` | el deck completo en un **PDF navegable** (marcadores, página de temas por sección, botones de regreso) |
 | `pnpm indice` | resincroniza los números de diapositiva del índice |
 | `pnpm densidad` | lista las diapositivas saturadas (regla R11) |
 

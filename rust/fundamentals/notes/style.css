@@ -639,3 +639,26 @@ html.dark .slidev-layout:has(.cp-lamina-seccion) .cp-cover-text { color: #4A3226
   fill: currentColor;
   stroke: none;
 }
+
+/* ------------------------------------------------------------
+   Deck de ejercicios: es el único que usa `layout: default`.
+   El tema lo alinea arriba, y con láminas cortas deja un hueco enorme abajo.
+   Se centra en vertical sin tocar el ancho, para que el margen izquierdo no
+   baile entre láminas (que es lo que pasaba con `layout: center`).
+   ------------------------------------------------------------ */
+.slidev-layout.default {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;   /* sin esto el alto es `auto` y no hay nada que centrar */
+}
+
+/* Regreso al índice en las portadas de sección. */
+.cp-volver-indice {
+  color: #4A3226 !important;
+  opacity: 0.6;
+  font-size: 0.8rem;
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+.cp-volver-indice:hover { opacity: 1; }

@@ -66,22 +66,22 @@ layout: center
   </div>
 
   <div>
-    <a href="/132" data-sec="4"><b class="cp-toc-title">4 · Abstracciones de costo cero</b></a>
+    <a href="/125" data-sec="4"><b class="cp-toc-title">4 · Abstracciones de costo cero</b></a>
     <div class="cp-muted">traits · generics · closures · traits de la stdlib · operadores</div>
   </div>
 
   <div>
-    <a href="/166" data-sec="5"><b class="cp-toc-title">5 · Vocabulario de la stdlib</b></a>
+    <a href="/159" data-sec="5"><b class="cp-toc-title">5 · Vocabulario de la stdlib</b></a>
     <div class="cp-muted">Option · Result · Vec · HashMap · otras colecciones · iteradores</div>
   </div>
 
   <div>
-    <a href="/216" data-sec="6"><b class="cp-toc-title">6 · Indirección</b></a>
+    <a href="/209" data-sec="6"><b class="cp-toc-title">6 · Indirección</b></a>
     <div class="cp-muted">Box y listas · Rc, RefCell y árboles · despacho dinámico · el mapa de la sección</div>
   </div>
 
   <div>
-    <a href="/252" data-sec="7"><b class="cp-toc-title">7 · Proyectos</b></a>
+    <a href="/245" data-sec="7"><b class="cp-toc-title">7 · Proyectos</b></a>
     <div class="cp-muted">módulos · crates y Cargo · tests · errores idiomáticos</div>
   </div>
 
@@ -90,12 +90,12 @@ layout: center
   </div>
 
   <div>
-    <a href="/292" data-sec="8"><b class="cp-toc-title">8 · Concurrencia</b></a>
+    <a href="/285" data-sec="8"><b class="cp-toc-title">8 · Concurrencia</b></a>
     <div class="cp-muted">la sección 6 entre hilos · hilos · Send y Sync · Arc y Mutex</div>
   </div>
 
   <div>
-    <a href="/309" data-sec="9"><b class="cp-toc-title">9 · Async</b></a>
+    <a href="/302" data-sec="9"><b class="cp-toc-title">9 · Async</b></a>
     <div class="cp-muted">async y await · Future · el runtime · Send en las tareas · un servidor mínimo</div>
   </div>
 
@@ -118,6 +118,8 @@ layout: intro-image
 <div class="absolute bottom-10 z-2">
   <h1 class="cp-cover-text">1 · Fundamentos</h1>
 </div>
+
+<a href="/3" class="cp-volver-indice absolute bottom-12 right-14 z-2">← Índice</a>
 
 ---
 src: ./pages/1.1-tokens.md
@@ -148,6 +150,8 @@ layout: intro-image
   <h1 class="cp-cover-text">2 · Tipos compuestos</h1>
 </div>
 
+<a href="/3" class="cp-volver-indice absolute bottom-12 right-14 z-2">← Índice</a>
+
 ---
 src: ./pages/2.1-tuplas-arreglos.md
 ---
@@ -170,6 +174,8 @@ layout: intro-image
 <div class="absolute bottom-10 z-2">
   <h1 class="cp-cover-text">3 · Memoria</h1>
 </div>
+
+<a href="/3" class="cp-volver-indice absolute bottom-12 right-14 z-2">← Índice</a>
 
 ---
 src: ./pages/3.1-stack-heap.md
@@ -203,6 +209,8 @@ layout: intro-image
   <h1 class="cp-cover-text">4 · Abstracciones de costo cero</h1>
 </div>
 
+<a href="/3" class="cp-volver-indice absolute bottom-12 right-14 z-2">← Índice</a>
+
 ---
 src: ./pages/4.0-costo-cero.md
 ---
@@ -231,6 +239,8 @@ layout: intro-image
 <div class="absolute bottom-10 z-2">
   <h1 class="cp-cover-text">5 · Vocabulario de la stdlib</h1>
 </div>
+
+<a href="/3" class="cp-volver-indice absolute bottom-12 right-14 z-2">← Índice</a>
 
 ---
 src: ./pages/5.1-option.md
@@ -264,6 +274,8 @@ layout: intro-image
   <h1 class="cp-cover-text">6 · Indirección</h1>
 </div>
 
+<a href="/3" class="cp-volver-indice absolute bottom-12 right-14 z-2">← Índice</a>
+
 ---
 src: ./pages/6.1-box-listas.md
 ---
@@ -286,6 +298,8 @@ layout: intro-image
 <div class="absolute bottom-10 z-2">
   <h1 class="cp-cover-text">7 · Proyectos</h1>
 </div>
+
+<a href="/3" class="cp-volver-indice absolute bottom-12 right-14 z-2">← Índice</a>
 
 ---
 src: ./pages/7.1-modulos.md
@@ -317,6 +331,8 @@ layout: intro-image
   <h1 class="cp-cover-text">8 · Concurrencia</h1>
 </div>
 
+<a href="/3" class="cp-volver-indice absolute bottom-12 right-14 z-2">← Índice</a>
+
 ---
 src: ./pages/8.0-la-6-entre-hilos.md
 ---
@@ -347,6 +363,8 @@ layout: intro-image
 <div class="absolute bottom-10 z-2">
   <h1 class="cp-cover-text">9 · Async</h1>
 </div>
+
+<a href="/3" class="cp-volver-indice absolute bottom-12 right-14 z-2">← Índice</a>
 
 ---
 src: ./pages/9.1-el-problema.md
