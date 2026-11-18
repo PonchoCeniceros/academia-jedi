@@ -9,7 +9,6 @@ layout: default
 ---
 
 ## Ejercicio 1: La keyword perdida
-<br/>
 
 ```rust
 fn main() {
@@ -25,7 +24,6 @@ layout: default
 ---
 
 ## Respuesta 1: La keyword perdida
-<br/>
 
 Rust exige declarar las variables con `let` antes de usarlas. Sin `let`, el compilador no sabe que `x` es una nueva variable.
 
@@ -41,7 +39,6 @@ layout: default
 ---
 
 ## Ejercicio 2: El identificador rebelde
-<br/>
 
 ```rust
 fn main() {
@@ -58,7 +55,6 @@ layout: default
 ---
 
 ## Respuesta 2: El identificador rebelde
-<br/>
 
 Dos problemas:
 1. Rust usa **snake_case** para variables: `mi_variable`, no `miVariable` (camelCase).
@@ -77,7 +73,6 @@ layout: default
 ---
 
 ## Ejercicio 3: La prioridad oculta
-<br/>
 
 ```rust
 fn main() {
@@ -94,7 +89,6 @@ layout: default
 ---
 
 ## Respuesta 3: La prioridad oculta
-<br/>
 
 Son **diferentes**. `resultado` es `14` (3 * 4 = 12, + 2 = 14) porque `*` tiene prioridad sobre `+`. `esperado` es `20` porque los paréntesis `(2 + 3)` fuerzan la suma primero.
 
@@ -111,7 +105,6 @@ layout: default
 ---
 
 ## Ejercicio 4: El camino incompleto
-<br/>
 
 ```rust
 fn main() {
@@ -129,7 +122,6 @@ layout: default
 ---
 
 ## Respuesta 4: El camino incompleto
-<br/>
 
 Necesitas un `else` para cubrir el caso cuando la condición es falsa:
 
@@ -149,7 +141,6 @@ layout: default
 ---
 
 ## Ejercicio 5: El match incompleto
-<br/>
 
 ```rust
 fn main() {
@@ -168,7 +159,6 @@ layout: default
 ---
 
 ## Respuesta 5: El match incompleto
-<br/>
 
 `match` en Rust debe ser **exhaustivo** (cubrir todos los valores posibles). Aquí solo se cubren `1` y `2`, pero `opcion` es `i32` y puede tener cualquier valor. Se soluciona con un brazo `_` (catch-all):
 
@@ -188,7 +178,6 @@ layout: default
 ---
 
 ## Ejercicio 6: El bucle que no termina
-<br/>
 
 ```rust
 fn main() {
@@ -210,7 +199,6 @@ layout: default
 ---
 
 ## Respuesta 6: El bucle que no termina
-<br/>
 
 La palabra clave `break` detiene el `loop`:
 
@@ -232,7 +220,6 @@ layout: default
 ---
 
 ## Ejercicio 7: El tipo invisible
-<br/>
 
 ```rust
 fn main() {
@@ -249,7 +236,6 @@ layout: default
 ---
 
 ## Respuesta 7: El tipo invisible
-<br/>
 
 Rust infiere:
 - `x`: `i32` (entero por defecto)
@@ -263,7 +249,6 @@ layout: default
 ---
 
 ## Ejercicio 8: El índice prohibido
-<br/>
 
 ```rust
 fn main() {
@@ -282,7 +267,6 @@ layout: default
 ---
 
 ## Respuesta 8: El índice prohibido
-<br/>
 
 `arr[10]` causa un error en **ejecución** (panic) porque el arreglo tiene 4 elementos (índices 0..3) y se está accediendo al índice 10, que está fuera de los límites. El compilador no puede saber en tiempo de compilación qué índice se usará (si fuera una variable), así que la verificación ocurre en runtime.
 
@@ -301,7 +285,6 @@ layout: default
 ---
 
 ## Ejercicio 9: La tupla desestructurada
-<br/>
 
 ```rust
 fn main() {
@@ -318,7 +301,6 @@ layout: default
 ---
 
 ## Respuesta 9: La tupla desestructurada
-<br/>
 
 La **desestructuración (destructuring)** permite desempaquetar una tupla en una sola línea:
 
@@ -335,7 +317,6 @@ layout: default
 ---
 
 ## Ejercicio 10: ¿Stack o Heap?
-<br/>
 
 ```rust
 fn main() {
@@ -354,7 +335,6 @@ layout: default
 ---
 
 ## Respuesta 10: ¿Stack o Heap?
-<br/>
 
 En el Stack: `a` (`i32`), `b` (`&str` — el string vive en el binario), `d` (`[i32; 3]` — arreglo de tamaño fijo).
 
@@ -365,7 +345,6 @@ layout: default
 ---
 
 ## Ejercicio 11: Copiar vs Mover
-<br/>
 
 ```rust
 fn main() {
@@ -386,7 +365,6 @@ layout: default
 ---
 
 ## Respuesta 11: Copiar vs Mover
-<br/>
 
 `i32` implementa el trait `Copy`: al hacer `let y = x`, se duplica el valor en el Stack y ambas variables son independientes.
 
@@ -405,7 +383,6 @@ layout: default
 ---
 
 ## Ejercicio 12: El bloque que todo lo borra
-<br/>
 
 ```rust
 fn main() {
@@ -426,7 +403,6 @@ layout: default
 ---
 
 ## Respuesta 12: El bloque que todo lo borra
-<br/>
 
 Las llaves `{}` crean un **ámbito (scope)**. Todo lo declarado dentro de ellas vive solo allí. Al cerrarse el bloque (la llave `}`), `y` se elimina del Stack. Fuera del bloque, `y` ya no existe. Esto es fundamental para la gestión de memoria en Rust: los recursos se liberan automáticamente al salir de su ámbito.
 
@@ -447,7 +423,6 @@ layout: default
 ---
 
 ## Ejercicio 13: El clon olvidado
-<br/>
 
 ```rust
 fn main() {
@@ -462,7 +437,6 @@ layout: default
 ---
 
 ## Respuesta 13: El clon olvidado
-<br/>
 
 `s1` se **mueve** (move) a `s2`. Después de esa asignación, `s1` ya no es válido
 porque Rust transfiere la propiedad del dato en el Heap. El compilador prohíbe
@@ -478,7 +452,6 @@ layout: default
 ---
 
 ## Ejercicio 14: El agujero negro de las funciones
-<br/>
 
 ```rust
 fn tomar_propiedad(texto: String) {
@@ -497,7 +470,6 @@ layout: default
 ---
 
 ## Respuesta 14: El agujero negro de las funciones
-<br/>
 
 Al pasar `frase` a `tomar_propiedad(frase)`, la propiedad del String se transfiere
 al parámetro `texto`. Cuando la función termina y `texto` sale de alcance, el
@@ -511,7 +483,6 @@ layout: default
 ---
 
 ## Ejercicio 15: Tipos primitivos en el Stack
-<br/>
 
 ```rust
 fn procesar_numero(n: i32) {
@@ -530,7 +501,6 @@ layout: default
 ---
 
 ## Respuesta 15: Tipos primitivos en el Stack
-<br/>
 
 `i32` implementa el trait `Copy`. Los tipos `Copy` se **copian** bit a bit en el
 Stack en lugar de moverse. Por eso `x` sigue siendo válido después de la llamada:
@@ -541,7 +511,6 @@ layout: default
 ---
 
 ## Ejercicio 16: El ciclo de devoluciones
-<br/>
 
 ```rust
 fn cambiar_dueno(s: String) -> String {
@@ -560,7 +529,6 @@ layout: default
 ---
 
 ## Respuesta 16: El ciclo de devoluciones
-<br/>
 
 Al finalizar la línea `let s2 = cambiar_dueno(s1)`:
 
@@ -573,7 +541,6 @@ layout: default
 ---
 
 ## Ejercicio 17: Mutabilidad y transferencia
-<br/>
 
 ```rust
 fn main() {
@@ -589,7 +556,6 @@ layout: default
 ---
 
 ## Respuesta 17: Mutabilidad y transferencia
-<br/>
 
 Sí, es válido. La mutabilidad es una propiedad del **binding** (la variable),
 no del dato. Al hacer `let mut s2 = s1`, simplemente se transfiere la propiedad
@@ -601,7 +567,6 @@ layout: default
 ---
 
 ## Ejercicio 18: Ownership dentro de un bucle
-<br/>
 
 ```rust
 fn main() {
@@ -618,7 +583,6 @@ layout: default
 ---
 
 ## Respuesta 18: Ownership dentro de un bucle
-<br/>
 
 `for elemento in lista` usa `IntoIterator`, que **consume** el vector completo.
 La propiedad de `lista` se transfiere al iterador al inicio del `for`. Cada
@@ -632,7 +596,6 @@ layout: default
 ---
 
 ## Ejercicio 19: Estructuras que reclaman propiedad
-<br/>
 
 ```rust
 struct Contenedor {
@@ -651,7 +614,6 @@ layout: default
 ---
 
 ## Respuesta 19: Estructuras que reclaman propiedad
-<br/>
 
 No. Cuando escribes `Contenedor { contenido: texto }`, el String que era de
 `texto` se **mueve** dentro del struct. A partir de esa línea, `texto` ya no es
@@ -662,7 +624,6 @@ layout: default
 ---
 
 ## Ejercicio 20: El préstamo básico
-<br/>
 
 ```rust
 fn calcular_longitud(s: &String) -> usize {
@@ -681,7 +642,6 @@ layout: default
 ---
 
 ## Respuesta 20: El préstamo básico
-<br/>
 
 Porque `&s1` crea una **referencia inmutable**: `calcular_longitud` toma
 prestado el String sin reclamar su propiedad. Cuando la función termina, el
@@ -693,7 +653,6 @@ layout: default
 ---
 
 ## Ejercicio 21: El lector que intentó escribir
-<br/>
 
 ```rust
 fn modificar(s: &String) {
@@ -711,7 +670,6 @@ layout: default
 ---
 
 ## Respuesta 21: El lector que intentó escribir
-<br/>
 
 La firma debe usar una **referencia mutable** para permitir modificar el valor:
 
@@ -734,7 +692,6 @@ layout: default
 ---
 
 ## Ejercicio 22: El doble escritor (Aliasing Mutable)
-<br/>
 
 ```rust
 fn main() {
@@ -750,7 +707,6 @@ layout: default
 ---
 
 ## Respuesta 22: El doble escritor (Aliasing Mutable)
-<br/>
 
 Rust prohíbe dos referencias mutables simultáneas al mismo dato para eliminar
 las **carreras de datos** (data races). Si `r1` y `r2` pudieran modificar `s` a
@@ -762,7 +718,6 @@ layout: default
 ---
 
 ## Ejercicio 23: El escritor tímido
-<br/>
 
 ```rust
 fn main() {
@@ -779,7 +734,6 @@ layout: default
 ---
 
 ## Respuesta 23: El escritor tímido
-<br/>
 
 El compilador aplica la regla de exclusión mutua: no puedes tener una referencia
 mutable (`r3`) activa al mismo tiempo que referencias inmutables (`r1`, `r2`)
@@ -792,7 +746,6 @@ layout: default
 ---
 
 ## Ejercicio 24: El ciclo de vida de una mirada (NLL)
-<br/>
 
 ```rust
 fn main() {
@@ -810,7 +763,6 @@ layout: default
 ---
 
 ## Respuesta 24: El ciclo de vida de una mirada (NLL)
-<br/>
 
 Gracias a **Non-Lexical Lifetimes (NLL)**, el compilador moderno calcula el
 alcance real de cada referencia basándose en su **último uso**, no en las llaves
@@ -823,7 +775,6 @@ layout: default
 ---
 
 ## Ejercicio 25: Referencias a porciones (Slices)
-<br/>
 
 ```rust
 fn main() {
@@ -839,7 +790,6 @@ layout: default
 ---
 
 ## Respuesta 25: Referencias a porciones (Slices)
-<br/>
 
 `slice = &v[0..3]` establece un **préstamo inmutable** del vector. Mientras
 `slice` esté vivo, el vector está "bloqueado" para lecturas. `v.push(6)` exige
@@ -851,7 +801,6 @@ layout: default
 ---
 
 ## Ejercicio 26: Desreferenciación (Entrar al Heap)
-<br/>
 
 ```rust
 fn main() {
@@ -867,7 +816,6 @@ layout: default
 ---
 
 ## Respuesta 26: Desreferenciación
-<br/>
 
 ```rust
 fn main() {
@@ -886,7 +834,6 @@ layout: default
 ---
 
 ## Ejercicio 27: La referencia que apunta a la nada
-<br/>
 
 ```rust
 fn main() {
@@ -904,7 +851,6 @@ layout: default
 ---
 
 ## Respuesta 27: La referencia que apunta a la nada
-<br/>
 
 Error conceptual: **dangling reference** (referencia colgante). `x` vive solo
 dentro del bloque interno `{}`. Cuando ese bloque termina, `x` se destruye y su
@@ -916,7 +862,6 @@ layout: default
 ---
 
 ## Ejercicio 28: El dilema de la función simple
-<br/>
 
 ```rust
 // ❌ Arregla la firma de esta función usando anotaciones de lifetimes ('a)
@@ -936,7 +881,6 @@ layout: default
 ---
 
 ## Respuesta 28: El dilema de la función simple
-<br/>
 
 El compilador no puede inferir de cuál parámetro proviene la referencia
 devuelta. Debes anotarlo explícitamente:
@@ -955,7 +899,6 @@ layout: default
 ---
 
 ## Ejercicio 29: El eslabón más débil
-<br/>
 
 ```rust
 fn elegir<'a>(x: &'a str, y: &'a str) -> &'a str {
@@ -978,7 +921,6 @@ layout: default
 ---
 
 ## Respuesta 29: El eslabón más débil
-<br/>
 
 El contrato `<'a>` le dice al compilador: "el resultado vive a lo sumo tanto
 como **el más corto** de los dos parámetros". Aunque en tiempo de ejecución el
@@ -993,7 +935,6 @@ layout: default
 ---
 
 ## Ejercicio 30: Structs con pasajeros prestados
-<br/>
 
 ```rust
 // ❌ Corrige este struct para que acepte una referencia
@@ -1012,7 +953,6 @@ layout: default
 ---
 
 ## Respuesta 30: Structs con pasajeros prestados
-<br/>
 
 Un struct que contiene una referencia debe declarar un lifetime para que el
 compilador sepa que el struct no puede sobrevivir al dato al que apunta:
@@ -1028,7 +968,6 @@ layout: default
 ---
 
 ## Ejercicio 31: Mezclando Lifetimes diferentes
-<br/>
 
 ```rust
 // Imagina que 'x' e 'y' no tienen nada que ver entre sí.
@@ -1043,7 +982,6 @@ layout: default
 ---
 
 ## Respuesta 31: Mezclando Lifetimes diferentes
-<br/>
 
 Cuando el retorno solo depende de `x`, se usan dos parámetros de lifetime
 distintos:
@@ -1061,7 +999,6 @@ layout: default
 ---
 
 ## Ejercicio 32: El ciudadano eterno
-<br/>
 
 ```rust
 struct Mensaje<'a> {
@@ -1083,7 +1020,6 @@ layout: default
 ---
 
 ## Respuesta 32: El ciudadano eterno
-<br/>
 
 Los literales de cadena (`"..."`) tienen lifetime `'static`: están embebidos
 directamente en el binario del programa (sección `.rodata`) y **viven durante
@@ -1095,7 +1031,6 @@ layout: default
 ---
 
 ## Ejercicio 33: Métodos con Lifetimes
-<br/>
 
 ```rust
 struct Descriptor<'a> {
@@ -1115,7 +1050,6 @@ layout: default
 ---
 
 ## Respuesta 33: Métodos con Lifetimes
-<br/>
 
 El bloque `impl` debe incluir el parámetro de lifetime del struct:
 
@@ -1136,7 +1070,6 @@ layout: default
 ---
 
 ## Ejercicio 34: El vector devorado
-<br/>
 
 ```rust
 fn procesar_primer_elemento(v: Vec<String>) {
@@ -1157,7 +1090,6 @@ layout: default
 ---
 
 ## Respuesta 34: El vector devorado
-<br/>
 
 La función recibe `Vec<String>` **por valor**, tomando propiedad del vector
 completo. Aunque solo usa el primer elemento, el vector entero fue consumido
@@ -1172,7 +1104,6 @@ layout: default
 ---
 
 ## Ejercicio 35: Extracción parcial de Tuplas
-<br/>
 
 ```rust
 fn main() {
@@ -1188,7 +1119,6 @@ layout: default
 ---
 
 ## Respuesta 35: Extracción parcial de Tuplas
-<br/>
 
 Al hacer `let llave = tupla.0`, se **mueve** el primer elemento de la tupla
 fuera de ella. La tupla queda parcialmente destruida: `tupla.0` ya no tiene
@@ -1203,7 +1133,6 @@ layout: default
 ---
 
 ## Ejercicio 36: El Option insaciable
-<br/>
 
 ```rust
 fn revisar_opcional(opt: Option<String>) {
@@ -1225,7 +1154,6 @@ layout: default
 ---
 
 ## Respuesta 36: El Option insaciable
-<br/>
 
 La función toma `Option<String>` por valor. Para no ceder la propiedad:
 
@@ -1243,7 +1171,6 @@ layout: default
 ---
 
 ## Ejercicio 37: Reemplazo en estructuras mutables
-<br/>
 
 ```rust
 struct Nodo {
@@ -1263,7 +1190,6 @@ layout: default
 ---
 
 ## Respuesta 37: Reemplazo en estructuras mutables
-<br/>
 
 Mover `n.valor` directamente deja el campo en estado no inicializado, lo que
 Rust no permite si el struct debe seguir siendo válido. La solución idiomática:
@@ -1282,7 +1208,6 @@ layout: default
 ---
 
 ## Ejercicio 38: El Closure acaparador
-<br/>
 
 ```rust
 fn main() {
@@ -1300,7 +1225,6 @@ layout: default
 ---
 
 ## Respuesta 38: El Closure acaparador
-<br/>
 
 Los hilos en Rust exigen que todo lo que capturan tenga lifetime `'static` (o
 sea propiedad del closure). `imprimir` captura `texto` por referencia, pero esa
@@ -1317,7 +1241,6 @@ layout: default
 ---
 
 ## Ejercicio 39: Clonación selectiva en bucles
-<br/>
 
 ```rust
 fn main() {
@@ -1338,7 +1261,6 @@ layout: default
 ---
 
 ## Respuesta 39: Clonación selectiva en bucles
-<br/>
 
 En la primera iteración, `plantilla` se mueve dentro del bucle. En la segunda,
 ya no existe. Solución: clonar en cada iteración.
@@ -1352,7 +1274,6 @@ layout: default
 ---
 
 ## Ejercicio 40: La trampa del método .to_string()
-<br/>
 
 ```rust
 fn main() {
@@ -1368,7 +1289,6 @@ layout: default
 ---
 
 ## Respuesta 40: La trampa del método .to_string()
-<br/>
 
 `.to_string()` (y `.to_owned()`) **asigna un nuevo String en el Heap** con sus
 propias reglas de ownership. A diferencia de un `&str` literal, el `String`
@@ -1380,7 +1300,6 @@ layout: default
 ---
 
 ## Ejercicio 41: El tipo Box\<T\> (Punteros Inteligentes)
-<br/>
 
 ```rust
 fn main() {
@@ -1396,7 +1315,6 @@ layout: default
 ---
 
 ## Respuesta 41: El tipo Box\<T\>
-<br/>
 
 `Box<T>` **hereda las leyes de Ownership**. Es un puntero inteligente que posee
 el dato en el Heap. Al hacer `let b2 = b1`, se mueve la propiedad del `Box`
@@ -1407,7 +1325,6 @@ layout: default
 ---
 
 ## Ejercicio 42: Vaciando colecciones con .drain()
-<br/>
 
 ```rust
 fn main() {
@@ -1424,7 +1341,6 @@ layout: default
 ---
 
 ## Respuesta 42: Vaciando colecciones con .drain()
-<br/>
 
 Sí compila. `.drain(..)` vacía el vector durante la iteración pero **no consume
 el vector en sí**: la propiedad del `Vec` permanece en `palabras`. Al terminar
@@ -1436,7 +1352,6 @@ layout: default
 ---
 
 ## Ejercicio 43: Pérdida de propiedad por indexación directa
-<br/>
 
 ```rust
 fn main() {
@@ -1451,7 +1366,6 @@ layout: default
 ---
 
 ## Respuesta 43: Pérdida de propiedad por indexación directa
-<br/>
 
 El operador de indexación `[]` devuelve una **referencia** al elemento, no el
 elemento en sí. No se puede mover un valor fuera de un vector por índice porque
@@ -1464,7 +1378,6 @@ layout: default
 ---
 
 ## Ejercicio 44: La función constructora
-<br/>
 
 ```rust
 struct Config {
@@ -1488,7 +1401,6 @@ layout: default
 ---
 
 ## Respuesta 44: La función constructora
-<br/>
 
 Al llamar `Config::new(path)`, la propiedad del String pasa al parámetro `r`.
 Dentro de `new`, `r` se mueve al campo `ruta` del struct. Al retornar, el
@@ -1502,7 +1414,6 @@ layout: default
 ---
 
 ## Ejercicio 45: Desestructuración con patrones (match)
-<br/>
 
 ```rust
 fn main() {
@@ -1520,7 +1431,6 @@ layout: default
 ---
 
 ## Respuesta 45: Desestructuración con patrones (match)
-<br/>
 
 `if let Ok(texto) = resultado` mueve el `String` contenido en `Ok`. Para evitar
 consumir la propiedad, desestrctura una referencia:
@@ -1537,7 +1447,6 @@ layout: default
 ---
 
 ## Ejercicio 46: Asignaciones encadenadas
-<br/>
 
 ```rust
 fn main() {
@@ -1554,7 +1463,6 @@ layout: default
 ---
 
 ## Respuesta 46: Asignaciones encadenadas
-<br/>
 
 Sí, es completamente válido. El viaje de la propiedad:
 
@@ -1570,7 +1478,6 @@ layout: default
 ---
 
 ## Ejercicio 47: Mutabilidad heredada en colecciones
-<br/>
 
 ```rust
 fn main() {
@@ -1586,7 +1493,6 @@ layout: default
 ---
 
 ## Respuesta 47: Mutabilidad heredada en colecciones
-<br/>
 
 No. `elemento` **no es mutable por defecto**. La mutabilidad no se hereda del
 contenedor. El binding `elemento` es inmutable a menos que lo declares
@@ -1602,7 +1508,6 @@ layout: default
 ---
 
 ## Ejercicio 48: Shadowing vs Ownership Transfer
-<br/>
 
 ```rust
 fn main() {
@@ -1618,7 +1523,6 @@ layout: default
 ---
 
 ## Respuesta 48: Shadowing vs Ownership Transfer
-<br/>
 
 Con shadowing, la primera variable (`"Alfa"`) **no se destruye inmediatamente**
 en el punto del shadowing. Ambas existen como bindings distintos en el mismo
@@ -1635,7 +1539,6 @@ layout: default
 ---
 
 ## Ejercicio 49: Propiedad en Enumeraciones Complejas
-<br/>
 
 ```rust
 enum Mensaje {
@@ -1657,7 +1560,6 @@ layout: default
 ---
 
 ## Respuesta 49: Propiedad en Enumeraciones Complejas
-<br/>
 
 No. Aunque el variant sea `Texto(String)`, el enum completo (`m`) se mueve a
 `procesar(m)`. La presencia de un `String` dentro del enum hace que el enum
@@ -1668,7 +1570,6 @@ layout: default
 ---
 
 ## Ejercicio 50: El operador de descarte (_)
-<br/>
 
 ```rust
 fn main() {
@@ -1683,7 +1584,6 @@ layout: default
 ---
 
 ## Respuesta 50: El operador de descarte (_)
-<br/>
 
 `let _ = s;` **mueve** `s` hacia el patrón `_`, que descarta el valor
 **inmediatamente** al final del statement (no al final del scope). Esto es
@@ -1695,7 +1595,6 @@ layout: default
 ---
 
 ## Ejercicio 51: Mutabilidad en cascada a través de funciones
-<br/>
 
 ```rust
 fn agregar_prefijo(s: &mut String) {
@@ -1713,7 +1612,6 @@ layout: default
 ---
 
 ## Respuesta 51: Mutabilidad en cascada a través de funciones
-<br/>
 
 La variable `s` debe declararse `mut` para poder prestarla como referencia
 mutable:
@@ -1728,7 +1626,6 @@ layout: default
 ---
 
 ## Ejercicio 52: La referencia del Iterator
-<br/>
 
 ```rust
 fn main() {
@@ -1744,7 +1641,6 @@ layout: default
 ---
 
 ## Respuesta 52: La referencia del Iterator
-<br/>
 
 El bucle `for n in &numeros` crea un **préstamo inmutable** del vector que dura
 todo el ciclo. `numeros.push(*n)` exige un préstamo mutable. Rust prohíbe tener
@@ -1756,7 +1652,6 @@ layout: default
 ---
 
 ## Ejercicio 53: El préstamo en funciones puras
-<br/>
 
 ```rust
 fn es_largo(s: &str) -> bool {
@@ -1776,7 +1671,6 @@ layout: default
 ---
 
 ## Respuesta 53: El préstamo en funciones puras
-<br/>
 
 Sí. Rust aplica **deref coercion**: `&String` se convierte automáticamente a
 `&str` al pasar como argumento. Además, pasar `r` (que es `&String`) a una
@@ -1788,7 +1682,6 @@ layout: default
 ---
 
 ## Ejercicio 54: Préstamos simultáneos en Structs
-<br/>
 
 ```rust
 struct Punto {
@@ -1811,7 +1704,6 @@ layout: default
 ---
 
 ## Respuesta 54: Préstamos simultáneos en Structs
-<br/>
 
 El borrow checker es suficientemente inteligente para distinguir **campos no
 solapados** del mismo struct. `&mut p.x` y `&mut p.y` apuntan a regiones de
@@ -1823,7 +1715,6 @@ layout: default
 ---
 
 ## Ejercicio 55: El bloqueo por alcance estructural
-<br/>
 
 ```rust
 struct Monitor {
@@ -1843,7 +1734,6 @@ layout: default
 ---
 
 ## Respuesta 55: El bloqueo por alcance estructural
-<br/>
 
 `ref_estado = &m.estado` establece un préstamo inmutable sobre parte del struct.
 `&mut m` exigiría un préstamo mutable del struct **completo**, lo que incluye
@@ -1855,7 +1745,6 @@ layout: default
 ---
 
 ## Ejercicio 56: Referencias mutables dentro de condicionales
-<br/>
 
 ```rust
 fn main() {
@@ -1872,7 +1761,6 @@ layout: default
 ---
 
 ## Respuesta 56: Referencias mutables dentro de condicionales
-<br/>
 
 Existe una sola referencia mutable `r`. Usar `r.len()` (lectura a través de
 `&mut`) y `r.push(4)` (escritura a través de `&mut`) sobre el **mismo** puntero
@@ -1885,7 +1773,6 @@ layout: default
 ---
 
 ## Ejercicio 57: El vector que se fue de gira
-<br/>
 
 ```rust
 fn main() {
@@ -1904,7 +1791,6 @@ layout: default
 ---
 
 ## Respuesta 57: El vector que se fue de gira
-<br/>
 
 No compila: **E0382, borrow of moved value: `nombres`**.
 
@@ -1925,7 +1811,6 @@ layout: default
 ---
 
 ## Ejercicio 58: Modificar la lista mientras se lee
-<br/>
 
 ```rust
 fn main() {
@@ -1945,7 +1830,6 @@ layout: default
 ---
 
 ## Respuesta 58: Modificar la lista mientras se lee
-<br/>
 
 **E0502: cannot borrow `v` as mutable because it is also borrowed as immutable.**
 
@@ -1964,7 +1848,6 @@ layout: default
 ---
 
 ## Ejercicio 59: Sacar un elemento por su índice
-<br/>
 
 ```rust
 fn main() {
@@ -1981,7 +1864,6 @@ layout: default
 ---
 
 ## Respuesta 59: Sacar un elemento por su índice
-<br/>
 
 **E0507: cannot move out of index of `Vec<String>`.**
 
@@ -2002,7 +1884,6 @@ layout: default
 ---
 
 ## Ejercicio 60: El map que no hizo nada
-<br/>
 
 ```rust
 fn main() {
@@ -2019,7 +1900,6 @@ layout: default
 ---
 
 ## Respuesta 60: El map que no hizo nada
-<br/>
 
 Compila, con una advertencia que lo dice todo: **unused `Map` that must be used**,
 y la nota *iterators are lazy and do nothing unless consumed*.
@@ -2039,7 +1919,6 @@ layout: default
 ---
 
 ## Ejercicio 61: Vaciar un Option prestado
-<br/>
 
 ```rust
 fn tomar(opt: &mut Option<String>) -> Option<String> {
@@ -2054,7 +1933,6 @@ layout: default
 ---
 
 ## Respuesta 61: Vaciar un Option prestado
-<br/>
 
 **E0507: cannot move out of `*opt` which is behind a mutable reference.**
 
@@ -2075,7 +1953,6 @@ layout: default
 ---
 
 ## Ejercicio 62: El valor del mapa
-<br/>
 
 ```rust
 use std::collections::HashMap;
@@ -2095,7 +1972,6 @@ layout: default
 ---
 
 ## Respuesta 62: El valor del mapa
-<br/>
 
 **E0507: cannot move out of index of `HashMap<&str, String>`.**
 
@@ -2115,7 +1991,6 @@ layout: default
 ---
 
 ## Ejercicio 63: El collect indeciso
-<br/>
 
 ```rust
 fn main() {
@@ -2132,7 +2007,6 @@ layout: default
 ---
 
 ## Respuesta 63: El collect indeciso
-<br/>
 
 **E0283: type annotations needed**, con la nota *cannot satisfy
 `_: FromIterator<i32>`*.
@@ -2151,7 +2025,6 @@ layout: default
 ---
 
 ## Ejercicio 64: Sumarle diez a cada elemento
-<br/>
 
 ```rust
 fn main() {
@@ -2169,7 +2042,6 @@ layout: default
 ---
 
 ## Respuesta 64: Sumarle diez a cada elemento
-<br/>
 
 No: **E0594, cannot assign to `*n`, which is behind a `&` reference**. Y de paso
 otra advertencia, *variable does not need to be mutable*, que delata el problema: el
@@ -2191,7 +2063,6 @@ layout: default
 ---
 
 ## Ejercicio 65: El nodo de tamaño infinito
-<br/>
 
 ```rust
 struct Nodo {
@@ -2207,7 +2078,6 @@ layout: default
 ---
 
 ## Respuesta 65: El nodo de tamaño infinito
-<br/>
 
 **E0072: recursive type `Nodo` has infinite size.**
 
@@ -2229,7 +2099,6 @@ layout: default
 ---
 
 ## Ejercicio 66: La cuenta de los dueños
-<br/>
 
 ```rust
 use std::rc::Rc;
@@ -2252,7 +2121,6 @@ layout: default
 ---
 
 ## Respuesta 66: La cuenta de los dueños
-<br/>
 
 `dentro: 3` y `fuera: 2`.
 
@@ -2268,7 +2136,6 @@ layout: default
 ---
 
 ## Ejercicio 67: Modificar lo compartido
-<br/>
 
 ```rust
 use std::rc::Rc;
@@ -2289,7 +2156,6 @@ layout: default
 ---
 
 ## Respuesta 67: Modificar lo compartido
-<br/>
 
 **E0594: cannot assign to data in an `Rc`**, con la ayuda *trait `DerefMut` is
 required to modify through a dereference, but it is not implemented for `Rc<Config>`*.
@@ -2309,7 +2175,6 @@ layout: default
 ---
 
 ## Ejercicio 68: El que compila pero no corre
-<br/>
 
 ```rust
 use std::cell::RefCell;
@@ -2329,7 +2194,6 @@ layout: default
 ---
 
 ## Respuesta 68: El que compila pero no corre
-<br/>
 
 Aborta: **thread 'main' panicked at: RefCell already borrowed**.
 
@@ -2351,7 +2215,6 @@ layout: default
 ---
 
 ## Ejercicio 69: La colección de figuras
-<br/>
 
 ```rust
 trait Figura { fn area(&self) -> f64; }
@@ -2372,7 +2235,6 @@ layout: default
 ---
 
 ## Respuesta 69: La colección de figuras
-<br/>
 
 **E0308: mismatched types.** Un `Vec<T>` exige que todos sus elementos sean del
 mismo tipo `T`, e implementar el mismo trait no los vuelve el mismo tipo.
@@ -2392,7 +2254,6 @@ layout: default
 ---
 
 ## Ejercicio 70: El trait que no puede ser dyn
-<br/>
 
 ```rust
 trait Duplicable { fn duplicar(&self) -> Self; }
@@ -2414,7 +2275,6 @@ layout: default
 ---
 
 ## Respuesta 70: El trait que no puede ser dyn
-<br/>
 
 **E0038: the trait `Duplicable` is not dyn compatible.**
 
@@ -2437,7 +2297,6 @@ layout: default
 ---
 
 ## Ejercicio 71: Los que nunca se liberan
-<br/>
 
 ```rust
 struct Nodo { valor: i32, otro: RefCell<Option<Rc<Nodo>>> }
@@ -2462,7 +2321,6 @@ layout: default
 ---
 
 ## Respuesta 71: Los que nunca se liberan
-<br/>
 
 Sale solo `fin de main`. **Ninguno de los dos `Drop` corre nunca.**
 
@@ -2483,7 +2341,6 @@ layout: default
 ---
 
 ## Ejercicio 72: El préstamo que se colgó solo
-<br/>
 
 ```rust
 impl Registro {
@@ -2503,7 +2360,6 @@ layout: default
 ---
 
 ## Respuesta 72: El préstamo que se colgó solo
-<br/>
 
 Aborta en la primera llamada: **panicked at: RefCell already borrowed**.
 
@@ -2527,7 +2383,6 @@ layout: default
 ---
 
 ## Ejercicio 73: El closure que se quedó corto
-<br/>
 
 ```rust
 use std::thread;
@@ -2548,7 +2403,6 @@ layout: default
 ---
 
 ## Respuesta 73: El closure que se quedó corto
-<br/>
 
 **E0373: closure may outlive the current function, but it borrows `datos`, which is
 owned by the current function.**
@@ -2571,7 +2425,6 @@ layout: default
 ---
 
 ## Ejercicio 74: El Rc que no cruzó
-<br/>
 
 ```rust
 use std::rc::Rc;
@@ -2592,7 +2445,6 @@ layout: default
 ---
 
 ## Respuesta 74: El Rc que no cruzó
-<br/>
 
 **E0277: `Rc<Vec<i32>>` cannot be sent between threads safely.**
 
@@ -2614,7 +2466,6 @@ layout: default
 ---
 
 ## Ejercicio 75: Contar con Arc
-<br/>
 
 ```rust
 use std::sync::Arc;
@@ -2637,7 +2488,6 @@ layout: default
 ---
 
 ## Respuesta 75: Contar con Arc
-<br/>
 
 **E0594: cannot assign to data in an `Arc`.**
 
@@ -2658,7 +2508,6 @@ layout: default
 ---
 
 ## Ejercicio 76: El Mutex sin envoltura
-<br/>
 
 ```rust
 use std::sync::Mutex;
@@ -2682,7 +2531,6 @@ layout: default
 ---
 
 ## Respuesta 76: El Mutex sin envoltura
-<br/>
 
 **E0382: borrow of moved value: `contador`.**
 
@@ -2705,7 +2553,6 @@ layout: default
 ---
 
 ## Ejercicio 77: El clon fuera del bucle
-<br/>
 
 ```rust
 fn main() {
@@ -2725,7 +2572,6 @@ layout: default
 ---
 
 ## Respuesta 77: El clon fuera del bucle
-<br/>
 
 **E0382: use of moved value: `c`.**
 
@@ -2748,7 +2594,6 @@ layout: default
 ---
 
 ## Ejercicio 78: El candado que se esperó a sí mismo
-<br/>
 
 ```rust
 use std::sync::Mutex;
@@ -2768,7 +2613,6 @@ layout: default
 ---
 
 ## Respuesta 78: El candado que se esperó a sí mismo
-<br/>
 
 Nada. **El programa se cuelga para siempre** y hay que matarlo.
 
@@ -2789,7 +2633,6 @@ layout: default
 ---
 
 ## Ejercicio 79: Los hilos que nadie esperó
-<br/>
 
 ```rust
 use std::thread;
@@ -2811,7 +2654,6 @@ layout: default
 ---
 
 ## Respuesta 79: Los hilos que nadie esperó
-<br/>
 
 Solo `fin de main`. Probado tres veces, el mensaje del hilo no aparece nunca.
 
@@ -2832,7 +2674,6 @@ layout: default
 ---
 
 ## Ejercicio 80: Leer mientras se escribe
-<br/>
 
 ```rust
 use std::sync::{Arc, RwLock};
@@ -2852,7 +2693,6 @@ layout: default
 ---
 
 ## Respuesta 80: Leer mientras se escribe
-<br/>
 
 Se cuelga. `RwLock` admite **muchos lectores o un escritor**, nunca las dos cosas, y
 el guard de escritura sigue vivo porque `escritura` se usa en la última línea.

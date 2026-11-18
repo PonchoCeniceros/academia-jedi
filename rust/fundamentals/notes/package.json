@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "build": "slidev build",
+    "build:ej": "slidev build ejercicios.md --out dist-ejercicios",
     "dev": "slidev --open --port 3031",
+    "dev:ej": "slidev ejercicios.md --open --port 3032",
     "export": "slidev export",
     "export:sections": "python3 export-sections.py",
+    "export:nav": "python3 export-navegable.py",
     "densidad": "python3 revisar-densidad.py",
     "indice": "python3 sync-indice.py",
     "refs": "python3 revisar-refs.py"

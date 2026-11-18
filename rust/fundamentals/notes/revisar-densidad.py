@@ -11,6 +11,7 @@ El umbral está calibrado contra una diapositiva que se desbordaba de verdad.
 
     python3 revisar-densidad.py
     python3 revisar-densidad.py --todas
+    python3 revisar-densidad.py --solo ejercicios
 """
 import math
 import pathlib
@@ -108,8 +109,13 @@ def lineas_largas(s: str) -> list[str]:
 def main() -> None:
     filas = []
     anchas = []
+    solo = None
+    if "--solo" in sys.argv:
+        solo = sys.argv[sys.argv.index("--solo") + 1]
     for f in sorted(PAGES.glob("*.md")):
-        if f.name.startswith("_") or f.name == "ejercicios.md":
+        if f.name.startswith("_"):
+            continue
+        if solo and solo not in f.name:
             continue
         for s in re.split(r"(?m)^---\n(?=layout:)", f.read_text()):
             t = re.findall(r"^## (.+)$", sin_comentarios(s), re.M)

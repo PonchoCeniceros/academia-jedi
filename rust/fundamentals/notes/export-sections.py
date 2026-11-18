@@ -84,15 +84,17 @@ def export_deck(entry: str, out_path: pathlib.Path, attempts: int = 3) -> None:
 
 
 def count_slides(text: str) -> int:
+    # Slidev solo parte en `---` de columna 0 (aun dentro de comentarios); los
+    # separadores con sangría de las láminas comentadas no cuentan.
     lines = text.split("\n")
-    sep_idx = [i for i, l in enumerate(lines) if l.strip() == "---"]
+    sep_idx = [i for i, l in enumerate(lines) if l.rstrip() == "---"]
     assert len(sep_idx) % 2 == 0, "separadores '---' desbalanceados"
     return len(sep_idx) // 2
 
 
 def build_ranges() -> dict[str, list[int]]:
     lines = SLIDES_MD.read_text().split("\n")
-    sep_idx = [i for i, l in enumerate(lines) if l.strip() == "---"]
+    sep_idx = [i for i, l in enumerate(lines) if l.rstrip() == "---"]
     pairs = list(zip(sep_idx[0::2], sep_idx[1::2]))
 
     srcs = []
