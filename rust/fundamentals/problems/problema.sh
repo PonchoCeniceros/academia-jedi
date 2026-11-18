@@ -5,20 +5,21 @@ BIN_DIR="${DIRECTORY}/src/bin"
 mkdir -p "$BIN_DIR"
 
 show_help() {
-  echo "🦀 HOLOCRON RS - Your guide in the Jedi Academy (Rust)"
+  echo "problema (Rust)"
   echo "----------------------------------------------------------"
-  echo "Usage:"
-  echo "  ./holocron.sh -m \"ID. Name\"  -> [M]editate: Create new Trial"
-  echo "  ./holocron.sh -t <ID>          -> [T]rain: Run Trial tests"
-  echo "  ./holocron.sh -r <ID> [case]   -> [R]un: Execute Trial main (optional test case index)"
-  echo "  ./holocron.sh -l               -> [L]og: List completed Trials"
+  echo "Uso:"
+  echo "  problema.sh -n \"ID. Nombre\"  -> [N]uevo: crea el binario del problema"
+  echo "  problema.sh -t <ID>            -> [T]est: corre las pruebas del problema"
+  echo "  problema.sh -r <ID> [caso]     -> [R]un: ejecuta main (índice de caso opcional)"
+  echo "  problema.sh -l                 -> [L]ista: problemas resueltos"
   echo ""
-  echo "Examples:"
-  echo "  ./holocron.sh -m \"1. Two Sum\""
-  echo "  ./holocron.sh -t 1"
-  echo "  ./holocron.sh -r 1"
+  echo "Ejemplos:"
+  echo "  problema.sh -n \"1. Two Sum\""
+  echo "  problema.sh -t 1"
+  echo "  problema.sh -r 1"
   echo ""
-  echo "Runs from anywhere: rust/fundamentals/trials/holocron.sh -t 1"
+  echo "Funciona desde cualquier carpeta: rust/fundamentals/problems/problema.sh -t 1"
+  echo "(-m y --train siguen funcionando como alias de -n y -t)"
   exit 1
 }
 
@@ -30,14 +31,14 @@ OPTION=$1
 VALUE=$2
 
 case $OPTION in
--m | --meditate)
+-n | -m | --new | --meditate)
   INPUT=$VALUE
   NUMBER=$(echo "$INPUT" | grep -oE '^[0-9]+')
   PROBLEM_NAME=$(echo "$INPUT" | sed -E 's/^[0-9]+\.? *//')
   PACKAGE_NAME=$(echo "$PROBLEM_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9 ]//g' | sed 's/  */_/g' | sed 's/ /_/g')
 
   if [ -z "$NUMBER" ] || [ -z "$PROBLEM_NAME" ]; then
-    echo "❌ Error: Invalid format. Use \"ID. Name\""
+    echo "Error: formato inválido. Usa \"ID. Nombre\""
     exit 1
   fi
 
@@ -45,7 +46,7 @@ case $OPTION in
   BIN_FILE="${BIN_DIR}/${BIN_NAME}.rs"
 
   if [ -f "$BIN_FILE" ]; then
-    echo "⚠️  This Trial already exists in the Academy. Keep training, Padawan!"
+    echo "El problema $NUMBER ya existe: $BIN_FILE"
   else
     cat <<EOF >"$BIN_FILE"
 use colored::*;
@@ -81,7 +82,7 @@ fn main() {
     const DEFAULT: usize = 0;
 
     let suite = get_test_cases();
-    let idx: usize = std::env::var("TRIAL_CASE")
+    let idx: usize = std::env::var("CASO")
         .ok()
         .and_then(|v| v.parse().ok())
         .unwrap_or(DEFAULT);
@@ -118,17 +119,17 @@ mod tests {
 }
 EOF
 
-    echo "⚔️  Trial $NUMBER is ready for training in: $BIN_FILE"
+    echo "Problema $NUMBER creado en: $BIN_FILE"
   fi
   ;;
 
--t | --train)
+-t | --test | --train)
   BIN_NAME=$(find "$BIN_DIR" -maxdepth 1 -name "${VALUE}_*.rs" | head -1 | xargs basename 2>/dev/null | sed 's/\.rs$//')
   if [ -n "$BIN_NAME" ]; then
-    echo "🌌 Initiating Trial ${VALUE}..."
+    echo "Probando el problema ${VALUE}..."
     cargo test --manifest-path "${DIRECTORY}/Cargo.toml" --bin "$BIN_NAME"
   else
-    echo "❌ Error: Trial '${VALUE}' does not exist."
+    echo "Error: el problema '${VALUE}' no existe."
   fi
   ;;
 
@@ -137,19 +138,19 @@ EOF
   BIN_NAME=$(find "$BIN_DIR" -maxdepth 1 -name "${VALUE}_*.rs" | head -1 | xargs basename 2>/dev/null | sed 's/\.rs$//')
   if [ -n "$BIN_NAME" ]; then
     if [ -n "$CASE_INDEX" ]; then
-      echo "🚀 Running Trial ${VALUE} (case #${CASE_INDEX})..."
-      TRIAL_CASE="$CASE_INDEX" cargo run --quiet --manifest-path "${DIRECTORY}/Cargo.toml" --bin "$BIN_NAME"
+      echo "Ejecutando el problema ${VALUE} (caso #${CASE_INDEX})..."
+      CASO="$CASE_INDEX" cargo run --quiet --manifest-path "${DIRECTORY}/Cargo.toml" --bin "$BIN_NAME"
     else
-      echo "🚀 Running Trial ${VALUE}..."
+      echo "Ejecutando el problema ${VALUE}..."
       cargo run --quiet --manifest-path "${DIRECTORY}/Cargo.toml" --bin "$BIN_NAME"
     fi
   else
-    echo "❌ Error: Trial '${VALUE}' does not exist."
+    echo "Error: el problema '${VALUE}' no existe."
   fi
   ;;
 
--l | --log)
-  echo "📜 Trial Log — Jedi Academy:"
+-l | --list | --log)
+  echo "Problemas resueltos (Rust):"
   echo "-----------------------------"
   for bin_file in "$BIN_DIR"/*.rs; do
     [ -f "$bin_file" ] && printf "  %s\n" "$(basename "$bin_file" .rs)"

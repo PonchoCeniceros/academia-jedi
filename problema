@@ -1,0 +1,31 @@
+#!/bin/bash
+# Punto de entrada único: delega en el script de cada lenguaje.
+#
+#   ./problema --py|--rs -n "ID. Nombre"   nuevo problema
+#   ./problema --py|--rs -t <ID>           correr sus pruebas
+#   ./problema --rs -r <ID> [caso]         ejecutar main (solo Rust)
+#   ./problema [--py|--rs] -l              listar (sin lenguaje: ambos)
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PY="${ROOT}/python/problema.sh"
+RS="${ROOT}/rust/fundamentals/problems/problema.sh"
+
+uso() {
+  sed -n '2,7p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
+  exit 1
+}
+
+LANG_FLAG=$1
+case $LANG_FLAG in
+--py | --rs) shift ;;
+-l | --list | --log) "$PY" -l && echo && "$RS" -l; exit ;;
+*) uso ;;
+esac
+
+[ $# -eq 0 ] && uso
+
+if [ "$LANG_FLAG" = "--py" ]; then
+  exec "$PY" "$@"
+else
+  exec "$RS" "$@"
+fi
