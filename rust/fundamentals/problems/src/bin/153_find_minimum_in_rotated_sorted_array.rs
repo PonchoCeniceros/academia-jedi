@@ -72,7 +72,7 @@ fn main() {
 
     let suite = get_test_cases();
 
-    let idx: usize = std::env::var("TRIAL_CASE")
+    let idx: usize = std::env::var("CASO")
         .ok()
         .and_then(|v| v.parse().ok())
         .unwrap_or(DEFAULT);
