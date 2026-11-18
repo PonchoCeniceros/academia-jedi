@@ -38,7 +38,7 @@ de texto (`&str`) y `String`. No se pueden evitar sin volver irreales los ejempl
 | **8** | Concurrencia | hilos · Send y Sync · Arc y Mutex · canales · paralelismo de datos |
 | **9** | Async | el problema · async, await y Future · el runtime · Send en las tareas · async o hilos |
 
-El **cheatsheet** y los **apéndices** (aplicación a los trials de LeetCode) están
+El **cheatsheet** y los **apéndices** (aplicación a los problemas de LeetCode) están
 comentados al final de `slides.md`. Para reactivarlos hay que quitar el comentario y
 devolver los separadores `---` a la columna 0.
 
